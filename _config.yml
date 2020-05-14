@@ -1,0 +1,34 @@
+name: SRCCON
+markdown: kramdown
+kramdown:
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+gems:
+  - jekyll-redirect-from
+exclude: ['*.yml']
+collections:
+  transcripts:
+    output: true
+    permalink: /:collection/:title/
+  share:
+    output: true
+    permalink: /:collection/:slug/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      event_name: SRCCON
+      title: DATES in PLACE
+      description: SRCCON is a participatory, interactive journalism conference centered on the challenges that news technology and data teams encounter every day.
+  - scope:
+      path: ""
+      type: "transcripts"
+    values:
+      layout: simple_layout
+      section: remote
+  - scope:
+      path: ""
+      type: "share"
+    values:
+      layout: simple_layout
+      section: share
