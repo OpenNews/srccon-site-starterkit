@@ -1,6 +1,8 @@
 ## SRCCON site starterkit
 
-This repo has generic versions of the basic pages you need to create a new SRCCON site. 
+This repo has generic versions of the basic pages you need to create a new SRCCON site. By default, pages use the "simple" SRCCON template, which looks like [the SRCCON:PRODUCT site](https://product.srccon.org)
+
+It can pretty much be launched as-is, with just a few event-specific updates.
 
 ### What's in srccon-site-starterkit:
 * directories
@@ -35,5 +37,7 @@ This repo has generic versions of the basic pages you need to create a new SRCCO
         * this template contains example language describing the audience and program from SRCCON 2018. Those sections are commented out by default, but this can be updated to make the page more useful for potential sponsors.
     * sponsors.md
         * by default, this template is set up as an automatic redirect to the sponsors_about page. But if we already have sponsors in place when the site launches, this page can be updated to list them instead (and link to sponsors_about for more information).
+    * _all page templates_
+        * in the front matter for each page template, the value of `layout` is set to "simple_layout". These page designs look like [the SRCCON:PRODUCT site](https://product.srccon.org). You can change the value of `layout` to "layout" if you want a site with photo headers (like [SRCCON 2019](https://2019.srccon.org)). This also may involve adding new images to the `media/img/backgrounds` directory, and updating various `#header-image` classes in `media/css/style.css`.
 * assets
 	* in the `media/img/` directory, `srccon_logo_angle` and `srccon_logo_angle_75` are logos that can be used for a conference called "SRCCON." If you're creating a site for a topical SRCCON, you should create appropriate logo files (probably starting from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai).)
