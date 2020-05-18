@@ -28,7 +28,7 @@ defaults:
       # description: rewrite this for a topical SRCCON
       description: SRCCON is a participatory, interactive journalism conference centered on the challenges that news technology and data teams encounter every day.
       # layout: set this value to layout_with_header_image for pages with images at top
-      layout: layout_with_header_image
+      layout: simple_layout
       # cta_button_link: set this value to a URL for the orange button (ticket form, etc)
       cta_button_link: https://opennews.networkforgood.com/
       # cta_button_text: set this value for text in the orange button

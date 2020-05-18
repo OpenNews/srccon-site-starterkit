@@ -45,4 +45,7 @@ It can pretty much be launched as-is, with just a few event-specific updates.
     * sponsors.md
         * by default, this template is set up as an automatic redirect to the sponsors_about page. But if we already have sponsors in place when the site launches, this page can be updated to list them instead (and link to sponsors_about for more information).
 * assets
-	* in the `media/img/` directory, `srccon_logo.png` is the primary SRCCON logo (the one that says "SRCCON" set at an angle). If you're creating a site for a topical SRCCON, you'll want to create appropriate logo files for it (generally 800px tall, probably starting from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai).)
+	* media
+		* img
+			* `srccon_logo.png` is the primary SRCCON logo (the one that says "SRCCON" set at an angle). If you're creating a site for a topical SRCCON instead, you'll want to create appropriate logo files (generally 800px tall, probably starting from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai).)
+			* `srccon_logo_share.png` is the version of the logo used by social-media share cards. If you create a new logo for an event, also make a 1200x600 version of it and replace this file.
