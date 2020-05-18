@@ -1,8 +1,8 @@
 ## SRCCON site starterkit
 
-This repo has generic versions of the basic pages you need to create a new SRCCON site. By default, pages use the "simple" SRCCON template, which looks like [the SRCCON:PRODUCT site](https://product.srccon.org)
+This repo has generic versions of the basic pages you need to create a new SRCCON site. By default, pages use the "simple" SRCCON template. [Check the demo site](http://site-starterkit.srccon.org) to see what's incuded and what it looks like.
 
-It can pretty much be launched as-is, with just a few event-specific updates.
+This repository can be copied and pretty much be launched as-is, with just a few event-specific updates.
 
 ### What's in srccon-site-starterkit:
 * directories
@@ -18,7 +18,11 @@ It can pretty much be launched as-is, with just a few event-specific updates.
 	* sponsors (including an initial redirect that sends traffic to the "how to sponsor" page)
 
 ### Pre-launch checklist
+What to do after copying this repository to set up a new SRCCON site:
+
 * settings
+	* CNAME
+		* delete this file! (It only exists to point to [the demo site for this repo](http://site-starterkit.srccon.org).) If you use GitHub's "Create repository from template" feature to set up your new site repository, you may need to `git rm` this file to get rid of it.
 	* _config.yml
 		* under `defaults`, add new values for:
 			 * `event_name`
