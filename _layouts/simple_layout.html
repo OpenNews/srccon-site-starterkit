@@ -4,12 +4,20 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>{{ page.event_name }} — {{ page.title }}</title>
+    <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ page.description }}">
-    <meta property="og:title" content="{{ page.event_name }} — {{ page.title }}">
+
+    <meta property="og:title" content="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}">
     <meta property="og:type" content="article">
     <meta property="og:description" content="{{ page.description }}"/>
+    <meta property="og:image" content="/media/img/srccon_share_logo.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" value="@srccon" />
+    <meta name="twitter:title" value="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}" />
+    <meta name="twitter:description" value="{{ page.description }}" />
+    <meta name="twitter:image" value="/media/img/srccon_share_logo.png" />
+    <meta name="twitter:image:alt" value="SRCCON conference logo" />
 
     <script src="//use.typekit.net/mvg8obr.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
@@ -34,7 +42,7 @@
         <nav id="hub-nav">
             <div class="page-container">
 		        {% include simple_navigation.html %}
-                <a id="main-logo" href="/"><img src="/media/img/srccon_logo_angle.png"></a>
+                <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png"></a>
             </div>
         </nav>
     </header>

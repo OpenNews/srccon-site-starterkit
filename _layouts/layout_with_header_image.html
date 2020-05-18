@@ -4,12 +4,20 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
+    <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ page.description }}">
-    <meta property="og:title" content="{{ page.title }}">
+
+    <meta property="og:title" content="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}">
     <meta property="og:type" content="article">
     <meta property="og:description" content="{{ page.description }}"/>
+    <meta property="og:image" content="/media/img/srccon_share_logo.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" value="@srccon" />
+    <meta name="twitter:title" value="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}" />
+    <meta name="twitter:description" value="{{ page.description }}" />
+    <meta name="twitter:image" value="/media/img/srccon_share_logo.png" />
+    <meta name="twitter:image:alt" value="SRCCON conference logo" />
 
     <script src="//use.typekit.net/mvg8obr.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
@@ -33,7 +41,7 @@
     <header>
         <nav id="header-nav">
             <div class="page-container">
-                <a href="/" id="corner-logo"><img src="/media/img/srccon_logo_angle.png"></a>
+                <a href="/" id="corner-logo"><img src="/media/img/srccon_logo.png"></a>
                 {% include navigation.html %}
             </div>
         </nav>
@@ -44,7 +52,7 @@
         
         <div id="header-callout">
             <div class="page-container">
-                <span>SRCCON&nbsp;2019 &bull; July&nbsp;11&nbsp;&&nbsp;12 in&nbsp;MPLS</span> <a href="https://opennews.networkforgood.com/" class="button">Support the SRCCON team</a>
+                <span>{{ page.event_name }} &bull; {{ page.event_date }} in&nbsp;{{ page.event_place_abbreviation }}</span> <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
             </div>
         </div>
     </header>

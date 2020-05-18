@@ -1,5 +1,4 @@
 ---
-layout: simple_layout
 section: conduct
 permalink: /conduct/
 title: Our Code of Conduct

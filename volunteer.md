@@ -1,5 +1,4 @@
 ---
-layout: simple_layout
 section: volunteer
 permalink: /volunteer/
 title: Volunteers

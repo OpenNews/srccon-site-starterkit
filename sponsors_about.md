@@ -1,5 +1,4 @@
 ---
-layout: simple_layout
 section: sponsors
 permalink: /sponsors/about/
 title: Become a Sponsor

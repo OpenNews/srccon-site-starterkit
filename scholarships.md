@@ -1,5 +1,4 @@
 ---
-layout: simple_layout
 section: scholarships
 permalink: /scholarships/
 title: Scholarships

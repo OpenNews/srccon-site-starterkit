@@ -17,9 +17,22 @@ defaults:
   - scope:
       path: ""
     values:
+      # event_name: set this value to something like SRCCON 2020 or SRCCON:LEAD
       event_name: SRCCON
-      title: DATES in PLACE
+      # event_date: set this value to something like July 11 & 12
+      event_date: DATES
+      # event_place: set this value to something like Minneapolis
+      event_place: PLACE
+      # event_place_abbreviation: set this value to something like MPLS
+      event_place_abbreviation: PLC
+      # description: rewrite this for a topical SRCCON
       description: SRCCON is a participatory, interactive journalism conference centered on the challenges that news technology and data teams encounter every day.
+      # layout: set this value to layout_with_header_image for pages with images at top
+      layout: layout_with_header_image
+      # cta_button_link: set this value to a URL for the orange button (ticket form, etc)
+      cta_button_link: https://opennews.networkforgood.com/
+      # cta_button_text: set this value for text in the orange button
+      cta_button_text: Support the SRCCON team
   - scope:
       path: ""
       type: "transcripts"

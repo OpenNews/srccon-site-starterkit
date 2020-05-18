@@ -1,5 +1,4 @@
 ---
-layout: simple_layout
 section: homepage
 permalink: /
 ---
@@ -33,7 +32,7 @@ Our participants represent organizations ranging from massive to tiny, and come 
 
 ### What's next
 
-Stay in touch by following [@SRCCON](https://twitter.com/srccon) and get information about tickets, our call for participation, and other event news through [the OpenNews notification list](https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc). If there's anything else you'd like to know about our events, [we'd love to hear from you](mailto:srccon@opennews.org).
+You can stay in touch by following [@SRCCON](https://twitter.com/srccon), and get information about tickets, our call for participation, and other event news through [the OpenNews notification list](https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc). If there's anything else you'd like to know about our events, [we'd love to hear from you](mailto:srccon@opennews.org).
 
 ### About us
 
