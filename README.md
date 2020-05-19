@@ -24,6 +24,8 @@ What to do after copying this repository to set up a new SRCCON site:
 	* CNAME
 		* delete this file! (It only exists to point to [the demo site for this repo](http://site-starterkit.srccon.org).) If you use GitHub's "Create repository from template" feature to set up your new site repository, you may need to `git rm` this file to get rid of it.
 	* _config.yml
+		* `name`: Update this value to the new event name
+		* `url`: Update this value to the new site URL
 		* under `defaults`, add new values for:
 			 * `event_name`
 			 * `event_date`

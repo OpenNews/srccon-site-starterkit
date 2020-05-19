@@ -13,6 +13,8 @@ collections:
     output: true
     permalink: /:collection/:slug/
 
+url: http://site-starterkit.srccon.org
+
 defaults:
   - scope:
       path: ""
