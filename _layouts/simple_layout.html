@@ -36,13 +36,24 @@
 </head>
 
 <body class="hub{% if page.section %} {{ page.section }}{% endif %}">
-    <header>
+    <header class="page-container">
         <nav id="hub-nav">
-            <div class="page-container">
-		        {% include simple_navigation.html %}
-                <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png"></a>
-            </div>
+	        {% include simple_navigation.html %}
+            <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png"></a>
         </nav>
+
+        <div class="page-intro">
+            {% if page.section == 'homepage' %}<p class="big-type">A participant-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>{% endif %}
+            <p>
+                {% if page.cta_button_text %}
+                <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
+                {% else %}
+                Stay up to date: <a href="https://twitter.com/srccon">Twitter</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a>
+                <span class="line-splitter">&bull;</span>
+                {% endif %}
+                Support our work: <a href="https://opennews.org/donate">Donate</a>
+            </p>
+        </div>
     </header>
     
     <main>

@@ -54,7 +54,7 @@ strong {
 
 
 .hub header {
-    margin: 1em 0 3em;
+    margin: 1em auto 3em;
 }
 .hub.homepage header {
     margin-bottom: 1em;
@@ -87,7 +87,9 @@ strong {
     text-align: center;
     margin: 0 -4em 1em;
     line-height: 1.3;
+    font-family: freight-text-pro, serif;
 }
+
 .hub .page-intro .big-type {
     font-weight: 600;
     font-size: 1.8em;
