@@ -13,6 +13,7 @@ body {
     color: #404040;
     overflow-x: hidden;
     font-size: 1.6em;
+    font-weight: 500;
 	min-height: 100vh;
     font-family: freight-text-pro, serif;
 }
@@ -35,6 +36,9 @@ a {
 h1, h2, h3, h4 {
     line-height: 1.3;
     margin: 0 0 .33em;
+}
+p strong {
+    font-weight: 900;
 }
 .button {
     border: 0;
@@ -85,7 +89,7 @@ h1, h2, h3, h4 {
     line-height: 1.3;
 }
 .hub .page-intro .big-type {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.8em;
 }
 .hub .quote {
@@ -94,8 +98,10 @@ h1, h2, h3, h4 {
     padding: 0 1em;
     font-weight: bold;
 }
-.hub .page-intro .contact-options {
-    margin: 0 .33em;
+.hub .page-intro .line-splitter {
+    font-size: .67em;
+    margin: 0 .5em;
+    vertical-align: 5%;
 }
 .page-divider,
 .hub main h3 {
