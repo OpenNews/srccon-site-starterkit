@@ -4,8 +4,12 @@ permalink: /
 ---
 
 <div class="page-intro">
-    <p class="big-type">A participant-led, interactive conference for journalists who want to transform their work, their organizations, and their communities.</p>
-    <p>If you&rsquo;d like to get involved, get in touch!<span class="contact-options"> <a href="https://twitter.com/srccon">Twitter</a> / <a href="mailto:srccon@opennews.org">Email</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a></span></p>
+    <p class="big-type">A participant-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>
+    <p>
+        <span class="contact-options">Stay in touch! <a href="https://twitter.com/srccon">Twitter</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a></span>
+        &nbsp; &bull; &nbsp;
+        <span class="contact-options">Support our work! <a href="https://opennews.org/donate">Donate</a></span>
+    </p>
 </div>
 
 ### When & where

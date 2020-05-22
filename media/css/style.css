@@ -95,7 +95,7 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 .hub .page-intro .contact-options {
-    margin-left: .67em;
+    margin: 0 .33em;
 }
 .page-divider,
 .hub main h3 {
