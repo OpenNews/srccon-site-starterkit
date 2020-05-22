@@ -6,9 +6,13 @@ permalink: /
 <div class="page-intro">
     <p class="big-type">A participant-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>
     <p>
-        Stay in touch! <a href="https://twitter.com/srccon">Twitter</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a>
+        {% if page.cta_button_text %}
+        <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
+        {% else %}
+        Stay up to date: <a href="https://twitter.com/srccon">Twitter</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a>
         <span class="line-splitter">&bull;</span>
-        Support our work! <a href="https://opennews.org/donate">Donate</a>
+        {% endif %}
+        Support our work: <a href="https://opennews.org/donate">Donate</a>
     </p>
 </div>
 

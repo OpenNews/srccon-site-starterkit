@@ -27,14 +27,15 @@ defaults:
       event_place: PLACE
       # event_place_abbreviation: set this value to something like MPLS
       event_place_abbreviation: PLC
-      # description: rewrite this for a topical SRCCON
-      description: SRCCON is a participatory, interactive journalism conference centered on the challenges that news technology and data teams encounter every day.
+      # description: this value is used for meta tags AND the top of the homepage
+      # rewrite this for a topical SRCCON
+      description: A participant-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.
       # layout: set this value to layout_with_header_image for pages with images at top
       layout: simple_layout
+      # cta_button_text: give this a value to enable the orange "call to action" button
+      cta_button_text: 
       # cta_button_link: set this value to a URL for the orange button (ticket form, etc)
-      cta_button_link: https://opennews.networkforgood.com/
-      # cta_button_text: set this value for text in the orange button
-      cta_button_text: Support the SRCCON team
+      cta_button_link: 
   - scope:
       path: ""
       type: "transcripts"
