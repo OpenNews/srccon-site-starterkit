@@ -15,17 +15,21 @@ SRCCON is a journalism conference people love. This reaction comes from the appr
 <style>.embed-container { position: relative; padding-bottom: 56.25%; margin-bottom: 50px; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
 
 
-## Help make SRCCON events happen
+## Ways to sponsor SRCCON and help make events happen
 
-We're seeking sponsors for SRCCON events, which host hundreds of participants from news and technology organizations of all sizes.
+We're seeking sponsors for SRCCON events, which host hundreds of participants from news and technology organizations of all sizes. Available sponsorships include:
 
-Available sponsorships include:
+### Partnership sponsors
+Support all aspects of the conference planning and program. Partnership sponsors have maximum visibility — your support helps make SRCCON possible.
 
-* **Lead sponsorship and partnership sponsors** - core supporters who make it possible to keep ticket prices low, offer facilitation training to session leaders, and support all attendees in having a great experience
-* **Accessibility sponsors** - support for scholarships, transcription, and childcare
-* **Meal and snacks sponsors** - helping keep attendees nourished throughout the event
-* **Event sponsors** - help make the entire event possible
-* **Special event sponsors for local organizations** - a chance for local media and technology companies and foundations to connect with a national audience
+### Accessibility sponsors
+You're directly supporting our live transcription and scholarship programs. Accessibility is one of our most visible sponsorships across the entire program — because you are literally helping us make SRCCON available to as many people as possible.
+
+### Break sponsors help
+Create spaces for attendees to connect in virtual hallways and hangout spaces. We know that these spaces have created lifelong connections between participants, and extremely meaningful.
+
+### Event sponsors 
+Help us with all the finishing touches on the event. Show your support by helping us put on what our participants frequently say is "the best conference I've ever been to."
 
 Each sponsorship includes at least 1 free ticket and different types of visibility and recognition throughout the event. [Contact Erika Owens](mailto:erika@opennews.org) for a full kit with pricing and further details. We love chatting with folks to find the best way we can collaborate to welcome your team to the event and make it inclusive for all attendees!
 
