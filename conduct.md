@@ -1,7 +1,7 @@
 ---
 section: conduct
 permalink: /conduct/
-title: Our Code of Conduct
+title: Our code of conduct
 ---
 
 ## Code of Conduct

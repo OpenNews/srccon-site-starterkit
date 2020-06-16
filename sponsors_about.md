@@ -1,7 +1,7 @@
 ---
 section: sponsors
 permalink: /sponsors/about/
-title: Become a Sponsor
+title: Become a sponsor
 ---
 
 # Become a SRCCON Sponsor

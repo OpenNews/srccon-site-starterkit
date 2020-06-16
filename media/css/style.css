@@ -87,12 +87,11 @@ strong {
     text-align: center;
     margin: 0 -4em 1em;
     line-height: 1.3;
-    font-family: freight-text-pro, serif;
 }
-
 .hub .page-intro .big-type {
     font-weight: 600;
     font-size: 1.8em;
+    font-family: freight-text-pro, serif;
 }
 .hub .quote {
     font-size: 1.4em;
@@ -105,6 +104,11 @@ strong {
     margin: 0 .5em;
     vertical-align: 10%;
 }
+.hub .page-intro .sub-nav {
+    margin-top: 1em;
+    font-size: .83em;
+}
+
 .page-divider,
 .hub main h3 {
 	display: flex;
