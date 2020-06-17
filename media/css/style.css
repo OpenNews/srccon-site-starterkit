@@ -202,7 +202,7 @@ header #header-image { /* default to MPLS skyline homepage background */
     background-image: url(/media/img/backgrounds/lifevests.jpg);
     background-position: 0 0;
 }
-.volunteer #header-image {
+.volunteers #header-image {
     background-image: url(/media/img/backgrounds/volunteer.jpg);
     background-position: 0 -225px;
 }

@@ -1,6 +1,6 @@
 ---
-section: volunteer
-permalink: /volunteer/
+section: volunteers
+permalink: /volunteers/
 title: Volunteers
 ---
 
