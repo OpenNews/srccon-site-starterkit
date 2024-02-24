@@ -17,6 +17,35 @@ body {
 	min-height: 100vh;
     font-family: freight-text-pro, serif;
 }
+
+body.participant.prep main p, body.participant.prep main ul {
+    font-size: 0.9em;
+    line-height: 1.6em;
+}
+
+.participant.prep header {
+    margin: 1em auto 1.5em;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 0.7em;
+}
+
+body.participant.prep .content-body ul:nth-of-type(-n+2) {
+    font-family: sofia-pro, sans-serif;
+    font-size:  1.3rem;
+    line-height:  2rem;
+}
+
+body.participant.prep h2 {
+    margin: 0.8em 0 .5em;
+}
+
+body.participant.prep h4 {
+    font-size: 1.2rem;
+    color: #fc6e1f;
+    text-transform: uppercase;
+    margin: 2em 0 0.8em;
+}
+
 header, footer, h1, h2, h3, h4, .button {
     font-family: sofia-pro, sans-serif;
 }
@@ -36,6 +65,12 @@ a {
 h1, h2, h3, h4 {
     line-height: 1.3;
     margin: 0 0 .33em;
+}
+h4 {
+    font-size: 1.2em
+}
+h2 + h4 {
+    margin-top: 1.5em;
 }
 strong {
     font-weight: 900;
@@ -80,9 +115,30 @@ strong {
 .hub #hub-nav {
     text-align: center;
 }
+
+.hub #hub-nav.mini-nav {
+    text-align: left;
+}
+
+.hub #hub-nav.mini-nav .mini {
+    display: block;
+    margin: 0 0 -14px 0;
+}
+
+.mini-nav > a {
+    font-size: 1.1rem;
+    margin: 0 4px;
+}
+
 .hub #main-logo img {
     width: 600px;
 }
+
+.hub #main-logo.mini img {
+    width: 300px;
+    margin: 0 0 0px 2px;
+}
+
 .hub .page-intro {
     text-align: center;
     margin: 0 -4em 1em;
@@ -109,6 +165,10 @@ strong {
     font-size: .83em;
 }
 
+.hub main h2 {
+    margin-top: 1.33em;
+}
+    
 .page-divider,
 .hub main h3 {
 	display: flex;
@@ -184,6 +244,43 @@ strong {
 }
 .hub .previous-event .when-where {
     margin-left: .5em;
+}
+
+.hub table.time-blocks {
+    font-family: sofia-pro, sans-serif;
+    text-align: left;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 1em;
+}
+
+.hub table.time-blocks thead {
+}
+
+.hub table.time-blocks ul {
+    margin:  0 0 0 0;
+    padding:  0 0 10px 25px;
+}
+
+.hub table.time-blocks th, .hub table.time-blocks td {
+    padding: 10px 15px;
+    border-bottom: 4px solid white;
+    font-size: 0.9em;
+}
+
+.hub table.time-blocks td {
+    border-bottom: 2px solid white;
+    line-height:  1.5;
+}
+
+.hub table.time-blocks th:nth-child(1), .hub table.time-blocks tr td:nth-child(1){
+    background-color:  #ffa50061;
+    width: 170px;
+}
+
+.hub table.time-blocks th:nth-child(even), .hub table.time-blocks tr td:nth-child(even){
+    background-color:  #ffa5002e;
+    padding-right:  30px;
 }
 
 /* HEADER IMAGES */
@@ -297,7 +394,7 @@ header nav a:hover {
     margin: .5em 0 .5em 1em;
 }
 .page-intro .button {
-    margin: 0 1em;
+    margin: 0 1em 0 1em;
 }
 
 #header-image {
@@ -322,6 +419,7 @@ header nav a:hover {
     color: #fff;
     text-shadow: 0 0 1px rgba(0,0,0,.7);
 }
+
 
 /* MAIN CONTENT AREA STYLES */
 main {
@@ -358,7 +456,7 @@ main input {
     margin: 0 0 2.5em;
 }
 .hub .sponsor-block {
-    margin: 2em 0;
+    margin: 2.5em 0;
 }
 .sponsor-block img {
     width: 75%;
@@ -369,10 +467,27 @@ main input {
 .sponsor-block.secondary img {
     width: 50%;
 }
+.sponsor-block.secondary-wide img {
+    width: 67%;
+}
 .sponsor-block h1,
 .sponsor-block h2,
 .sponsor-block h3 {
     text-align: center;
+}
+
+.step {
+    display: flex;
+}
+
+.step .icon {
+    min-width: 150px;
+    width: 150px;
+    margin: 1.5em 20px 0 0;
+}
+
+.step .icon img {
+    width:  100%;
 }
 
 /* FOOTER STYLES */
@@ -435,13 +550,40 @@ footer li {
     padding-bottom: 2em;
 }
 .hub footer #footer-sponsors {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
-.hub footer .trailer {
-    padding-top: 2em;
-    font-size: .8em;
+footer .sourcecon .trailer {
+    padding: 0em;
+    font-size: 1em;
     text-align: center;
     font-family: freight-text-pro, serif;
+    margin-bottom: 2em;
+    color: #00000082;
+}
+
+header .sourcecon .trailer {
+    font-size: 1.2em;
+    overflow: hidden;
+    font-style: italic;
+ }
+header .sourcecon .trailer > span {
+    position: relative;
+    display: inline-block;
+}
+header .sourcecon .trailer > span:before,
+header .sourcecon .trailer > span:after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    border-bottom: 1px solid;
+    width: 4.5em;
+    margin: 0 .5em;
+}
+header .sourcecon .trailer > span:before {
+    right: 100%;
+}
+header .sourcecon .trailer > span:after{
+    left: 100%;
 }
 
 #footer-sponsors .page-container {
@@ -454,8 +596,8 @@ footer li {
 
 .sponsor-list a {
     display: inline-block;
-    margin: 0 5% 1em 0;
-    width: 40%;
+    margin: 0 4% 1em 0;
+    width: 45%;
 }
 .sponsor-list a.narrow-logo {
     width: 23%;
@@ -550,13 +692,26 @@ table a.session-transcript {
     margin-top: 3em;
 }
 .session-proposal-list .session-proposal {
-    margin-bottom: 2em;
+    margin-bottom: 2.5em;
 }
 .session-proposal-list .facilitator {
-    font-size: .8em;
+    font-size: .9em;
     font-style: italic;
-    margin-bottom: .33em;
+    margin: .5em 0;
 }
+p.facilitator + p.session-description {
+    margin: 0;
+}
+.session-proposal-list h4.session-title {
+    font-size: 1.2em;
+}
+
+#list-filter-form label {
+    font-family: sofia-pro, sans-serif;
+    font-size: .8em;
+    font-weight: bold;
+}
+
 
 
 /* FORM STYLES */
@@ -641,6 +796,15 @@ table a.session-transcript {
     }
 }
 
+@media screen and (max-width: 980px) {
+    .hub .page-intro {
+        margin: 0 -1em 1em;
+    }
+    .page-intro .button {
+        margin-top: 1em;
+    }
+}
+
 @media screen and (max-width: 960px) {
     .big-lead {
         margin: 0 0 1.2em;
@@ -663,9 +827,11 @@ table a.session-transcript {
     .participation #header-image {
         background-position: 0 -200px;
     }
+}
 
+@media screen and (max-width: 850px) {
     .hub .page-intro {
-        margin: 0 -1em 1em;
+        margin: 0 0 1em;
     }
 }
 
@@ -753,9 +919,12 @@ table a.session-transcript {
     .sponsor-block.secondary img {
         width: 67%;
     }
+    .sponsor-block.secondary-wide img {
+        width: 80%;
+    }
 
     .hub .page-intro {
-        margin: 0 0 1em;
+        margin: 0 1em 1em;
     }
     .hub .page-intro .contact-options {
         margin-left: 0;
@@ -797,6 +966,10 @@ table a.session-transcript {
         position: relative;
         vertical-align: middle;
     }
+    .hub #hub-nav img {
+        margin-left: 0;
+        width: 95%;
+    }
 
     .hub .page-intro .big-type {
         font-size: 1.6em;
@@ -811,12 +984,12 @@ table a.session-transcript {
     .hub .page-intro .big-type {
         font-size: 1.5em;
     }
-    .hub #hub-nav img {
-        margin-left: 0;
-        width: 95%;
-    }
     .narrow-hide {
         display: none;
+    }
+    header .sourcecon .trailer > span:before,
+    header .sourcecon .trailer > span:after {
+        border: none;
     }
 }
 
@@ -906,6 +1079,17 @@ table a.session-transcript {
     .hub .page-intro .big-type {
         font-size: 1.4em;
     }
+
+    .step {
+        display: block;
+    }
+
+    .step .icon {
+        min-width: 150px;
+        width: 150px;
+        margin: 0 0 -20px 0;
+    }
+
 }
 
 @media screen and (max-width: 360px) {
@@ -914,5 +1098,8 @@ table a.session-transcript {
     }
     .hub #hub-nav .top-bar {
         font-size: .7em;
+    }
+    .hub table.time-blocks th:nth-child(1), .hub table.time-blocks tr td:nth-child(1){
+        width: 100px;
     }
 }
