@@ -4,17 +4,17 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}</title>
+    <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ page.description | markdownify | strip_html | strip_newlines }}">
 
-    <meta property="og:title" content="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}">
+    <meta property="og:title" content="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}">
     <meta property="og:type" content="article">
     <meta property="og:description" content="{{ page.description | markdownify | strip_html | strip_newlines }}"/>
     <meta property="og:image" content="{{ site.url }}/media/img/srccon_share_logo.png" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" value="@srccon" />
-    <meta name="twitter:title" value="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }} in {{ page.event_place }}{% endif %}" />
+    <meta name="twitter:title" value="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}" />
     <meta name="twitter:description" value="{{ page.description | markdownify | strip_html | strip_newlines }}" />
     <meta name="twitter:image" value="{{ site.url }}/media/img/srccon_share_logo.png" />
     <meta name="twitter:image:alt" value="SRCCON conference logo" />
