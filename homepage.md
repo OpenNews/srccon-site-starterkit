@@ -25,13 +25,11 @@ SRCCON events are highly participatory, where participants come first so they ca
 
 ### Who attends SRCCON events
 
-SRCCON participants are developers, designers, journalists, editors, and allies: the practitioners and leaders who are transforming their newsrooms into more representative and innovative places to work. Participants come to SRCCON to change journalism by creating more intentional processes, better relationships with the communities they cover, and new ways to engage and inform people.
-
-Our participants represent organizations ranging from massive to tiny, and come from all over the U.S. and many other countries. Each year, we particularly welcome journalists and allies from the city hosting SRCCON. Accessibility is a core value, and we offer [live session transcripts and tons of documentation](https://2019.srccon.org/documentation/) for those who can't attend in person.
+Our participants represent organizations ranging from massive to tiny, and come from all over the U.S. and many other countries. SRCCON participants are developers, designers, journalists, editors, and allies: the practitioners and leaders who are transforming their newsrooms into more representative and innovative places to work. Participants come to SRCCON to change journalism by creating more intentional processes, better relationships with the communities they cover, and new ways to engage and inform people.
 
 ### What's next
 
-You can stay in touch by following [@SRCCON](https://twitter.com/srccon), and get information about tickets, our call for participation, and other event news through [the OpenNews notification list](https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc). If there's anything else you'd like to know about our events, [we'd love to hear from you](mailto:srccon@opennews.org).
+[The OpenNews newsletter](https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc) is a great way to stay up-to-date on tickets, our call for participation, and other event information. You can also keep in touch with us on social media: We're on [Twitter](https://twitter.com/srccon), [BlueSky](https://bsky.app/profile/opennews.bsky.social), and [LinkedIn](https://www.linkedin.com/company/opennews/). If there's anything else you'd like to know about our events, [we'd love to hear from you](mailto:srccon@opennews.org).
 
 ### About us
 

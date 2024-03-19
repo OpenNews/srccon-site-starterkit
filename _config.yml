@@ -27,7 +27,7 @@ defaults:
       event_place_abbreviation: PLC
       # description: this value is used for meta tags AND the top of the homepage
       # html will be stripped for meta tags. Rewrite this for a topical SRCCON!
-      description: A participant-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.
+      description: A peer-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.
       # layout: set this value to layout_with_header_image for pages with images at top
       layout: simple_layout
       # cta_button_text: give this a value to enable the orange "call to action" button
