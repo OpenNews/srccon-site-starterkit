@@ -1,0 +1,57 @@
+name: Test Build
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - main
+      - staging
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version-file: .ruby-version
+          bundler-cache: true
+      
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --verbose
+      
+      - name: Validate HTML and check links
+        run: |
+          bundle exec htmlproofer ./_site \
+            --disable-external \
+            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/" \
+            --check-html \
+            --check-img-http \
+            --allow-hash-href
+      
+      - name: Configure AWS credentials
+        if: github.event_name == 'pull_request'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Test deployment (dry-run)
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Testing S3 sync command (dry-run)..."
+          aws s3 sync _site/ s3://${{ secrets.AWS_S3_BUCKET_STAGING }} \
+            --dryrun \
+            --delete \
+            --cache-control "public, max-age=3600"
