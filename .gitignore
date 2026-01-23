@@ -1,2 +1,14 @@
 _site
 .jekyll-cache
+
+# Test content (used for CI validation only)
+_test/
+
+# Ruby/Bundler
+.bundle/
+vendor/
+Gemfile.lock
+
+# OS files
+.DS_Store
+Thumbs.db
