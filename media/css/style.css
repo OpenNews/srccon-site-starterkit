@@ -452,6 +452,7 @@ main input {
     margin: 0 -1em 1.2em;
 }
 
+/** legacy styles */
 .sponsor-block {
     margin: 0 0 2.5em;
 }
@@ -475,6 +476,15 @@ main input {
 .sponsor-block h3 {
     text-align: center;
 }
+/** end legacy styles */
+body.sponsors .page-container p {
+    margin: 2.5em 0;
+}
+body.sponsors .page-container p > a > img {
+    display: block;
+    margin: 0 auto .5em;
+    width: 65%;
+} 
 
 .step {
     display: flex;
