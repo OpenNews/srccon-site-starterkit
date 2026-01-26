@@ -42,7 +42,7 @@ task :check do
   ].each do |price|
     cost = price.to_s.gsub(/^\$(\d{3})$/) { |m| $1 } # extract digits
     warnings << "Ticket price #{price} is has no dollar-sign prefix" unless price.to_s.start_with?('$')
-    warnings << "Ticket price #{price} is not three digits" if cost && cost.to_i < 100 || cost.to_i > 999
+    warnings << "Ticket price #{price} is not three digits" if cost && (cost.to_i < 100 || cost.to_i > 999)
   end
     
   if errors.any?
