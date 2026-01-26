@@ -29,7 +29,7 @@ defaults:
       event_date: DATES
       # event_place: set this value to something like Minneapolis
       event_place: PLACE
-      # event_venue: set this value to the name of the venue, add 'the' if apporpriate
+      # event_venue: set this value to the name of the venue, add 'the' if appropriate
       event_venue: Nerd Church
       # google maps link or share-shortlink to venue (defaults to McNamara)
       event_venue_link: "https://maps.app.goo.gl/EmfKT9J6HWwp7u6e9"
