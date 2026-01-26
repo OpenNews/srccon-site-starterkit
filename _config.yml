@@ -1,4 +1,4 @@
-name: SRCCON
+name: SRCCON # leave this as-is
 markdown: kramdown
 kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
@@ -29,12 +29,10 @@ defaults:
       event_date: DATES
       # event_place: set this value to something like Minneapolis
       event_place: PLACE
-      # event_place_abbreviation: set this value to something like MPLS
-      event_place_abbreviation: PLC
       # event_venue: set this value to the name of the venue, add 'the' if apporpriate
       event_venue: Nerd Church
       # google maps link or share-shortlink to venue (defaults to McNamara)
-      event_place_map_link: "https://maps.app.goo.gl/EmfKT9J6HWwp7u6e9"
+      event_venue_link: "https://maps.app.goo.gl/EmfKT9J6HWwp7u6e9"
       # event_timezone: set this value to the IANA timezone name (e.g., America/Chicago, America/New_York)
       event_timezone: America/Chicago
       # event_timezone_offset: set this value to the UTC offset during event (e.g., -05:00 for CDT, -06:00 for CST)
@@ -42,6 +40,8 @@ defaults:
       # description: this value is used for meta tags AND the top of the homepage
       # html will be stripped for meta tags. Rewrite this for a topical SRCCON!
       description: A peer-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.
+      # event_place_abbr: set this value to something like MPLS
+      event_place_abbr: PLC
 
       # Homepage CTA
       # cta_button_text / cta_button_link: enable the orange "call to action" button
@@ -53,8 +53,8 @@ defaults:
       form_link: https://airtable.com/embed/appvmrSAI2PeiWEes/pagJcROoTohbsBLFw/form?backgroundColor=green
       
       # ⚠️ IMPORTANT "GATES" in page logic
-      # program_live: set this value to true when the program should be exposed on the site
-      program_live: false
+      # schedule_live: set this value to true when the program should be exposed on the site
+      schedule_live: false
       # session_deadline_passed: set this value to true to swap out various "by deadline" links
       session_deadline_passed: false
       # session_deadline: proposals and stipend applications

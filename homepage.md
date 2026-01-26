@@ -5,7 +5,7 @@ permalink: /
 
 ### Let's build SRCCON together
 
-# Join us at {{ page.event_name }}!
+# Join us at {{ page.event_name }}! (#join)
 
 {% if page.session_deadline_passed == false %}
 **Our [call for participation form](/participation/form/) is open** and includes questions to tell us about all the ways you might want to participate at {{ page.event_name }}, including as an attendee or a session facilitator. We will review entries and notify everyone before or on {{ page.session_confirm }}. If invited to attend or facilitate a session, you will receive a link to purchase a ticket with [prices starting at {{ page.price_base }} plus fees](/attendees/#tickets).
@@ -16,7 +16,7 @@ permalink: /
 {% if page.session_deadline_passed == true %}
 Our deadline for proposing sessions has already passed, but we'll keep our [call for participation form](/participation/form) open for attendees as long as we have space!{% endif %}
 
-### Key dates
+### Key dates {#dates}
 
 {% if page.session_deadline_passed == false %}* **[NOW](/participation/form)**: Call for participation is open!{% endif %}
 * **{{ page.session_deadline }}**: Deadline to submit session proposals and stipend applications
@@ -26,13 +26,13 @@ Our deadline for proposing sessions has already passed, but we'll keep our [call
 
 Curious about how it all works? Learn more about [being a participant at SRCCON](/attendees) and [our call for participation form](/participation/form). There won't be a separate ticket lottery or sale date, so if you want to come to {{ page.event_name }}, our call for participation is how to let us know!
 
-### When & where
+### When & where {#when-where}
 
-On {{ page.event_date }} in {{ page.event_place }}, SRCCON returns to [{{ page.event_venue}}]({{ page.event_place_map_link }}). When tickets go on sale, we'll also open up a discounted block of rooms for participants at a nearby hotel.
+On {{ page.event_date }} in {{ page.event_place }}, SRCCON returns to [{{ page.event_venue}}]({{ page.event_venue_link }}). When tickets go on sale, we'll also open up a discounted block of rooms for participants at a nearby hotel.
 
-{% comment %}
+{% comment %}<!-- remove to add -->
 We have reserved a block of rooms at the [hotel](#TK) at a base rate of $### per night. The room-discount hotel is located steps away from the {{ page.event_venue }}. The reserved block of rooms will be available until {{ place.event_name }} starts or all rooms are booked, whichever happens first&mdash;booking early is always a good idea!
-{% endcomment %}
+{% endcomment %}<!-- remove to add -->
 
 ### Health policy
 
