@@ -31,7 +31,6 @@ This means **less manual find-and-replace work** when setting up a new SRCCON si
 	* `_includes/` - Partial templates (footers, navigation, metadata, session tables)
 	* `_layouts/` - Page layouts: `simple_layout.html` (clean design; default choice) and `layout_with_header_image.html` (with photo headers)
 	* `_site/` - this is the result of our `:build` commmand, it should not be commited to GitHub; it's what goes to AWS's bucket to become the static site (is deployed, but also .gitignored)
-	* `_test/` - Sample content for CI validation (not deployed)
 	* `.github/workflows/*` - GitHub Actions scripts that drive our site-building process on commits to `main`
 	* `.jekyll-cache/` - local-only elements to `serve` local dev site (gitignored)
 	* `media/` - Static CSS, JS, and image assets
@@ -267,7 +266,7 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 - **`dependabot`** automatically creates PRs for dependency updates
 - Weekly automated health checks catch breaking changes
 
-### Migration from Travis CI
+### Migration from Travis CI-backed sites to 2026 latest
 
 TODO!
 
