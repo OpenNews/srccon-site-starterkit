@@ -268,7 +268,7 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 
 ### Migration from Travis CI-backed sites to 2026 latest
 
-TODO!
+[See these AI-driven instructions](MIGRATION.md)
 
 ### Enhancement: Advanced AWS Setup (OIDC)
 
