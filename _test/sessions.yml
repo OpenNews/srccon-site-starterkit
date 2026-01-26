@@ -1,0 +1,14 @@
+[
+    {
+        "id": "building-ethical-guardrails",
+        "title": "AI in newsrooms: Building ethical guardrails and culture change",
+        "facilitators": "Michael Olson, Ernesto Aguilar",
+        "description": "Ready to move beyond the AI hype and actually build something useful for your newsroom? Join us for a hands-on workshop where we'll tackle the messy reality of AI in journalism head-on.\n\nTogether, we'll explore the urgent questions facing our industry: Who decides what ethical AI use looks like in your organization? How do we protect against bias and misinformation? Where's the line between efficiency and authenticity in audience engagement? \n\nThrough interactive exercises, real-world scenarios, and collaborative policy-building (starting with an improv ice breaker!), you'll leave with a draft AI ethics framework tailored to your newsroom's needs and concrete strategies to advocate for responsible AI adoption. This isn't about theoretical discussions - it's about creating practical guardrails that protect journalistic integrity while embracing innovation. Because if we don't proactively shape how AI is used in our organizations, corporate priorities will do it for us."
+    },
+    {
+        "id": "beyond-going-viral",
+        "title": "Beyond ‘going viral’: How to define what content is good content",
+        "facilitators": "Emily Hood, Genesis Qu",
+        "description": "Going viral isn’t the only thing that matters anymore.\n\nAt the Minnesota Star Tribune, we found that defining our content’s success only by the volume of traffic it received did not lead to the outcomes we wanted for our audience and business. Instead, we introduced a metric called New Subscriber Paths, which looks at the stories a reader consumed before subscribing, and are working on building a suite of metrics to understand what types of stories are effective for different journalistic and business goals. \n\nWe are also developing a framework through machine learning to systematically categorize content the Star Tribune produces, allowing us to find what kinds of stories do better and bring that insight to the newsroom. \n\nIn this session, we’ll brainstorm new metrics that can capture different goals for your news organization and ways to categorize your content and audiences to dig deeper into these metrics. At the end of this session, we hope you’ll have new inspiration for how to define what’s a successful story at your organization."
+    }
+]

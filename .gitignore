@@ -1,9 +1,6 @@
 _site
 .jekyll-cache
 
-# Test content (used for CI validation only)
-_test/
-
 # Ruby/Bundler
 .bundle/
 vendor/
