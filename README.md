@@ -137,7 +137,7 @@ This checklist will guide you though customizing `_config` values and smoke-test
         * Double-check the use of the prices in `homepage.md`, `attendees.md` and `scholarships.md`  
 	- [ ] `participation/form/` - make sure Airtable renders
     - [ ] Sponsors:
-		-[ ] `sponsors/` - starts with two default sponsors, but typical sponsor names/logos are ready to be un-`{% comment %}`ed as decisions come in
+		- [ ] `sponsors/` - starts with two default sponsors, but typical sponsor names/logos are ready to be un-`{% comment %}`ed as decisions come in
 		- [ ] `sponsors/about/` - may need a refresh for numbers and contact points; if so, please consider PRing the same change back to `srccon-site-template`, too
 	- [ ] `welcome.md` - do we have stenographers this year? Are they newer people? If so, please update and consider PRing the same change back to `srccon-site-template`, too
 
