@@ -21,8 +21,8 @@ task :check do
   errors << "event_date is still 'DATES' placeholder" if defaults['event_date'] == 'DATES'
   errors << "event_place is still 'PLACE' placeholder" if defaults['event_place'] == 'PLACE'
   errors << "form_link is still set to the demo Airtable URL" if defaults['form_link'].to_s.include?('pagJcROoTohbsBLFw')
-  errors << "session_deadline is still set to April Fools placeholder" if defaults['form_link'].to_s.include?('April 1')
-  errors << "session_confirm is still set to Tax Day placeholder" if defaults['form_link'].to_s.include?('April 15')
+  errors << "session_deadline is still set to April Fools placeholder" if defaults['session_deadline'].to_s.include?('April 1')
+  errors << "session_confirm is still set to Tax Day placeholder" if defaults['session_confirm'].to_s.include?('April 15')
   
   # Check for CNAME file (should be deleted or customized)
   if File.exist?('CNAME')
