@@ -13,11 +13,8 @@ Session facilitators make SRCCON what it is: a collaborative, hands-on conferenc
 * [Planning your session](#planning)
 * [Facilitation tips](#facilitation)
 * [More resources](#resources)
-
-
-<span id="about-srccon"></span>
  
-## About SRCCON & being a facilitator
+## About SRCCON & being a facilitator {#about-srccon}
  
 #### What is SRCCON like? {#about}
  
@@ -41,28 +38,27 @@ As a facilitator, you use your experience and excitement (or even skepticism) to
  
 Facilitators don't need to come in with all the answers. You're there to guide discussions or collaborative work, and to help attendees contribute and walk away having learned something new. 
 
-
 ## Session logistics & FAQ {#logistics}
 
-#### How many people will be in my session?
+#### How many people will be in my session? {#attendees}
 
 We try to plan a program where most sessions have 25 to 40 people in the room. Some sessions can have more, so we encourage you to think about easy ways to scale your activities. And some sessions will be smaller—that's great! The smallest sessions at SRCCON are _incredibly_ meaningful for the people who are there, and we intentionally encourage those conversations.
 
 We'll have volunteers available to help you make room adjustments as they come up, but it always feels great to go in knowing how you'll respond to different crowd sizes.
  
-#### What kinds of people will be in my session?
+#### What kinds of people will be in my session? {#skills}
  
 First and foremost, you’ll be surrounded by peers—people excited about journalism and ready to share their expertise at a journalism-centric conference. About a third of the attendees at SRCCON will be session facilitators themselves. Most participants are reporters, data developers, editors, designers, and product people who work with newsrooms, but we also welcome managers, multimedia journalists, and attendees from related fields like civic tech, art, mapping, and open data. Most participants come from the U.S., although many countries will be represented. We draw from large media organizations as well as smaller, regional, and noncoastal newsrooms.
 
 Every person at SRCCON is smart and creative. But not every person in your room will be an expert in the things you’re covering! We encourage attendees, in fact, to go to sessions that challenge them, taking on topics they might not normally choose. Think about how you might involve people from different fields—in the same way they're in the room to hear new ideas, your topic might be energized by an outside perspective.
 
-#### What materials will I have?
+#### What materials will I have? {#materials}
  
 Every room at SRCCON will be well-stocked with note paper, post-it notes, pens, and sharpies. We'll make sure you have a whiteboard or a giant scratchpad on an easel, too. Each room will have a screen so you can connect your laptop and walk through a software lesson or show examples to kick off a discussion. We'll also set up a shared document for live note-taking, linked right from your session on the SRCCON schedule. This is a great place to drop links to useful resources for your session attendees.
  
 If you need any special supplies for your session, you can tell us in advance and we'll have things ready for you.
 
-#### How long are sessions?
+#### How long are sessions? {#time}
 
 Sessions at SRCCON are 75 minutes long. You don’t have to fill the entire time, but we want you to have plenty of room to dig into a topic and respond to threads that emerge along the way. Our schedule also builds in a 30-minute break between sessions—plenty of time for attendees to hang around and ask questions or continue conversations before they head out.
  
@@ -73,7 +69,6 @@ How you use your time is completely up to you. While you won't need a script lik
 We don't record audio or video of sessions at SRCCON. We do work with [White Coat Captioning](http://www.whitecoatcaptioning.com/) to provide transcription, and this year we'll be able to have live transcription in one session during each block on the schedule.
 
 We'll let you know in advance if there will be a transcriptionist in your room. If there is, you can always ask participants to say "off the record" if they'd like the transcriptionist to pause their work. If you'd prefer your session to be off the record entirely, that's not a problem—we'll make sure your session isn't transcribed at all.
-
 
 ## Planning your session before SRCCON {#planning}
 
@@ -105,7 +100,7 @@ As a facilitator, you have the power to establish norms, keep track of time, and
 
 Even just naming things and extending an invitation is a powerful tool: "I noticed you said something about X earlier, could you tell us more about that?"
 
-#### Invite people to participate in different ways, and make it easy to join in
+#### Invite people to participate in different ways, and make it easy to join in {#invite}
 
 We’re big fans of what the facilitation experts at [AORTA](https://aorta.coop/) call “right-sized” ways to participate—tools you can use to make your session friendly to everyone who’s still figuring things out. A few of their great examples you can lean on for your session:
 

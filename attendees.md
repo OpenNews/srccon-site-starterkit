@@ -9,9 +9,9 @@ title: Attendee guide
 # Participation at SRCCON
 
 SRCCON is a hands-on conference, which means that everyone who attends actively participates throughout the event. Our [call for participation form](/participation/form/) is open until {{ page.session_dealine }} to tell us what you'd like to bring to the event and what you hope to take back home with you. 
-{% comment %}
+{% comment %}<!-- remove to add -->
 The deadline to propose a session has already passed, but we'll keep this form open for attendees as long as space remains available.
-{% endcomment %}
+{% endcomment %}<!-- remove to add -->
 
 We keep the size of SRCCON intentionally rather small at 300 people, and we've experimented with different ways to allocate tickets. We've landed on this approach&mdash;one single form to gather session ideas, applications to attend, and scholarship requests&mdash;as the easiest experience for potential attendees and a streamlined process for us as organizers, too.
 

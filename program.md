@@ -4,7 +4,7 @@ permalink: /program/
 title: Our Program
 ---
 
-# Our Program
+# Our Program {#program}
 
 The following sessions have been confirmed so far for {{ page.event_name }}. Thank you to everyone who submitted proposals! We still have a handful of sessions left to finalize, and descriptions here will evolve in the weeks leading up to the event.
 
@@ -14,7 +14,7 @@ We'll publish the complete schedule with session dates and times soon.
 **If you're figuring out travel plans:** {{ page.event_name }} will begin around 9am on Thursday, MMM DD, and close by 6pm Friday, MMM DD. Most participants arrive Wednesday afternoon and head home Saturday morning.
 {% endcomment %}<!-- remove to add -->
 
-### Sessions 
+### Sessions {#sessions}
 
 Our conference schedule this year will include the sessions below. Thank you to the [community panel](#community-review) that helped us during our review process! 
 

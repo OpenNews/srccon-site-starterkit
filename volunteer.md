@@ -4,7 +4,7 @@ permalink: /volunteers/
 title: Volunteers
 ---
 
-# Volunteer at a SRCCON event
+# Volunteer at a SRCCON event {#volunteer}
 
 We need YOU to help make each SRCCON work. In addition to participants leading sessions throughout our conferences, we also need a small group of people to help us keep things running smoothly. Want to help? Consider volunteering.
 

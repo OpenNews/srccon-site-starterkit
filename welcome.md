@@ -30,7 +30,7 @@ If you're looking for lodging and other logistics info, [you'll find it right he
 * [What do people expect me to do in the sessions?](#participation)
 * [Where is the conference schedule?](#schedule)
 * [How will I find the sessions?](#finding-sessions)
-{% comment %}* [Who are the people with the futuristic keyboards?](#stenographer){% endcomment %}
+{% comment %}<!-- remove to add -->* [Who are the people with the futuristic keyboards?](#stenographer){% endcomment %}<!-- remove to add -->
 * [What are the meals like?](#meals)
 * [What are the non-caffeinated, non-alcoholic drink options like?](#drinks)
 * [What is this Thursday evening thing all about?](#evening)
@@ -109,10 +109,10 @@ Here's [the SRCCON schedule](https://2025.srccon.org/schedule/)&ndash;you can ev
 ### How will I find the sessions? {#finding-sessions}
 Once you pick up your conference badge at SRCCON, flip it over and you'll see a map of the space. There will also be ample signage around the venue.
 
-{% comment %}
+{% comment %}<!-- remove to add -->
 ### Who is the person with the futuristic keyboard? {#stenographer}
 That's our stenographer! Amanda Lundberg from the White Coat Captioning crew will be live transcribing a portion of the SRCCON sessions. You'll see a note on the SRCCON schedule about which sessions will be transcribed. We offer transcription as an accessibility aid, plus it's just really cool. Please speak up loudly in large group conversations so the stenographers can hear you. If you'd like a comment to be off the record, just say so and they will not record it.
-{% endcomment %}
+{% endcomment %}<!-- remove to add -->
 
 ### What are the meals like? {#meals}
 Meals are usually buffet style, with a variety of tasty options to meet all dietary needs (just be sure to let us know when you register or email us if anything changed). Meals are a communal experience at SRCCON. With folks gathering around tables to chat, sometimes to host entire sessions, and enjoy some camaraderie. Yes, sometimes folks catch up on work email as well, but there's a lot of chatting happening too. We provide lunch both days of SRCCON as well as dinner on Thursday night, and snack breaks on both days so you never have to worry about finding sufficient energy to keep your brain moving.

@@ -23,9 +23,9 @@ There's no separate application. We offer two scholarship options:
 ## How to apply
 
 The travel and caregiving scholarship application is part of our call for participation form. This application closes along with the deadline for session proposals.
-{% comment %}
+{% comment %}<!-- remove to add -->
 The application for this scholarship closed {{ page.session_deadline }}.
-{% endcomment %}
+{% endcomment %}<!-- remove to add -->
 
 ## When notifications go out
 
