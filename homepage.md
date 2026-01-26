@@ -38,7 +38,7 @@ We have reserved a block of rooms at the [hotel](#TK) at a base rate of $### per
 
 We want everyone who comes to SRCCON to feel safe and cared for. We know that encouraging sensible precautions makes it possible for more members of our community to attend. We've kept an eye on journalism events since we last convened, and we’re seeing that it’s possible to come together in a group as long as we’re all doing our best to look out for others.
 	
-We will not require masking at {{ page.event_name }}, but some people may be masking, and we ask participants to respect anyone wearing a mask, particularly in session spaces where people are gathering more closely together. We will have masks available, but we invite you to bring your preferred N95, KN95, or similar masks as well. We also strongly encourage attendees to be up to date on their vaccinations and to please consider staying home if you’re not feeling well. If you have any questions or need further information, [reach out to us](mailto:srccon@opennews.org). Thanks for taking care of each other at SRCCON!.
+We will not require masking at {{ page.event_name }}, but some people may be masking, and we ask participants to respect anyone wearing a mask, particularly in session spaces where people are gathering more closely together. We will have masks available, but we invite you to bring your preferred N95, KN95, or similar masks as well. We also strongly encourage attendees to be up to date on their vaccinations and to please consider staying home if you’re not feeling well. If you have any questions or need further information, [reach out to us](mailto:srccon@opennews.org). Thanks for taking care of each other at SRCCON!
 
 ### What you can expect at {{ page.event_name }}
 
