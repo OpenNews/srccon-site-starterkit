@@ -31,7 +31,7 @@ Curious about how it all works? Learn more about [being a participant at SRCCON]
 On {{ page.event_date }} in {{ page.event_place }}, SRCCON returns to [{{ page.event_venue}}]({{ page.event_venue_link }}). When tickets go on sale, we'll also open up a discounted block of rooms for participants at a nearby hotel.
 
 {% comment %}<!-- remove to add -->
-We have reserved a block of rooms at the [hotel](#TK) at a base rate of $### per night. The room-discount hotel is located steps away from the {{ page.event_venue }}. The reserved block of rooms will be available until {{ place.event_name }} starts or all rooms are booked, whichever happens first&mdash;booking early is always a good idea!
+We have reserved a block of rooms at the [hotel](#TK) at a base rate of $### per night. The room-discount hotel is located steps away from the {{ page.event_venue }}. The reserved block of rooms will be available until {{ page.event_name }} starts or all rooms are booked, whichever happens first&mdash;booking early is always a good idea!
 {% endcomment %}<!-- remove to add -->
 
 ### Health policy
