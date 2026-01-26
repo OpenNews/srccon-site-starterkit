@@ -130,7 +130,7 @@ This checklist will guide you though customizing `_config` values and smoke-test
 	- [ ] `_inculdes/footer_sponsors.html` - any tweaks?
 * VQA/smoke-testing
 	- [ ] `_includes/`
-		* in `simple_footer.html` or `footer.html` (dependeng on `layout`), double-check the list of linked pages/includes. "Previous events" _should_ add any missing years once you set the `root_url`
+		* in `simple_footer.html` or `footer.html` (depending on `layout`), double-check the list of linked pages/includes. "Previous events" _should_ add any missing years once you set the `root_url`
 	- [ ] `homepage.md`
 		* in the "When & Where" section, consider un-`{% comment %}`ing the Room-block text once a link is ready
     - [ ] `price_*` changes in `_config.yaml`
