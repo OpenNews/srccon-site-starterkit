@@ -52,7 +52,7 @@ At SRCCON, you’ll:
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 1em; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' webkitAllowFullScreen mozallowfullscreen allowFullScreen style="border: 0px;"></iframe></div>
 
-SRCCON events are highly participatory, where participants come first so they can can feel comfortable digging into complex problems. The conversations that happen here come from the community and reflect its values:
+SRCCON events are highly participatory, where participants come first so they can feel comfortable digging into complex problems. The conversations that happen here come from the community and reflect its values:
 
 * **We lead change**&mdash;by challenging the power structures that have failed our industry, we push for long-lasting change in our organizations, led by journalists of color and journalists in local and regional newsrooms.
 * **We support one another**&mdash;by offering each other our expertise and empathy, we find new collaborators, help each other learn, and make our networks and organizations more resilient.

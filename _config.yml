@@ -73,7 +73,7 @@ defaults:
 
       # google_analytics_id: set this value to your GA4 measurement ID (format: G-XXXXXXXXXX)
       # Leave empty to disable Google Analytics tracking
-      google_analytics_id: "UA-91317400-3"
+      google_analytics_id: ""
   # these 'scope' props drive pages generated from the schedule
   - scope:
       path: ""

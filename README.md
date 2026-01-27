@@ -107,27 +107,27 @@ This checklist will guide you though customizing `_config` values and smoke-test
 			 * `event_venue_link`
 			 * `event_timezone`
 			 * `event_timezone_offset` - daylight savings time
-			 * `event_place_abbr` (only used by `layout_with_teader_image`)
+			 * `event_place_abbr` (only used by `layout_with_header_image`)
 			* `description`: This is written for a midyear SRCCON; if the site is a semi-colon event, change it accordingly	
 		- [ ] `layout`: This is set to "simple_layout" for page designs that look like [SRCCON:2025](https://2025.srccon.org/). You can change the value to "layout_with_header_image" for a site with photo headers like [SRCCON 2019](https://2019.srccon.org). (More work may be necessary for the photo template.)
 		- [ ] `google_analytics_id` - any custom tracking?
 		- [ ] `cta_button_text` & `cta_button_link`: an orange "call to action" button and its text. Some common options are commented out
 		- [ ] `schedule_live` - should users be able to see a link to the program (aka, is it ready to publish)
-		- [ ] `session_deadline_passed` - should we indicate that the partiticpation form is closed
+		- [ ] `session_deadline_passed` - should we indicate that the participation form is closed
 			- [ ] `session_deadline` - date & time when the form ends
 			- [ ] `session_confirm` - date when applicants should hear a verdict
 		- [ ] To make sure all uses match across our pages, prices are now `_config.yaml` values:
 			* `price_base`
 			* `price_med`
 			* `price_full`
-			* `price_stiped`
+			* `price_stipend`
 		* Additionally, we have some `scope` args after the `defaults:`; these can be ignored until we get into some challenges with schedule item renderings
 	-[ ] `media/img/`
 		- [ ] `srccon_logo.png` is the primary SRCCON logo (the one that says "SRCCON" set at an angle). If you're creating a site for a topical SRCCON instead, you'll want to create appropriate logo files (generally 800px tall, probably starting from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai).)
 		- [ ] `srccon_logo_share.png` is the version of the logo used by social-media share cards. If you create a new logo for an event, also make a 1200x600 version of it and replace this file.
 		- [ ] if you're using `layout_with_header_image`, there are some helpful images in `/media/img/backgrounds/`
 	- [ ] `_data/sessions.yml` - this is the JSON that will drive the schedule "app", with a basic placeholder/CTA to start
-	- [ ] `_inculdes/footer_sponsors.html` - any tweaks?
+	- [ ] `_includes/footer_sponsors.html` - any tweaks?
 * VQA/smoke-testing
 	- [ ] `_includes/`
 		* in `simple_footer.html` or `footer.html` (depending on `layout`), double-check the list of linked pages/includes. "Previous events" _should_ add any missing years once you set the `root_url`
