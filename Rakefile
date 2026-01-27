@@ -84,7 +84,7 @@ end
 
 namespace :deploy do
   desc "Run all pre-deployment checks"
-  task :precheck => [:check, :build, :test] do
+  task :precheck => [:check, :build, 'test:all'] do
     puts "\n✅ All pre-deployment checks passed!"
     puts "Ready to deploy. Use 'rake deploy:staging' or 'rake deploy:production'"
   end

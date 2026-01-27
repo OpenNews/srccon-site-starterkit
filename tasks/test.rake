@@ -90,7 +90,7 @@ namespace :test do
             
             content = File.read(file)
             if content =~ /\A---\s*\n(.*?)\n---\s*\n/m
-                fm = YAML.load($1)
+                fm = YAML.safe_load($1)
                 warnings << "#{file}: Missing 'section' field" unless fm['section']
                 warnings << "#{file}: Missing 'permalink' field" unless fm['permalink']
                 # warnings << "#{file}: Missing 'title' field" unless fm['title']

@@ -12,7 +12,7 @@ _"This was the first conference I've been a part of where I felt I belonged on e
 
 SRCCON is a journalism conference people love. This reaction comes from the approach SRCCON takes: highly participatory and extraordinarily inclusive. We're grateful for the support of sponsors in helping make this event possible.
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; margin-bottom: 50px; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' style='border: none;' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; margin-bottom: 50px; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' style='border: none;' webkitAllowFullScreen mozallowfullscreen allowFullScreen title="SRCCON video promo"></iframe></div>
 
 
 ### Ways to help make events happen {#ways}

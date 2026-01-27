@@ -98,7 +98,7 @@ defaults:
 **Update Liquid template patterns:**
 
 ```bash
-# Critical: Change site.root_url to page.root_url
+# Critical: Change site . root_url to page.root_url
 grep -r "site\.root_url" . --include="*.html" --include="*.md"
 # Replace all instances with: page.root_url
 ```
