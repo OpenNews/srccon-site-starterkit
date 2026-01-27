@@ -20,7 +20,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version-file: .ruby-version
+          ruby-version: '.ruby-version'
           bundler-cache: true
       
       - name: Build Jekyll site
@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: slackapi/slack-github-action@v2.0.0
         with:
-          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           payload: |
             {
               "text": "${{ job.status == 'success' && '✅' || '❌' }} SRCCON Site Deployment",
