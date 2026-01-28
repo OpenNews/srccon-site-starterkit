@@ -86,7 +86,7 @@ namespace :test do
         warnings = []
         
         Dir.glob('*.md').each do |file|
-            next if file == 'README.md'
+            next if file =~ /^[A-Z]+\.md$/
             
             content = File.read(file)
             if content =~ /\A---\s*\n(.*?)\n---\s*\n/m
