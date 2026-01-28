@@ -1,12 +1,24 @@
 require 'jekyll'
 require 'yaml'
+require 'fileutils'
 
 # Load test:* tasks from separate file
 Dir.glob('tasks/*.rake').each { |r| load r }
 
 # Load deployment vars from _config.yml
 def deployment_config
-  @deployment_config ||= YAML.load_file('_config.yml')['deployment'] || {}
+  return @deployment_config if @deployment_config
+  
+  unless File.exist?('_config.yml')
+    abort "❌ _config.yml not found. Are you in the project root directory?"
+  end
+  
+  begin
+    config = YAML.load_file('_config.yml')
+    @deployment_config = config['deployment'] || {}
+  rescue => e
+    abort "❌ Error loading _config.yml: #{e.message}"
+  end
 end
 
 # Default task
@@ -15,8 +27,27 @@ task default: [:build, :check, :serve]
 desc "Validate configuration has been updated from template defaults"
 task :check do
   puts "Validating _config.yml configuration..."
-  config = YAML.load_file('_config.yml')
-  defaults = config['defaults'].find { |d| d['scope']['path'] == '' }['values']
+  
+  unless File.exist?('_config.yml')
+    abort "❌ _config.yml not found. Are you in the project root directory?"
+  end
+  
+  begin
+    config = YAML.load_file('_config.yml')
+  rescue => e
+    abort "❌ Error parsing _config.yml: #{e.message}"
+  end
+  
+  unless config['defaults'].is_a?(Array)
+    abort "❌ _config.yml is missing 'defaults' array"
+  end
+  
+  default_scope = config['defaults'].find { |d| d['scope'] && d['scope']['path'] == '' }
+  unless default_scope && default_scope['values']
+    abort "❌ _config.yml is missing default scope with empty path"
+  end
+  
+  defaults = default_scope['values']
   
   errors = []
   warnings = []
@@ -79,7 +110,7 @@ end
 desc "Clean the build directory"
 task :clean do
   puts "Cleaning _site directory..."
-  sh "rm -rf _site .jekyll-cache .jekyll-metadata"
+  FileUtils.rm_rf(['_site', '.jekyll-cache', '.jekyll-metadata'])
 end
 
 desc "Build and serve the site locally"
@@ -104,14 +135,14 @@ namespace :deploy do
 
   desc "Deploy to staging (dry-run by default)"
   namespace :staging do
-    # Load bucket config once at namespace level
-    staging_bucket = "#{deployment_config['bucket']}-staging"
-    abort "❌ Staging bucket not configured in _config.yml" unless staging_bucket
-    
     task :default => :dryrun
     
     desc "Dry-run staging deploy"
     task :dryrun => :build do
+      config = deployment_config
+      abort "❌ Staging bucket not configured in _config.yml deployment section" unless config['bucket']
+      
+      staging_bucket = "#{config['bucket']}-staging"
       puts "[DRY RUN] Deploying to staging bucket: #{staging_bucket}..."
       sh "aws s3 sync _site/ s3://#{staging_bucket} --dryrun #{S3_ARGS}"
       puts "\n✅ Dry-run complete. To deploy for real, run: rake deploy:staging:real"
@@ -119,7 +150,11 @@ namespace :deploy do
 
     desc "Real staging deploy (with confirmation)"
     task :real => :precheck do
-      puts "\n⚠️  Deploying to STAGING: #{staging_bucket}"
+      config = deployment_config
+      abort "❌ Staging bucket not configured in _config.yml deployment section" unless config['bucket']
+      
+      staging_bucket = "#{config['bucket']}-staging"
+      puts "⚠️  Deploying to STAGING: #{staging_bucket}"
       print "Continue? (y/N) "
 
       response = STDIN.gets.chomp
@@ -133,22 +168,22 @@ namespace :deploy do
 
   desc "Deploy to production (dry-run by default)"
   namespace :production do
-    # Load bucket config once at namespace level
-    prod_bucket = deployment_config['bucket']
-    cloudfront_dist = deployment_config['cloudfront_distribution_id']
-    abort "❌ Production bucket not configured in _config.yml" unless prod_bucket
-    
     task :default => :dryrun
 
     desc "Dry-run production deploy"
     task :dryrun => :build do
+      config = deployment_config
+      prod_bucket = config['bucket']
+      cloudfront_dist = config['cloudfront_distribution_id']
+      abort "❌ Production bucket not configured in _config.yml deployment section" unless prod_bucket
+      
       puts "[DRY RUN] Deploying to production bucket: #{prod_bucket}..."
       sh "aws s3 sync _site/ s3://#{prod_bucket} --dryrun #{S3_ARGS}"
       
-      if cloudfront_dist
-        puts "[DRY RUN] Would invalidate CloudFront: #{cloudfront_dist}"
+      if cloudfront_dist && !cloudfront_dist.empty?
+        puts "\n[DRY RUN] Would invalidate CloudFront: #{cloudfront_dist}"
       else
-        puts "⚠️ No CloudFront distribution configured (cache won't be invalidated)"
+        puts "\n⚠️  No CloudFront distribution configured (cache won't be invalidated)"
       end
       
       puts "\n✅ Dry-run complete. To deploy for real, run: rake deploy:production:real"
@@ -156,20 +191,25 @@ namespace :deploy do
 
     desc "Real production deploy (with confirmation)"
     task :real => :precheck do
-      puts "\n🚨 DEPLOYING TO PRODUCTION: #{prod_bucket}"
+      config = deployment_config
+      prod_bucket = config['bucket']
+      cloudfront_dist = config['cloudfront_distribution_id']
+      abort "❌ Production bucket not configured in _config.yml deployment section" unless prod_bucket
+      
+      puts "🚨 DEPLOYING TO PRODUCTION: #{prod_bucket}"
       print "Are you absolutely sure? (yes/N) "
       response = STDIN.gets.chomp
       abort "Deployment cancelled" unless response == 'yes'
       
-      puts "Deploying to production bucket: #{prod_bucket}..."
+      puts "\nDeploying to production bucket: #{prod_bucket}..."
       sh "aws s3 sync _site/ s3://#{prod_bucket} #{S3_ARGS}"
       
-      if cloudfront_dist
+      if cloudfront_dist && !cloudfront_dist.empty?
         puts "\nInvalidating CloudFront distribution: #{cloudfront_dist}..."
         sh "aws cloudfront create-invalidation --distribution-id #{cloudfront_dist} --paths '/*'"
-        puts "✅ CloudFront cache invalidated"
+        puts "\n✅ CloudFront cache invalidated"
       else
-        puts "⚠️ Skipping CloudFront invalidation (not configured)"
+        puts "\n⚠️  Skipping CloudFront invalidation (not configured)"
       end
       
       puts "\n🎉 Successfully deployed to production!"
