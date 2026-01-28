@@ -15,6 +15,13 @@ collections:
   test:
     output: false
 
+# Deployment vars - used by `rake deploy:*` tasks and GitHub Actions
+deployment:
+  # AWS S3 bucket for deployments (will auto-append -staging if staging branch)
+  bucket: srccon-2026
+  # CloudFront distribution ID for cache invalidation (optional)
+  cloudfront_distribution_id: E1234ABCD5678
+
 defaults:
   - scope:
       path: ""
