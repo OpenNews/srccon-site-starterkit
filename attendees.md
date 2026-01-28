@@ -8,7 +8,7 @@ title: Attendee guide
 
 # Participation at SRCCON
 
-SRCCON is a hands-on conference, which means that everyone who attends actively participates throughout the event. Our [call for participation form](/participation/form/) is open until {{ page.session_dealine }} to tell us what you'd like to bring to the event and what you hope to take back home with you. 
+SRCCON is a hands-on conference, which means that everyone who attends actively participates throughout the event. Our [call for participation form](/participation/form/) is open until {{ page.session_deadline }} to tell us what you'd like to bring to the event and what you hope to take back home with you. 
 {% comment %}<!-- remove to add -->
 The deadline to propose a session has already passed, but we'll keep this form open for attendees as long as space remains available.
 {% endcomment %}<!-- remove to add -->
