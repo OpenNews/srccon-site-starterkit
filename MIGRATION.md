@@ -1,6 +1,12 @@
-# Migration 
+# Migration Guide & Developer Notes
 
-## From Travis CI-backed sites to `srccon-site-starterkit` circa 2026
+This document covers:
+1. Migrating an existing SRCCON site to the 2026 template pattern
+2. AWS OIDC implementation for secure, keyless deployments
+
+---
+
+## Part 1: Migrating SRCCON 2025 to 2026 Template Pattern
 
 If you're upgrading an existing SRCCON site (like [srccon-2025](https://github.com/OpenNews/srccon-2025)) to use this 2026 template, follow these steps:
 
@@ -133,18 +139,20 @@ mkdir -p _data
 {% include live_sessions_table.html %}
 ```
 
-#### 6. Set Up GitHub Secrets
+#### 6. Configure Deployment Settings
 
-**Repository-level secrets** (Settings → Secrets and variables → Actions):
+**Update `_config.yml`** with your deployment configuration:
 
-- `AWS_S3_BUCKET_STAGING` - Your staging S3 bucket (e.g., `srccon-2025-staging`)
-- `AWS_S3_BUCKET` - Your production S3 bucket (e.g., `srccon-2025`)
-- `CLOUDFRONT_DISTRIBUTION_ID` - Your CloudFront distribution ID
+```yaml
+deployment:
+  bucket: srccon-2025                    # Your S3 bucket name (staging gets -staging suffix)
+  cloudfront_distribution_id: E1234ABCD5678  # Your CloudFront distribution ID (optional)
+```
 
-**Verify organization-level secrets exist** (should already be configured):
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `SLACK_WEBHOOK_URL`
+**Verify organization-level secret exists** (should already be configured):
+- `AWS_ROLE_ARN` - IAM role for OIDC authentication (see Part 2 of this migration guide below for setup instructions)
+
+**Note:** S3 buckets and CloudFront distributions must be created in AWS before deployment. No repository-level secrets are needed - all deployment config is in `_config.yml`.
 
 #### 7. Add Footer Automation
 
@@ -226,3 +234,185 @@ rm -f .travis.yml
 **Sponsor data:**
 - Consider moving to `_data/sponsors.yml` for easier year-over-year updates
 - See `sponsors.md` for examples of commented-out sponsor templates
+
+---
+
+## Part 2: AWS OIDC Implementation (One-Time Setup)
+
+**This setup is done ONCE at the organization level and shared across ALL SRCCON repositories.**
+
+### Prerequisites
+
+- AWS account with IAM permissions
+- GitHub organization admin access
+- AWS CLI installed (optional, for testing)
+
+### Implementation Steps
+
+### 1. Create OIDC Identity Provider in AWS
+
+**Via AWS Console:**
+
+1. Navigate to IAM → Identity providers
+2. Click "Add provider"
+3. Select "OpenID Connect"
+4. Configure:
+   - **Provider URL:** `https://token.actions.githubusercontent.com`
+   - **Audience:** `sts.amazonaws.com`
+5. Click "Add provider"
+
+### 2. Create IAM Role for GitHub Actions
+
+**Important:** This role will be **shared across all SRCCON event repositories**. The wildcard pattern `srccon-*` in both the trust policy and permissions allows this.
+
+**Via AWS Console:**
+
+1. Navigate to **IAM → Roles**
+2. Click **"Create role"**
+3. Select trusted entity:
+   - **Trusted entity type:** Web identity
+   - **Identity provider:** token.actions.githubusercontent.com
+   - **Audience:** sts.amazonaws.com
+4. Click **"Next"**
+5. Skip adding permissions for now (we'll add them in step 3)
+6. Click **"Next"**
+7. Configure role:
+   - **Role name:** `GitHubActions-SRCCON-Deploy`
+   - **Description:** `Role for GitHub Actions to deploy SRCCON sites`
+8. Click **"Create role"**
+
+**Now edit the trust policy to add branch restrictions:**
+
+1. Find and click on the newly created `GitHubActions-SRCCON-Deploy` role
+2. Click the **"Trust relationships"** tab
+3. Click **"Edit trust policy"**
+4. Replace the entire JSON with:  
+  **Security note:** This trust policy restricts deployments to only the `main` and `staging` branches. Other branches (like feature branches) can still run workflows but cannot assume the AWS role, preventing unauthorized deployments.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::YOUR_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringLike": {
+          "token.actions.githubusercontent.com:sub": [
+            "repo:OpenNews/srccon-*:ref:refs/heads/main",
+            "repo:OpenNews/srccon-*:ref:refs/heads/staging"
+          ]
+        },
+        "StringEquals": {
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        }
+      }
+    }
+  ]
+}
+```
+
+5. **Replace `YOUR_ACCOUNT_ID`** with your actual 12-digit AWS account ID
+6. Click **"Update policy"**
+7. **Copy the role ARN** - you'll need it for GitHub secrets (find it at the top of the role summary page, format: `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy`).
+
+### 3. Create and Attach Permissions Policy
+
+**Important:** The wildcard pattern `srccon-*` in the S3 resources allows this single role to deploy to **all SRCCON buckets** (srccon-2024, srccon-2025, srccon-2026, srccon-2024-staging, etc.).
+
+**Via AWS Console:**
+
+1. Navigate to **IAM → Policies**
+2. Click **"Create policy"**
+3. Click the **"JSON"** tab
+4. Paste this policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3Deployment",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::srccon-*",
+        "arn:aws:s3:::srccon-*/*"
+      ]
+    },
+    {
+      "Sid": "CloudFrontInvalidation",
+      "Effect": "Allow",
+      "Action": "cloudfront:CreateInvalidation",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+5. Click **"Next"**
+6. Configure policy:
+   - **Policy name:** `GitHubActions-SRCCON-Permissions`
+   - **Description:** `Permissions for deploying SRCCON sites to S3 and CloudFront`
+7. Click **"Create policy"**
+
+**Now attach the policy to the role:**
+
+1. Navigate back to **IAM → Roles**
+2. Click on the `GitHubActions-SRCCON-Deploy` role
+3. Click **"Add permissions" → "Attach policies"**
+4. Search for `GitHubActions-SRCCON-Permissions`
+5. Check the box next to it
+6. Click **"Attach policies"**
+
+**Note:** This policy allows deployment to any S3 bucket starting with `srccon-`, including both production and staging buckets.
+
+### 4. Configure GitHub Organization Secret
+
+**This is the ONLY secret you need to configure** - it will be shared across all SRCCON event repositories.
+
+1. Go to https://github.com/organizations/OpenNews/settings/secrets/actions
+2. Click "New organization secret"
+3. Configure:
+   - **Name:** `AWS_ROLE_ARN`
+   - **Value:** `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy` (the ARN you copied in step 2)
+   - **Repository access:** All repositories
+4. Click **"Add secret"**
+
+### 5. Verify the Setup
+
+Test with any SRCCON repository:
+
+1. Push to the `staging` branch
+2. Check workflow run in GitHub Actions
+3. Verify "Configure AWS credentials" step succeeds
+
+### Troubleshooting
+
+**"Not authorized to perform sts:AssumeRoleWithWebIdentity"**
+- Verify OIDC provider exists in AWS IAM
+- Check trust policy Federated ARN matches your OIDC provider
+- Ensure repository name matches pattern (`srccon-*`)
+- Verify branch is `main` or `staging` (others are blocked)
+
+**"Access Denied" during S3 sync**
+- Verify role has permissions policy attached
+- Check S3 bucket names match pattern (`srccon-*`)
+- Ensure buckets exist in AWS before deploying
+
+**"Error: Credentials could not be loaded"**
+- Verify `AWS_ROLE_ARN` secret is set at organization level
+- Check workflow has `id-token: write` permission
+- Ensure using `aws-actions/configure-aws-credentials@v4`
+
+**Config extraction fails**
+- Verify `_config.yml` has `deployment:` section
+- Check YAML syntax is valid
+- Ensure `bucket` key exists in deployment config

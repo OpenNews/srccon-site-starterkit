@@ -147,32 +147,26 @@ This template uses GitHub Actions for automated deployment to S3 and CloudFront.
 
 ### Required Secrets
 
-Secrets can be configured at the **organization level** (shared across all SRCCON repos) or **repository level** (specific to each event site).
+With OIDC authentication and deployment configuration in `_config.yml`, only **one organization-level secret** is required.
 
-**Organization-Level Secrets** (Settings → Secrets and variables → Actions at https://github.com/organizations/OpenNews/settings/secrets/actions):
+**Organization-Level Secret** (Settings → Secrets and variables → Actions at https://github.com/organizations/OpenNews/settings/secrets/actions):
 
-**⚠️ REQUIRED DEPENDENCIES:** These must be configured at the organization level before deployment workflows will function. They are shared across all SRCCON site repositories:
+- `AWS_ROLE_ARN` - AWS IAM role ARN for OIDC authentication (e.g., `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy`). This role must have permissions for `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket`, `cloudfront:CreateInvalidation`
 
-- `AWS_ACCESS_KEY_ID` - AWS access key with S3 and CloudFront permissions (IAM policy must include `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket`, `cloudfront:CreateInvalidation`)
-- `AWS_SECRET_ACCESS_KEY` - AWS secret access key corresponding to the access key ID
-- `SLACK_WEBHOOK_URL` - Slack webhook for deployment notifications (uses a shared channel for all SRCCON deployments)
+**All other deployment configuration** (bucket names, CloudFront distribution ID) is stored in each repository's `_config.yml` file:
 
-**Repository-Level Secrets** (Settings → Secrets and variables → Actions in each repository):
+```yaml
+deployment:
+  bucket: srccon-2026                    # Production bucket (staging gets -staging suffix)
+  cloudfront_distribution_id: E1234ABCD5678  # Optional
+```
 
-These are unique to each event and must be configured for each new SRCCON site repository:
-
-- `AWS_S3_BUCKET_STAGING` - S3 bucket name for this event's staging site (e.g., `srccon-2026-staging`)
-- `AWS_S3_BUCKET` - S3 bucket name for this event's production site (e.g., `srccon-2026`)
-- `CLOUDFRONT_DISTRIBUTION_ID` - CloudFront distribution ID for this event's production site (e.g., `E1234ABCD5678`)
-
-**Note:** S3 buckets and CloudFront distributions must be created in AWS before setting these values. The CloudFront distribution ID is found in the AWS CloudFront console after creating a distribution that points to your S3 bucket.
-
-**Optional Repository-Level Overrides:**
-
-If a specific event needs different configuration, you can override organization secrets at the repository level:
-
-- `SLACK_WEBHOOK_URL` - Override with event-specific Slack channel webhook
-- `SLACK_WEBHOOK_URL` - Slack webhook URL for deployment notifications ([get one here](https://api.slack.com/messaging/webhooks))
+**Benefits of this approach:**
+- ✅ Single organization secret to maintain (the IAM role ARN)
+- ✅ Bucket names visible in code (easier to verify and update)
+- ✅ No repository-level secrets needed
+- ✅ Each event repository is self-contained
+- ✅ Deployment config is version-controlled
 
 ### Deployment Workflow
 
@@ -270,11 +264,72 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 
 [See these AI-driven instructions](MIGRATION.md)
 
-### Enhancement: Advanced AWS Setup (OIDC)
+### AWS OIDC Setup (Required)
 
-For enhanced security, you can use AWS OIDC instead of long-lived credentials. This eliminates the need for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+This project uses **OpenID Connect (OIDC)** for secure, keyless AWS authentication. This eliminates the need for long-lived credentials.
 
-[See AWS documentation for setup instructions](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+**Setup Steps:**
+
+1. **Create an OIDC Identity Provider in AWS IAM:**
+   - Provider URL: `https://token.actions.githubusercontent.com`
+   - Audience: `sts.amazonaws.com`
+   - [AWS Documentation](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+
+2. **Create an IAM Role for GitHub Actions:**
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+           "Federated": "arn:aws:iam::YOUR_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
+         },
+         "Action": "sts:AssumeRoleWithWebIdentity",
+         "Condition": {
+           "StringLike": {
+             "token.actions.githubusercontent.com:sub": "repo:OpenNews/*:*"
+           },
+           "StringEquals": {
+             "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+           }
+         }
+       }
+     ]
+   }
+   ```
+
+3. **Attach permissions policy to the role:**
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": [
+           "s3:PutObject",
+           "s3:DeleteObject",
+           "s3:ListBucket"
+         ],
+         "Resource": [
+           "arn:aws:s3:::srccon-*",
+           "arn:aws:s3:::srccon-*/*"
+         ]
+       },
+       {
+         "Effect": "Allow",
+         "Action": "cloudfront:CreateInvalidation",
+         "Resource": "*"
+       }
+     ]
+   }
+   ```
+
+4. **Set the role ARN as an organization secret:**
+   - Secret name: `AWS_ROLE_ARN`
+   - Value: `arn:aws:iam::YOUR_ACCOUNT_ID:role/GitHubActions-SRCCON-Deploy`
+
+**Note:** This template only supports OIDC authentication. Long-lived credentials (AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY) are not configured in the workflows for security reasons.
 
 ### Troubleshooting
 

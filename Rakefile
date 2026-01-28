@@ -1,7 +1,13 @@
 require 'jekyll'
+require 'yaml'
 
 # Load test:* tasks from separate file
 Dir.glob('tasks/*.rake').each { |r| load r }
+
+# Load deployment vars from _config.yml
+def deployment_config
+  @deployment_config ||= YAML.load_file('_config.yml')['deployment'] || {}
+end
 
 # Default task
 task default: [:build, :check, :serve]
@@ -86,44 +92,87 @@ namespace :deploy do
   desc "Run all pre-deployment checks"
   task :precheck => [:check, :build, 'test:all'] do
     puts "\n✅ All pre-deployment checks passed!"
-    puts "Ready to deploy. Use 'rake deploy:staging' or 'rake deploy:production'"
+    puts "\nDeploy with:"
+    puts "  rake deploy:staging          # Dry-run to staging"
+    puts "  rake deploy:staging:real     # Actually deploy to staging"
+    puts "  rake deploy:production       # Dry-run to production"
+    puts "  rake deploy:production:real  # Actually deploy to production"
   end
   
-  desc "Deploy to S3 staging bucket (dry-run by default, set DRY_RUN=false to deploy)"
-  task :staging do
-    dry_run = ENV['DRY_RUN'] != 'false'
-    bucket = ENV['AWS_S3_BUCKET_STAGING']
+  # Common S3 sync arguments
+  S3_ARGS = "--delete --cache-control 'public, max-age=3600'"
+
+  desc "Deploy to staging (dry-run by default)"
+  namespace :staging do
+    # Load bucket config once at namespace level
+    staging_bucket = "#{deployment_config['bucket']}-staging"
+    abort "❌ Staging bucket not configured in _config.yml" unless staging_bucket
     
-    abort "AWS_S3_BUCKET_STAGING environment variable not set" unless bucket
+    task :default => :dryrun
     
-    puts "#{dry_run ? '[DRY RUN] ' : ''}Deploying to staging bucket: #{bucket}..."
-    sh "aws s3 sync _site/ s3://#{bucket} " \
-       "#{dry_run ? '--dryrun ' : ''}" \
-       "--delete " \
-       "--cache-control 'public, max-age=3600'"
+    desc "Dry-run staging deploy"
+    task :dryrun => :build do
+      puts "[DRY RUN] Deploying to staging bucket: #{staging_bucket}..."
+      sh "aws s3 sync _site/ s3://#{staging_bucket} --dryrun #{S3_ARGS}"
+      puts "\n✅ Dry-run complete. To deploy for real, run: rake deploy:staging:real"
+    end
+
+    desc "Real staging deploy (with confirmation)"
+    task :real => :precheck do
+      puts "\n⚠️  Deploying to STAGING: #{staging_bucket}"
+      print "Continue? (y/N) "
+
+      response = STDIN.gets.chomp
+      abort "Deployment cancelled" unless response.downcase == 'y'
+      
+      puts "Deploying to staging bucket: #{staging_bucket}..."
+      sh "aws s3 sync _site/ s3://#{staging_bucket} #{S3_ARGS}"
+      puts "\n✅ Successfully deployed to staging!"
+    end
   end
 
-  desc "Deploy to S3 production bucket and invalidate CloudFront (dry-run by default, set DRY_RUN=false to deploy)"
-  task :production do
-    dry_run = ENV['DRY_RUN'] != 'false'
-    bucket = ENV['AWS_S3_BUCKET']
-    distribution = ENV['CLOUDFRONT_DISTRIBUTION_ID']
+  desc "Deploy to production (dry-run by default)"
+  namespace :production do
+    # Load bucket config once at namespace level
+    prod_bucket = deployment_config['bucket']
+    cloudfront_dist = deployment_config['cloudfront_distribution_id']
+    abort "❌ Production bucket not configured in _config.yml" unless prod_bucket
     
-    abort "AWS_S3_BUCKET environment variable not set" unless bucket
-    
-    puts "#{dry_run ? '[DRY RUN] ' : ''}Deploying to production bucket: #{bucket}..."
-    sh "aws s3 sync _site/ s3://#{bucket} " \
-       "#{dry_run ? '--dryrun ' : ''}" \
-       "--delete " \
-       "--cache-control 'public, max-age=3600'"
-    
-    if !dry_run && distribution
-      puts "Invalidating CloudFront distribution: #{distribution}..."
-      sh "aws cloudfront create-invalidation " \
-         "--distribution-id #{distribution} " \
-         "--paths '/*'"
-    elsif !dry_run
-      puts "Skipping CloudFront invalidation (CLOUDFRONT_DISTRIBUTION_ID not set)"
+    task :default => :dryrun
+
+    desc "Dry-run production deploy"
+    task :dryrun => :build do
+      puts "[DRY RUN] Deploying to production bucket: #{prod_bucket}..."
+      sh "aws s3 sync _site/ s3://#{prod_bucket} --dryrun #{S3_ARGS}"
+      
+      if cloudfront_dist
+        puts "[DRY RUN] Would invalidate CloudFront: #{cloudfront_dist}"
+      else
+        puts "⚠️ No CloudFront distribution configured (cache won't be invalidated)"
+      end
+      
+      puts "\n✅ Dry-run complete. To deploy for real, run: rake deploy:production:real"
+    end
+
+    desc "Real production deploy (with confirmation)"
+    task :real => :precheck do
+      puts "\n🚨 DEPLOYING TO PRODUCTION: #{prod_bucket}"
+      print "Are you absolutely sure? (yes/N) "
+      response = STDIN.gets.chomp
+      abort "Deployment cancelled" unless response == 'yes'
+      
+      puts "Deploying to production bucket: #{prod_bucket}..."
+      sh "aws s3 sync _site/ s3://#{prod_bucket} #{S3_ARGS}"
+      
+      if cloudfront_dist
+        puts "\nInvalidating CloudFront distribution: #{cloudfront_dist}..."
+        sh "aws cloudfront create-invalidation --distribution-id #{cloudfront_dist} --paths '/*'"
+        puts "✅ CloudFront cache invalidated"
+      else
+        puts "⚠️ Skipping CloudFront invalidation (not configured)"
+      end
+      
+      puts "\n🎉 Successfully deployed to production!"
     end
   end
 end

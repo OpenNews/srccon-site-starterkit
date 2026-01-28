@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write  # Required for OIDC authentication
 
 jobs:
   test:
@@ -38,19 +39,26 @@ jobs:
             --ignore-urls "/^http:\/\/(127\.0\.0\.1|0\.0\.0\.0|localhost)/" \
             --allow-hash-href
       
+      - name: Extract deployment config from _config.yml
+        if: github.event_name == 'pull_request'
+        id: config
+        run: |
+          BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['bucket']")
+          echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
+      
       - name: Configure AWS credentials
         if: github.event_name == 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
+          role-session-name: Test-${{ github.event.repository.name }}-${{ github.run_id }}
       
       - name: Test deployment (dry-run)
         if: github.event_name == 'pull_request'
         run: |
           echo "Testing S3 sync command (dry-run)..."
-          aws s3 sync _site/ s3://${{ secrets.AWS_S3_BUCKET_STAGING }} \
+          aws s3 sync _site/ s3://${{ steps.config.outputs.bucket }}-staging \
             --dryrun \
             --delete \
             --cache-control "public, max-age=3600"
