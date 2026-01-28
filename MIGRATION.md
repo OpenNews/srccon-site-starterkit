@@ -1,8 +1,8 @@
 # Migration Guide & Developer Notes
 
 This document covers:
-1. Migrating an existing SRCCON site to the 2026 template pattern
-2. AWS OIDC implementation for secure, keyless deployments
+1. [Migrating an existing SRCCON site to the 2026 template pattern](#part-1-migrating-srccon-2025-to-2026-template-pattern)
+2. [AWS OIDC implementation for secure, keyless deployments](#part-2-aws-oidc-implementation-one-time-setup)
 
 ---
 
@@ -89,29 +89,23 @@ defaults:
 
 **Find and replace hardcoded values across all `.md` files:**
 
-```bash
-# Example: Replace hardcoded dates with config variable
-# OLD: August 14-15, 2025
-# NEW: {{ page.event_date }}
-
-# OLD: Minneapolis
-# NEW: {{ page.event_place }}
-
-# OLD: $225
-# NEW: {{ page.price_base }}
-```
+* OLD: August 14-15, 2025
+* NEW: `{{ page.event_date }}`
+* OLD: Minneapolis
+* NEW: `{{ page.event_place }}`
+* OLD: $225
+* NEW: `{{ page.price_base }}`
 
 **Update Liquid template patterns:**
-
+Replace all matches with `{{ page.root_url }}`
 ```bash
 # Critical: Change site . root_url to page.root_url
 grep -r "site\.root_url" . --include="*.html" --include="*.md"
-# Replace all instances with: page.root_url
 ```
 
 **Update social metadata in `_includes/headmeta.html`:**
 
-```liquid
+```html
 <!-- OLD (relative URLs): -->
 <meta property="og:url" content="{{ page.url }}" />
 <meta property="og:image" content="/media/img/srccon_logo_share.png" />
@@ -135,7 +129,7 @@ mkdir -p _data
 
 **Update `program.md` to use the session table include:**
 
-```liquid
+```html
 {% include live_sessions_table.html %}
 ```
 
@@ -145,8 +139,8 @@ mkdir -p _data
 
 ```yaml
 deployment:
-  bucket: srccon-2025                    # Your S3 bucket name (staging gets -staging suffix)
-  cloudfront_distribution_id: E1234ABCD5678  # Your CloudFront distribution ID (optional)
+  bucket: srccon-2025
+  cloudfront_distribution_id: E1234ABCD5678
 ```
 
 **Verify organization-level secret exists** (should already be configured):
@@ -160,11 +154,10 @@ deployment:
 
 In your footer template (`_includes/simple_footer.html` or `_includes/footer.html`):
 
-```liquid
+```html
 <!-- OLD: Manual list -->
 <a href="https://2024.srccon.org">SRCCON 2024</a>
 <a href="https://2023.srccon.org">SRCCON 2023</a>
-<!-- ... -->
 
 <!-- NEW: Automated generation -->
 {% include prior_events.html %}
@@ -241,11 +234,10 @@ rm -f .travis.yml
 
 **This setup is done ONCE at the organization level and shared across ALL SRCCON repositories.**
 
-### Prerequisites
+### Prereqs
 
 - AWS account with IAM permissions
 - GitHub organization admin access
-- AWS CLI installed (optional, for testing)
 
 ### Implementation Steps
 
@@ -286,38 +278,37 @@ rm -f .travis.yml
 1. Find and click on the newly created `GitHubActions-SRCCON-Deploy` role
 2. Click the **"Trust relationships"** tab
 3. Click **"Edit trust policy"**
-4. Replace the entire JSON with:  
-  **Security note:** This trust policy restricts deployments to only the `main` and `staging` branches. Other branches (like feature branches) can still run workflows but cannot assume the AWS role, preventing unauthorized deployments.
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::YOUR_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringLike": {
-          "token.actions.githubusercontent.com:sub": [
-            "repo:OpenNews/srccon-*:ref:refs/heads/main",
-            "repo:OpenNews/srccon-*:ref:refs/heads/staging"
-          ]
+4. **Security note:** This trust policy restricts deployments to only the `main` and `staging` branches. Other branches (like feature branches) can still run workflows but cannot assume the AWS role, preventing unauthorized deployments.
+5. Replace the entire JSON with:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::YOUR_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
         },
-        "StringEquals": {
-          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringLike": {
+            "token.actions.githubusercontent.com:sub": [
+              "repo:OpenNews/srccon-*:ref:refs/heads/main",
+              "repo:OpenNews/srccon-*:ref:refs/heads/staging"
+            ]
+          },
+          "StringEquals": {
+            "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+          }
         }
       }
-    }
-  ]
-}
-```
+    ]
+  }
+  ```
 
-5. **Replace `YOUR_ACCOUNT_ID`** with your actual 12-digit AWS account ID
-6. Click **"Update policy"**
-7. **Copy the role ARN** - you'll need it for GitHub secrets (find it at the top of the role summary page, format: `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy`).
+6. **Replace `YOUR_ACCOUNT_ID`** with your actual 12-digit AWS account ID
+7. Click **"Update policy"**
+8. **Copy the role ARN** - you'll need it for GitHub secrets (find it at the top of the role summary page, format: `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy`).
 
 ### 3. Create and Attach Permissions Policy
 
@@ -328,34 +319,33 @@ rm -f .travis.yml
 1. Navigate to **IAM → Policies**
 2. Click **"Create policy"**
 3. Click the **"JSON"** tab
-4. Paste this policy:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "S3Deployment",
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:DeleteObject",
-        "s3:ListBucket"
-      ],
-      "Resource": [
-        "arn:aws:s3:::srccon-*",
-        "arn:aws:s3:::srccon-*/*"
-      ]
-    },
-    {
-      "Sid": "CloudFrontInvalidation",
-      "Effect": "Allow",
-      "Action": "cloudfront:CreateInvalidation",
-      "Resource": "*"
-    }
-  ]
-}
-```
+4. Paste this policy:  
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "S3Deployment",
+        "Effect": "Allow",
+        "Action": [
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:ListBucket"
+        ],
+        "Resource": [
+          "arn:aws:s3:::srccon-*",
+          "arn:aws:s3:::srccon-*/*"
+        ]
+      },
+      {
+        "Sid": "CloudFrontInvalidation",
+        "Effect": "Allow",
+        "Action": "cloudfront:CreateInvalidation",
+        "Resource": "*"
+      }
+    ]
+  }
+  ```
 
 5. Click **"Next"**
 6. Configure policy:
