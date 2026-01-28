@@ -50,7 +50,7 @@ At SRCCON, you’ll:
 * Connect with people who share your hopes and dreams for journalism&mdash;not just making professional acquaintances, but creating personal relationships that last.
 * Bring who you are into a conference that thinks about the program, the schedule&mdash;even games & meals&mdash;as ways to celebrate everything you have to share.
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 1em; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' webkitAllowFullScreen mozallowfullscreen allowFullScreen style="border: 0px;"></iframe></div>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 1em; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/180221748' webkitAllowFullScreen mozallowfullscreen allowFullScreen style="border: 0px;" title="SRCCON conference video"></iframe></div>
 
 SRCCON events are highly participatory, where participants come first so they can feel comfortable digging into complex problems. The conversations that happen here come from the community and reflect its values:
 
