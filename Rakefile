@@ -151,7 +151,7 @@ namespace :deploy do
     desc "Real staging deploy (with confirmation)"
     task :real => :precheck do
       config = deployment_config
-      staging_bucket = config['staging_bucket'] || "#{config['bucket']}-staging"
+      staging_bucket = config['staging_bucket'] || "staging.#{config['bucket']}"
       abort "❌ Staging bucket not configured in _config.yml deployment section" unless staging_bucket
       
       puts "⚠️  Deploying to STAGING: #{staging_bucket}"
