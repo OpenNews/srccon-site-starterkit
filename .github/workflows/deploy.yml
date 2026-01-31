@@ -31,8 +31,12 @@ jobs:
         id: config
         run: |
           BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['bucket']")
-          STAGING_BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['staging_bucket']")
-          CLOUDFRONT=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['cloudfront_distribution_id']")
+          BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); deployment = config['deployment'] || {}; puts deployment['bucket'].to_s")
+          if [ -z "$BUCKET" ]; then
+            echo "Error: S3 bucket name not configured. Please set deployment.bucket in _config.yml." >&2
+            exit 1
+          fi
+          CLOUDFRONT=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); deployment = config['deployment'] || {}; puts deployment['cloudfront_distribution_id'].to_s")
           echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
           echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
           echo "cloudfront=$CLOUDFRONT" >> $GITHUB_OUTPUT
