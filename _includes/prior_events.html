@@ -1,0 +1,16 @@
+{% assign subdomain = page.root_url | remove: 'https://' | split: '.' | first %}
+{% assign prior_year = subdomain | minus: 1 %}
+{% assign years = (2014..prior_year) | reverse %}
+<ul>
+    <li>
+        SRCCON
+        {% for year in years %}<a href="https://{{ year }}.srccon.org/">{{ year }}</a>{% if forloop.last == false %}, {% endif %}{% endfor %}
+    </li>
+    <li>
+        Topical SRCCON <a href="https://power.srccon.org/">Power</a>, 
+        <a href="https://work.srccon.org/">Work</a>, 
+        <a href="https://lead.srccon.org/">Lead</a>, 
+        <a href="https://product.srccon.org/">Product</a>
+    </li>
+    <li><a href="https://srccon.org/our-resources/">How we build SRCCON events</a></li>
+</ul>

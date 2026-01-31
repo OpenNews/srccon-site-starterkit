@@ -1,10 +1,10 @@
-name: SRCCON
+name: SRCCON # leave this as-is
 markdown: kramdown
 kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
-gems:
+plugins:
   - jekyll-redirect-from
-exclude: ['*.yml']
+exclude: ['*.yml', 'Rakefile', 'README.md', 'TEMPLATE_SETUP.md', 'LICENSE']
 collections:
   transcripts:
     output: true
@@ -12,28 +12,78 @@ collections:
   share:
     output: true
     permalink: /:collection/:slug/
+  test:
+    output: false
+
+# Deployment vars - used by `rake deploy:*` tasks and GitHub Actions
+deployment:
+  # AWS S3 bucket for production deployments
+  bucket: 2026.srccon.org
+  # AWS S3 bucket for staging deployments
+  staging_bucket: staging.2026.srccon.org
+  # CloudFront distribution ID for cache invalidation (optional)
+  cloudfront_distribution_id: E1234ABCD5678
 
 defaults:
   - scope:
       path: ""
     values:
+      # layout: set this value to layout_with_header_image for pages with images at top
+      layout: simple_layout
+      # root_url: set this value to the root_url of the event
+      root_url: https://2025.srccon.org #no trailing slash
       # event_name: set this value to something like SRCCON 2020 or SRCCON:LEAD
-      event_name: SRCCON
+      event_name: SRCCON YYYY
       # event_date: set this value to something like July 11 & 12
       event_date: DATES
       # event_place: set this value to something like Minneapolis
       event_place: PLACE
-      # event_place_abbreviation: set this value to something like MPLS
-      event_place_abbreviation: PLC
+      # event_venue: set this value to the name of the venue, add 'the' if appropriate
+      event_venue: Nerd Church
+      # google maps link or share-shortlink to venue (defaults to McNamara)
+      event_venue_link: "https://maps.app.goo.gl/EmfKT9J6HWwp7u6e9"
+      # event_timezone: set this value to the IANA timezone name (e.g., America/Chicago, America/New_York)
+      event_timezone: America/Chicago
+      # event_timezone_offset: set this value to the UTC offset during event (e.g., -05:00 for CDT, -06:00 for CST)
+      event_timezone_offset: "-05:00"
       # description: this value is used for meta tags AND the top of the homepage
       # html will be stripped for meta tags. Rewrite this for a topical SRCCON!
       description: A peer-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.
-      # layout: set this value to layout_with_header_image for pages with images at top
-      layout: simple_layout
-      # cta_button_text: give this a value to enable the orange "call to action" button
-      cta_button_text: 
-      # cta_button_link: set this value to a URL for the orange button (ticket form, etc)
-      cta_button_link: 
+      # event_place_abbr: set this value to something like MPLS
+      event_place_abbr: PLC
+
+      # Homepage CTA
+      # cta_button_text / cta_button_link: enable the orange "call to action" button
+      # cta_button_text: Sponsor SRCCON!
+      # cta_button_link: https://opennews.org/sponsors/
+      cta_button_text: Propose a session!
+      cta_button_link: /participation/form/
+      # form_link: set this value to the URL for the ticket purchase or registration form
+      form_link: https://airtable.com/embed/appvmrSAI2PeiWEes/pagJcROoTohbsBLFw/form?backgroundColor=green
+      
+      # ⚠️ IMPORTANT "GATES" in page logic
+      # schedule_live: set this value to true when the program should be exposed on the site
+      schedule_live: false
+      # session_deadline_passed: set this value to true to swap out various "by deadline" links
+      session_deadline_passed: false
+      # session_deadline: proposals and stipend applications
+      session_deadline: April 1 at 5 p.m. ET
+      # session_confirm: date attendees will be notified
+      session_confirm: April 15
+      
+      # price_base: set this value to the base ticket price
+      price_base: $295
+      # price_med: set this value to the medium-sized newsroom ticket price
+      price_med: $425
+      # price_full: set this value to the full-cost ticket
+      price_full: $695
+      # price_stipend: set this value to the stipend ticket price
+      price_stipend: $500
+
+      # google_analytics_id: set this value to your GA4 measurement ID (format: G-XXXXXXXXXX)
+      # Leave empty to disable Google Analytics tracking
+      google_analytics_id: ""
+  # these 'scope' props drive pages generated from the schedule
   - scope:
       path: ""
       type: "transcripts"

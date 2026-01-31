@@ -1,54 +1,28 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if lte IE 9]>  <html class="ie oldie" lang="en"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<html lang="en-US">
 <head>
-    <meta charset="utf-8" />
-    <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{{ page.description | markdownify | strip_html | strip_newlines }}">
-
-    <meta property="og:title" content="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}">
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="{{ page.description | markdownify | strip_html | strip_newlines }}"/>
-    <meta property="og:image" content="{{ site.url }}/media/img/srccon_share_logo.png" />
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" value="@srccon" />
-    <meta name="twitter:title" value="{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}" />
-    <meta name="twitter:description" value="{{ page.description | markdownify | strip_html | strip_newlines }}" />
-    <meta name="twitter:image" value="{{ site.url }}/media/img/srccon_share_logo.png" />
-    <meta name="twitter:image:alt" value="SRCCON conference logo" />
-
-    <link rel="stylesheet" href="https://use.typekit.net/npu3izb.css">
-    <link rel="stylesheet" href="/media/css/style.css">
-    <link rel="shortcut icon" href="/media/img/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" type="image/png" href="/media/img/touch-icon-144x144.png" sizes="144x144" />
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-91317400-3', 'auto');
-      ga('send', 'pageview');
-    </script>
+    {% include headmeta.html %}
 </head>
 
 <body class="hub{% if page.section %} {{ page.section }}{% endif %}">
     <header class="page-container">
         <nav id="hub-nav">
-	        {% include simple_navigation.html %}
-            <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png"></a>
+	        <div class="top-bar">
+                {% if page.section != 'homepage' %}<a id="back-home" href="/">&larr;<span class="narrow-hide"> {{ page.event_name }}</span> Home</a>{% endif %}
+            </div>
+            <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png" alt="SRCCON logo"></a>
         </nav>
 
         <div class="page-intro">
             <div class="sourcecon">
                 <p class="trailer"><span>{{ page.event_date }}, {{ page.event_place }}</span></p>
             </div>
-            {% if page.section == 'homepage' %}<p class="big-type">A peer-led conference from <a href="https://opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>{% endif %}
+            {% if page.section == 'homepage' %}<p class="big-type">A peer-led conference from <a href="https://www.opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>{% endif %}
             <div class="sub-nav">
-                Stay up to date: <a href="https://twitter.com/srccon">Twitter</a> / <a href="https://opennews.us5.list-manage.com/subscribe?u=71c95e9a43708843d2fdc1f09&id=996e9290cc">Newsletter</a>
+                <a href="/welcome/">Welcome guide</a> &nbsp;&bull;&nbsp; 
+                <a href="/attendees/">Attendee info</a> &nbsp;&bull;&nbsp; 
+                {% if page.schedule_live == true %}<a href="/schedule/">Schedule</a> &nbsp;&bull;&nbsp;{% endif %} 
+                <a href="/sessions/proposal-guide/">Session proposal guide</a>
                 {% if page.cta_button_text %}
                 <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
                 {% else %}

@@ -1,2 +1,11 @@
 _site
 .jekyll-cache
+
+# Ruby/Bundler
+.bundle/
+vendor/
+Gemfile.lock
+
+# OS files
+.DS_Store
+Thumbs.db
