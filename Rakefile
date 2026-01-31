@@ -140,9 +140,9 @@ namespace :deploy do
     desc "Dry-run staging deploy"
     task :dryrun => :build do
       config = deployment_config
-      abort "❌ Staging bucket not configured in _config.yml deployment section" unless config['bucket']
+      staging_bucket = config['staging_bucket'] || "staging.#{config['bucket']}"
+      abort "❌ Staging bucket not configured in _config.yml deployment section" unless staging_bucket
       
-      staging_bucket = "#{config['bucket']}-staging"
       puts "[DRY RUN] Deploying to staging bucket: #{staging_bucket}..."
       sh "aws s3 sync _site/ s3://#{staging_bucket} --dryrun #{S3_ARGS}"
       puts "\n✅ Dry-run complete. To deploy for real, run: rake deploy:staging:real"
@@ -151,9 +151,9 @@ namespace :deploy do
     desc "Real staging deploy (with confirmation)"
     task :real => :precheck do
       config = deployment_config
-      abort "❌ Staging bucket not configured in _config.yml deployment section" unless config['bucket']
+      staging_bucket = config['staging_bucket'] || "#{config['bucket']}-staging"
+      abort "❌ Staging bucket not configured in _config.yml deployment section" unless staging_bucket
       
-      staging_bucket = "#{config['bucket']}-staging"
       puts "⚠️  Deploying to STAGING: #{staging_bucket}"
       print "Continue? (y/N) "
 

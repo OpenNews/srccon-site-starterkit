@@ -43,8 +43,8 @@ jobs:
         if: github.event_name == 'pull_request'
         id: config
         run: |
-          BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['bucket']")
-          echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
+          STAGING_BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['staging_bucket']")
+          echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
       
       - name: Configure AWS credentials
         if: github.event_name == 'pull_request'
@@ -58,7 +58,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Testing S3 sync command (dry-run)..."
-          aws s3 sync _site/ s3://${{ steps.config.outputs.bucket }}-staging \
+          aws s3 sync _site/ s3://${{ steps.config.outputs.staging_bucket }} \
             --dryrun \
             --delete \
             --cache-control "public, max-age=3600"

@@ -31,8 +31,10 @@ jobs:
         id: config
         run: |
           BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['bucket']")
+          STAGING_BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['staging_bucket']")
           CLOUDFRONT=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['cloudfront_distribution_id']")
           echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
+          echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
           echo "cloudfront=$CLOUDFRONT" >> $GITHUB_OUTPUT
       
       - name: Configure AWS credentials
@@ -45,7 +47,7 @@ jobs:
       - name: Deploy to S3 (Staging)
         if: github.ref == 'refs/heads/staging'
         run: |
-          aws s3 sync _site/ s3://${{ steps.config.outputs.bucket }}-staging \
+          aws s3 sync _site/ s3://${{ steps.config.outputs.staging_bucket }} \
             --delete \
             --cache-control "public, max-age=3600"
       
