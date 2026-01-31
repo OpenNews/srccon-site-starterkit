@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Jekyll static site generator
-gem 'jekyll', '~> 4.3'
+gem 'jekyll', '~> 4.4'
 
 # Jekyll plugins
 gem 'jekyll-redirect-from'
