@@ -268,6 +268,8 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 
 This project uses **OpenID Connect (OIDC)** for secure, keyless AWS authentication. This eliminates the need for long-lived credentials.
 
+**It is already working!** However, if you need to re-do it, here are the steps:
+
 **Setup Steps:**
 
 1. **Create an OIDC Identity Provider in AWS IAM:**
