@@ -30,13 +30,21 @@ jobs:
       - name: Extract deployment config from _config.yml
         id: config
         run: |
-          BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['bucket']")
           BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); deployment = config['deployment'] || {}; puts deployment['bucket'].to_s")
+          if [ -z "$BUCKET" ]; then
+            echo "Error: S3 bucket name not configured. Please set deployment.bucket in _config.yml." >&2
+          mapfile -t DEPLOYMENT_VALUES < <(ruby -ryaml -e "config = YAML.load_file('_config.yml'); deployment = config['deployment'] || {}; puts deployment['bucket'].to_s; puts deployment['staging_bucket'].to_s; puts deployment['cloudfront_distribution_id'].to_s")
+          BUCKET="${DEPLOYMENT_VALUES[0]}"
           if [ -z "$BUCKET" ]; then
             echo "Error: S3 bucket name not configured. Please set deployment.bucket in _config.yml." >&2
             exit 1
           fi
-          CLOUDFRONT=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); deployment = config['deployment'] || {}; puts deployment['cloudfront_distribution_id'].to_s")
+          STAGING_BUCKET="${DEPLOYMENT_VALUES[1]}"
+          if [ -z "$STAGING_BUCKET" ]; then
+            echo "Error: Staging bucket name not configured. Please set deployment.staging_bucket in _config.yml." >&2
+            exit 1
+          fi
+          CLOUDFRONT="${DEPLOYMENT_VALUES[2]}"
           echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
           echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
           echo "cloudfront=$CLOUDFRONT" >> $GITHUB_OUTPUT
