@@ -12,6 +12,7 @@ ignore:
   - ".bundle/**/*"
   - ".jekyll-cache/**/*"
   - "_data/**/*"
+  - ".github/**/*" # GitHub Actions workflows are not Ruby code
   - "tasks/**/*" # Prettier handles formatting for these files
   - "Rakefile" # Prettier handles formatting for this file
 
