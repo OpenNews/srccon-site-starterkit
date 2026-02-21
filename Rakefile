@@ -62,13 +62,21 @@ task :check do
   end
 
   # Check for placeholder values that need updating
-  errors << "root_url is still set to 'https://site-starterkit.srccon.org'" if defaults["root_url"] == "https://site-starterkit.srccon.org"
-  errors << "event_name is still set to 'SRCCON YYYY'" if defaults["event_name"] == "SRCCON YYYY"
-  errors << "event_date is still 'DATES' placeholder" if defaults["event_date"] == "DATES"
-  errors << "event_place is still 'PLACE' placeholder" if defaults["event_place"] == "PLACE"
-  errors << "form_link is still set to the demo Airtable URL" if defaults["form_link"].to_s.include?("pagJcROoTohbsBLFw")
-  errors << "session_deadline is still set to April Fools placeholder" if defaults["session_deadline"].to_s.include?("April 1")
-  errors << "session_confirm is still set to Tax Day placeholder" if defaults["session_confirm"].to_s.include?("April 15")
+  placeholder_checks = [
+    ["root_url", "https://site-starterkit.srccon.org", "root_url is still set to 'https://site-starterkit.srccon.org'"],
+    ["event_name", "SRCCON YYYY", "event_name is still set to 'SRCCON YYYY'"],
+    ["event_date", "DATES", "event_date is still 'DATES' placeholder"],
+    ["event_place", "PLACE", "event_place is still 'PLACE' placeholder"],
+    ["form_link", "pagJcROoTohbsBLFw", "form_link is still set to the demo Airtable URL", :include?],
+    ["session_deadline", "April 1", "session_deadline is still set to April Fools placeholder", :include?],
+    ["session_confirm", "April 15", "session_confirm is still set to Tax Day placeholder", :include?]
+  ]
+
+  placeholder_checks.each do |key, value, message, method = :==|
+    check_value = defaults[key].to_s
+    errors << message if check_value.send(method, value)
+  end
+
   cname_content = File.read("CNAME").strip
   errors << "CNAME file still set to demo site URL" if cname_content.include?("site-starterkit")
 
