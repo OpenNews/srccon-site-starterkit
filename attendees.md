@@ -4,11 +4,11 @@ permalink: /attendees/
 title: Attendee guide
 ---
 
-*There are many ways to take part in SRCCON, and we'll help you find what works best for you. <a href="/participation/form/">Our call for participation form</a> is open to tell us how else you'd like to take part.*
+_There are many ways to take part in SRCCON, and we'll help you find what works best for you. <a href="/participation/form/">Our call for participation form</a> is open to tell us how else you'd like to take part._
 
 # Participation at SRCCON
 
-SRCCON is a hands-on conference, which means that everyone who attends actively participates throughout the event. Our [call for participation form](/participation/form/) is open until {{ page.session_deadline }} to tell us what you'd like to bring to the event and what you hope to take back home with you. 
+SRCCON is a hands-on conference, which means that everyone who attends actively participates throughout the event. Our [call for participation form](/participation/form/) is open until {{ page.session_deadline }} to tell us what you'd like to bring to the event and what you hope to take back home with you.
 {% comment %}<!-- remove to add -->
 The deadline to propose a session has already passed, but we'll keep this form open for attendees as long as space remains available.
 {% endcomment %}<!-- remove to add -->
@@ -25,13 +25,13 @@ In 2019, [we began experimenting with a tiered ticket-pricing system](https://op
 
 Here are the tiers (plus Eventbrite ticketing fees):
 
-* **{{ page.price_base }}:** This is the base price designed for people who are paying their own way, from small news organizations with fewer than 50 people, or nonprofits with budgets $750,000 or less.
-* **{{ page.price_med }}:** A new ticket price for people from medium-sized news organizations of 51-250 employees, nonprofits with budgets $750,000-$2 million, and other similar-sized organizations.
-* **{{ page.price_full }}:** This ticket tier reflects very nearly the actual cost for each attendee of SRCCON and is for people from large news organizations with more than 250 employees, nonprofits with budgets over $2 million, and other organizations that provide full professional-development budgets for employees.
+- **{{ page.price_base }}:** This is the base price designed for people who are paying their own way, from small news organizations with fewer than 50 people, or nonprofits with budgets $750,000 or less.
+- **{{ page.price_med }}:** A new ticket price for people from medium-sized news organizations of 51-250 employees, nonprofits with budgets $750,000-$2 million, and other similar-sized organizations.
+- **{{ page.price_full }}:** This ticket tier reflects very nearly the actual cost for each attendee of SRCCON and is for people from large news organizations with more than 250 employees, nonprofits with budgets over $2 million, and other organizations that provide full professional-development budgets for employees.
 
 In addition, we also offer a [free scholarship ticket](/scholarships) as one of the tiers. We have a limited number of free tickets set aside for people who otherwise would not be able to attend, in particular for laid-off and freelance journalists. We also give priority to people who identify as members of communities underrepresented in journalism and technology, such as journalists of color or journalists from smaller and non-coastal newsrooms.
 
-**Here's the most important thing to know about these ticket prices:** _We want you to choose the one that makes sure you can be at {{ page.event_name }}._ We don't review who pays what, and we won't follow up with any questions. If you work for an organization where budgets have already been set or there's not support available to you, _choose a lower price_ and join us. By the same token, if you budgeted for higher travel costs you no longer have to spend and are able to purchase a ticket at a higher tier, please do. If you're interested in contributing to a scholarship ticket, please pick the highest ticket tier you can afford. Paying for free tickets and scholarships is something we deliberately build into our ticket tier structure. 
+**Here's the most important thing to know about these ticket prices:** _We want you to choose the one that makes sure you can be at {{ page.event_name }}._ We don't review who pays what, and we won't follow up with any questions. If you work for an organization where budgets have already been set or there's not support available to you, _choose a lower price_ and join us. By the same token, if you budgeted for higher travel costs you no longer have to spend and are able to purchase a ticket at a higher tier, please do. If you're interested in contributing to a scholarship ticket, please pick the highest ticket tier you can afford. Paying for free tickets and scholarships is something we deliberately build into our ticket tier structure.
 
 We based these tiers on community feedback encouraging us to find ways to share event costs. Ticket funds are a huge part of what makes it possible to organize event with dozens of travel and caregiving scholarships, live transcription, two lunches, dinner, and ample snacks and drinks, and the support of a skilled event team in preparing sessions and constructing a schedule that lets attendees focus on learning and talking together.
 
@@ -45,7 +45,7 @@ Our [call for participation form](/participation/form) has a few questions for y
 
 ## Facilitating sessions
 
-At SRCCON events, session facilitators regularly make up more than a third of attendees. All of our sessions are peer-led by conference attendees&mdash;consider becoming a facilitator this year by [learning more about sessions](/sessions/proposal-guide). You will be able to tell us all about your session idea on the [call for participation form](/participation/form). 
+At SRCCON events, session facilitators regularly make up more than a third of attendees. All of our sessions are peer-led by conference attendees&mdash;consider becoming a facilitator this year by [learning more about sessions](/sessions/proposal-guide). You will be able to tell us all about your session idea on the [call for participation form](/participation/form).
 
 ## Welcome, first-timers
 

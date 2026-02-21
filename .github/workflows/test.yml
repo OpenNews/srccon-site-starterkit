@@ -12,25 +12,25 @@ on:
 
 permissions:
   contents: read
-  id-token: write  # Required for OIDC authentication
+  id-token: write # Required for OIDC authentication
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '.ruby-version'
+          ruby-version: ".ruby-version"
           bundler-cache: true
-      
+
       - name: Build Jekyll site
         run: bundle exec jekyll build --verbose
-      
+
       - name: Validate HTML and check links
         run: |
           bundle exec htmlproofer ./_site \
@@ -38,14 +38,14 @@ jobs:
             --no-enforce-https \
             --ignore-urls "/^http:\/\/(127\.0\.0\.1|0\.0\.0\.0|localhost)/" \
             --allow-hash-href
-      
+
       - name: Extract deployment config from _config.yml
         if: github.event_name == 'pull_request'
         id: config
         run: |
           STAGING_BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['staging_bucket']")
           echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
-      
+
       - name: Configure AWS credentials
         if: github.event_name == 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
@@ -53,7 +53,7 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
           role-session-name: Test-${{ github.event.repository.name }}-${{ github.run_id }}
-      
+
       - name: Test deployment (dry-run)
         if: github.event_name == 'pull_request'
         run: |

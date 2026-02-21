@@ -1,40 +1,48 @@
 {% comment %}<!-- remove to add -->
 {% if page.section != 'sponsors' %}
 <div id="footer-sponsors">
-    <div class="page-container">
-        <h3>Ongoing Sponsors</h3>
-        <div class="sponsor-list">
-            <a href="https://knightfoundation.org/"><img src="/media/img/partners/knight_foundation.png" alt="The Knight Foundation"></a>
-            <a href="https://opennews.org/donate/"><img src="/media/img/partners/opennews_sustainers.png" alt="OpenNews Sustainers"></a>
-        </div>
+  <div class="page-container">
+    <h3>Ongoing Sponsors</h3>
+    <div class="sponsor-list">
+      <a href="https://knightfoundation.org/"
+        ><img src="/media/img/partners/knight_foundation.png" alt="The Knight Foundation"
+      /></a>
+      <a href="https://opennews.org/donate/"
+        ><img src="/media/img/partners/opennews_sustainers.png" alt="OpenNews Sustainers"
+      /></a>
     </div>
+  </div>
 </div>
-{% endif %}
-{% endcomment %}<!-- remove to add -->
+{% endif %} {% endcomment %}<!-- remove to add -->
 
-<div class="page-container">    
-    <p class="trailer"><em>We say &ldquo;Source con.&rdquo; You can say it however you want!</em></p>
+<div class="page-container">
+  <p class="trailer"><em>We say &ldquo;Source con.&rdquo; You can say it however you want!</em></p>
 </div>
 
 <div id="footer-details">
-    <div class="page-container">
-        <div>
-            <h3>About this event</h3>
-            <ul>
-                <li><a href="/conduct">Code of Conduct</a></li>
-                <li><a href="/scholarships">Scholarships</a></li>
-                <li><a href="/sponsors">Sponsors</a></li>
-                <li><a href="/volunteers">Volunteers</a></li>
-            </ul>
-            <h3>Keep in touch</h3>
-            {% include touch.html %}
-            <p><a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC Attribution 4.0</a></p>
-        </div>
-        <div>
-            <h3>About SRCCON events</h3>
-            <p>OpenNews runs <a href="https://srccon.org">several journalism events each year</a>. The largest is SRCCON, a mid-year conference for about 300 developers, designers, journalists, editors, and allies. We also gather small working groups and convenings, and topically focused SRCCON-style events.</p>
-            <h3>Previous events</h3>
-            {% include prior_events.html %}
-        </div>
+  <div class="page-container">
+    <div>
+      <h3>About this event</h3>
+      <ul>
+        <li><a href="/conduct">Code of Conduct</a></li>
+        <li><a href="/scholarships">Scholarships</a></li>
+        <li><a href="/sponsors">Sponsors</a></li>
+        <li><a href="/volunteers">Volunteers</a></li>
+      </ul>
+      <h3>Keep in touch</h3>
+      {% include touch.html %}
+      <p><a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC Attribution 4.0</a></p>
     </div>
+    <div>
+      <h3>About SRCCON events</h3>
+      <p>
+        OpenNews runs <a href="https://srccon.org">several journalism events each year</a>. The
+        largest is SRCCON, a mid-year conference for about 300 developers, designers, journalists,
+        editors, and allies. We also gather small working groups and convenings, and topically
+        focused SRCCON-style events.
+      </p>
+      <h3>Previous events</h3>
+      {% include prior_events.html %}
+    </div>
+  </div>
 </div>

@@ -1,125 +1,125 @@
 <script>
-// Live schedule display using native JavaScript (no external dependencies)
-// Uses timezone-aware Date objects for accurate time comparisons
-(function() {
+  // Live schedule display using native JavaScript (no external dependencies)
+  // Uses timezone-aware Date objects for accurate time comparisons
+  (function () {
     // Event timezone configuration from _config.yml
-    var eventTimezone = '{{ page.event_timezone }}';
-    var eventTimezoneOffset = '{{ page.event_timezone_offset }}';
-    
+    var eventTimezone = "{{ page.event_timezone }}";
+    var eventTimezoneOffset = "{{ page.event_timezone_offset }}";
+
     // Helper to create Date in event timezone
     function eventTime(dateTimeStr) {
-        // Format: 'YYYY-MM-DD HH:MM'
-        // Parses as local time in the event's timezone using the configured offset
-        return new Date(dateTimeStr + ':00.000' + eventTimezoneOffset);
+      // Format: 'YYYY-MM-DD HH:MM'
+      // Parses as local time in the event's timezone using the configured offset
+      return new Date(dateTimeStr + ":00.000" + eventTimezoneOffset);
     }
 
     // Helper to check if current time is between two dates
     function isBetween(now, start, end) {
-        return now >= start && now < end;
+      return now >= start && now < end;
     }
 
     var now = new Date(),
-        thursdayMorning = eventTime('2019-07-11 08:00'),
-        thursdayAM1 = eventTime('2019-07-11 09:30'),
-        thursdayAMbreak = eventTime('2019-07-11 10:45'),
-        thursdayAM2 = eventTime('2019-07-11 11:15'),
-        thursdayLunch = eventTime('2019-07-11 12:30'),
-        thursdayScienceFair = eventTime('2019-07-11 13:45'),
-        thursdayPM1 = eventTime('2019-07-11 15:00'),
-        thursdayPMbreak = eventTime('2019-07-11 16:15'),
-        thursdayPM2 = eventTime('2019-07-11 16:45'),
-        thursdayEvening = eventTime('2019-07-11 18:00'),
-        thursdayEveningEnd = eventTime('2019-07-11 21:30'),
-        fridayMorning = eventTime('2019-07-12 09:00'),
-        fridayAM1 = eventTime('2019-07-12 10:00'),
-        fridayAMbreak = eventTime('2019-07-12 11:15'),
-        fridayAM2 = eventTime('2019-07-12 11:45'),
-        fridayLunch = eventTime('2019-07-12 13:00'),
-        fridayPM1 = eventTime('2019-07-12 14:30'),
-        fridayPMbreak = eventTime('2019-07-12 15:45'),
-        fridayPM2 = eventTime('2019-07-12 16:15'),
-        fridayEvening = eventTime('2019-07-12 17:30'),
-        fridayEveningEnd = eventTime('2019-07-12 18:30');
+      thursdayMorning = eventTime("2019-07-11 08:00"),
+      thursdayAM1 = eventTime("2019-07-11 09:30"),
+      thursdayAMbreak = eventTime("2019-07-11 10:45"),
+      thursdayAM2 = eventTime("2019-07-11 11:15"),
+      thursdayLunch = eventTime("2019-07-11 12:30"),
+      thursdayScienceFair = eventTime("2019-07-11 13:45"),
+      thursdayPM1 = eventTime("2019-07-11 15:00"),
+      thursdayPMbreak = eventTime("2019-07-11 16:15"),
+      thursdayPM2 = eventTime("2019-07-11 16:45"),
+      thursdayEvening = eventTime("2019-07-11 18:00"),
+      thursdayEveningEnd = eventTime("2019-07-11 21:30"),
+      fridayMorning = eventTime("2019-07-12 09:00"),
+      fridayAM1 = eventTime("2019-07-12 10:00"),
+      fridayAMbreak = eventTime("2019-07-12 11:15"),
+      fridayAM2 = eventTime("2019-07-12 11:45"),
+      fridayLunch = eventTime("2019-07-12 13:00"),
+      fridayPM1 = eventTime("2019-07-12 14:30"),
+      fridayPMbreak = eventTime("2019-07-12 15:45"),
+      fridayPM2 = eventTime("2019-07-12 16:15"),
+      fridayEvening = eventTime("2019-07-12 17:30"),
+      fridayEveningEnd = eventTime("2019-07-12 18:30");
 
-    var showLive = function() {
-        var timeblockToShow = '',
-            leaderText = '';
-            
-        switch(true) {
-            case isBetween(now, thursdayMorning, thursdayAM1):
-                timeblockToShow = '.live-thursday-morning';
-                break;
-            case isBetween(now, thursdayAM1, thursdayAMbreak):
-                timeblockToShow = '.live-thursday-am-1';
-                break;
-            case isBetween(now, thursdayAMbreak, thursdayAM2):
-                timeblockToShow = '.live-thursday-am-2';
-                leaderText = 'Next up at SRCCON';
-                break;
-            case isBetween(now, thursdayAM2, thursdayLunch):
-                timeblockToShow = '.live-thursday-am-2';
-                break;
-            case isBetween(now, thursdayLunch, thursdayScienceFair):
-                timeblockToShow = '.live-thursday-lunch';
-                break;
-            case isBetween(now, thursdayScienceFair, thursdayPM1):
-                timeblockToShow = '.live-thursday-science-fair';
-                break;
-            case isBetween(now, thursdayPM1, thursdayPMbreak):
-                timeblockToShow = '.live-thursday-pm-1';
-                break;
-            case isBetween(now, thursdayPMbreak, thursdayPM2):
-                timeblockToShow = '.live-thursday-pm-2';
-                leaderText = 'Next up at SRCCON';
-                break;
-            case isBetween(now, thursdayPM2, thursdayEvening):
-                timeblockToShow = '.live-thursday-pm-2';
-                break;
-            case isBetween(now, thursdayEvening, thursdayEveningEnd):
-                timeblockToShow = '.live-thursday-evening';
-                break;
-            case isBetween(now, fridayMorning, fridayAM1):
-                timeblockToShow = '.live-friday-morning';
-                break;
-            case isBetween(now, fridayAM1, fridayAMbreak):
-                timeblockToShow = '.live-friday-am-1';
-                break;
-            case isBetween(now, fridayAMbreak, fridayAM2):
-                timeblockToShow = '.live-friday-am-2';
-                leaderText = 'Next up at SRCCON';
-                break;
-            case isBetween(now, fridayAM2, fridayLunch):
-                timeblockToShow = '.live-friday-am-2';
-                break;
-            case isBetween(now, fridayLunch, fridayPM1):
-                timeblockToShow = '.live-friday-lunch';
-                break;
-            case isBetween(now, fridayPM1, fridayPMbreak):
-                timeblockToShow = '.live-friday-pm-1';
-                break;
-            case isBetween(now, fridayPMbreak, fridayPM2):
-                timeblockToShow = '.live-friday-pm-2';
-                leaderText = 'Next up at SRCCON';
-                break;
-            case isBetween(now, fridayPM2, fridayEvening):
-                timeblockToShow = '.live-friday-pm-2';
-                break;
-            case isBetween(now, fridayEvening, fridayEveningEnd):
-                timeblockToShow = '.live-friday-evening';
-                break;
+    var showLive = function () {
+      var timeblockToShow = "",
+        leaderText = "";
+
+      switch (true) {
+        case isBetween(now, thursdayMorning, thursdayAM1):
+          timeblockToShow = ".live-thursday-morning";
+          break;
+        case isBetween(now, thursdayAM1, thursdayAMbreak):
+          timeblockToShow = ".live-thursday-am-1";
+          break;
+        case isBetween(now, thursdayAMbreak, thursdayAM2):
+          timeblockToShow = ".live-thursday-am-2";
+          leaderText = "Next up at SRCCON";
+          break;
+        case isBetween(now, thursdayAM2, thursdayLunch):
+          timeblockToShow = ".live-thursday-am-2";
+          break;
+        case isBetween(now, thursdayLunch, thursdayScienceFair):
+          timeblockToShow = ".live-thursday-lunch";
+          break;
+        case isBetween(now, thursdayScienceFair, thursdayPM1):
+          timeblockToShow = ".live-thursday-science-fair";
+          break;
+        case isBetween(now, thursdayPM1, thursdayPMbreak):
+          timeblockToShow = ".live-thursday-pm-1";
+          break;
+        case isBetween(now, thursdayPMbreak, thursdayPM2):
+          timeblockToShow = ".live-thursday-pm-2";
+          leaderText = "Next up at SRCCON";
+          break;
+        case isBetween(now, thursdayPM2, thursdayEvening):
+          timeblockToShow = ".live-thursday-pm-2";
+          break;
+        case isBetween(now, thursdayEvening, thursdayEveningEnd):
+          timeblockToShow = ".live-thursday-evening";
+          break;
+        case isBetween(now, fridayMorning, fridayAM1):
+          timeblockToShow = ".live-friday-morning";
+          break;
+        case isBetween(now, fridayAM1, fridayAMbreak):
+          timeblockToShow = ".live-friday-am-1";
+          break;
+        case isBetween(now, fridayAMbreak, fridayAM2):
+          timeblockToShow = ".live-friday-am-2";
+          leaderText = "Next up at SRCCON";
+          break;
+        case isBetween(now, fridayAM2, fridayLunch):
+          timeblockToShow = ".live-friday-am-2";
+          break;
+        case isBetween(now, fridayLunch, fridayPM1):
+          timeblockToShow = ".live-friday-lunch";
+          break;
+        case isBetween(now, fridayPM1, fridayPMbreak):
+          timeblockToShow = ".live-friday-pm-1";
+          break;
+        case isBetween(now, fridayPMbreak, fridayPM2):
+          timeblockToShow = ".live-friday-pm-2";
+          leaderText = "Next up at SRCCON";
+          break;
+        case isBetween(now, fridayPM2, fridayEvening):
+          timeblockToShow = ".live-friday-pm-2";
+          break;
+        case isBetween(now, fridayEvening, fridayEveningEnd):
+          timeblockToShow = ".live-friday-evening";
+          break;
+      }
+
+      if (timeblockToShow) {
+        document.querySelector(".live").classList.remove("hidden");
+        document.querySelectorAll(timeblockToShow).forEach(function (el) {
+          el.classList.remove("hidden");
+        });
+        if (leaderText) {
+          document.querySelector("#live-leader").innerHTML = leaderText;
         }
-        
-        if (timeblockToShow) {
-            document.querySelector('.live').classList.remove('hidden');
-            document.querySelectorAll(timeblockToShow).forEach(function(el) {
-                el.classList.remove('hidden');
-            });
-            if (leaderText) {
-                document.querySelector('#live-leader').innerHTML = leaderText;
-            }
-        }
+      }
     };
-    
+
     showLive();
-})();
+  })();
 </script>

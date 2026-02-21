@@ -1,46 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
-<head>
+  <head>
     {% include headmeta.html %}
-</head>
+  </head>
 
-<body class="hub{% if page.section %} {{ page.section }}{% endif %}">
+  <body class="hub{% if page.section %} {{ page.section }}{% endif %}">
     <header class="page-container">
-        <nav id="hub-nav">
-	        <div class="top-bar">
-                {% if page.section != 'homepage' %}<a id="back-home" href="/">&larr;<span class="narrow-hide"> {{ page.event_name }}</span> Home</a>{% endif %}
-            </div>
-            <a id="main-logo" href="/"><img src="/media/img/srccon_logo.png" alt="SRCCON logo"></a>
-        </nav>
+      <nav id="hub-nav">
+        <div class="top-bar">
+          {% if page.section != 'homepage' %}
+          <a id="back-home" href="/">
+            &larr;<span class="narrow-hide"> {{ page.event_name }}</span>
+            Home
+          </a>
+          {% endif %}
+        </div>
+        <a id="main-logo" href="/">
+          <img src="/media/img/srccon_logo.png" alt="SRCCON logo" />
+        </a>
+      </nav>
 
-        <div class="page-intro">
-            <div class="sourcecon">
-                <p class="trailer"><span>{{ page.event_date }}, {{ page.event_place }}</span></p>
-            </div>
-            {% if page.section == 'homepage' %}<p class="big-type">A peer-led conference from <a href="https://www.opennews.org">OpenNews</a> for&nbsp;journalists who want to transform their work, their organizations, and their communities.</p>{% endif %}
-            <div class="sub-nav">
-                <a href="/welcome/">Welcome guide</a> &nbsp;&bull;&nbsp; 
-                <a href="/attendees/">Attendee info</a> &nbsp;&bull;&nbsp; 
-                {% if page.schedule_live == true %}<a href="/schedule/">Schedule</a> &nbsp;&bull;&nbsp;{% endif %} 
-                <a href="/sessions/proposal-guide/">Session proposal guide</a>
-                {% if page.cta_button_text %}
-                <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
-                {% else %}
-                <span class="line-splitter">&bull;</span>
-                Support our work: <a href="https://opennews.org/donate">Donate</a>
-                {% endif %}
-            </div>
+      <div class="page-intro">
+        <div class="sourcecon">
+          <p class="trailer">
+            <span>{{ page.event_date }}, {{ page.event_place }}</span>
+          </p>
         </div>
+        {% if page.section == 'homepage' %}
+        <p class="big-type">
+          A peer-led conference from
+          <a href="https://www.opennews.org">OpenNews</a> for&nbsp;journalists who want to transform
+          their work, their organizations, and their communities.
+        </p>
+        {% endif %}
+        <div class="sub-nav">
+          <a href="/welcome/">Welcome guide</a> &nbsp;&bull;&nbsp;
+          <a href="/attendees/">Attendee info</a> &nbsp;&bull;&nbsp; {% if page.schedule_live ==
+          true %}<a href="/schedule/">Schedule</a> &nbsp;&bull;&nbsp; {% endif %}
+          <a href="/sessions/proposal-guide/">Session proposal guide</a>
+          {% if page.cta_button_text %}
+          <a href="{{ page.cta_button_link }}" class="button">{{ page.cta_button_text }}</a>
+          {% else %}
+          <span class="line-splitter">&bull;</span>
+          Support our work: <a href="https://opennews.org/donate">Donate</a>
+          {% endif %}
+        </div>
+      </div>
     </header>
-    
+
     <main>
-        <div class="page-container">
-            {{ content }}
-        </div>
+      <div class="page-container">{{ content }}</div>
     </main>
 
-    <footer>
-        {% include simple_footer.html %}
-    </footer>
-</body>
+    <footer>{% include simple_footer.html %}</footer>
+  </body>
 </html>

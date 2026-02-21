@@ -8,7 +8,6 @@ title: Our sponsors
 
 Interested in having your company or organization get involved? [Find out more about becoming a sponsor of SRCCON](/sponsors/about/).
 
-
 ### Accessibility & scholarships sponsors {#a11y}
 
 [![The Knight Foundation](/media/img/partners/knight_foundation.png)](https://knightfoundation.org/)
@@ -22,6 +21,7 @@ We are social investors who support a more effective democracy by funding free e
 {% endcomment %}<!-- remove to add -->
 
 {% comment %}<!-- remove to add -->
+
 ### Meal Sponsors {#meal}
 
 [![University of Missouri School of Journalism](/media/img/partners/mizzou_journalism.png)](https://journalism.missouri.edu/)
@@ -46,12 +46,14 @@ We are social investors who support a more effective democracy by funding free e
 OpenNews community members are our facilitators, volunteers, participants, _and_ help fund SRCCON for their peers.
 
 {% comment %}<!-- remove to add -->
+
 ### Event sponsor {#event}
 
 [![Democracy Fund](/media/img/partners/democracy_fund.png)](https://www.democracyfund.org/)
 {% endcomment %}<!-- remove to add -->
 
 {% comment %}<!-- remove to add -->
+
 ### Local event sponsor {#local}
 
 [![The Star-Tribune](/media/img/partners/star_tribune.png)](https://www.startribune.com/)

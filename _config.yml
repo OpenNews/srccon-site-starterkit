@@ -4,7 +4,28 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
 plugins:
   - jekyll-redirect-from
-exclude: ['*.yml', 'Rakefile', 'README.md', 'SITE_README.md', 'AWS_authentication.md', 'LICENSE']
+exclude:
+  - "*.yml"
+  - "Rakefile"
+  - "README.md"
+  - "SITE_README.md"
+  - "AWS_authentication.md"
+  - "LICENSE"
+  - "tasks/"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "package.json"
+  - "package-lock.json"
+  - "yarn.lock"
+  - "node_modules/"
+  - "vendor/"
+  - ".bundle/"
+  - ".editorconfig"
+  - ".prettierrc"
+  - ".prettierignore"
+  - ".standard.yml"
+  - ".ruby-version"
+  - ".gitignore"
 collections:
   transcripts:
     output: true
@@ -21,7 +42,7 @@ deployment:
   bucket: site-starterkit.srccon.org
   # AWS S3 bucket for staging deployments
   staging_bucket: staging.site-starterkit.srccon.org
-  # CloudFront distribution ID for cache invalidation 
+  # CloudFront distribution ID for cache invalidation
   # (for production, you MUST change this to your site's ID)
   cloudfront_distribution_id: E1234ABCD5678
 
@@ -61,7 +82,7 @@ defaults:
       cta_button_link: /participation/form/
       # form_link: set this value to the URL for the ticket purchase or registration form
       form_link: https://airtable.com/embed/appvmrSAI2PeiWEes/pagJcROoTohbsBLFw/form?backgroundColor=green
-      
+
       # ⚠️ IMPORTANT "GATES" in page logic
       # schedule_live: set this value to true when the program should be exposed on the site
       schedule_live: false
@@ -71,7 +92,7 @@ defaults:
       session_deadline: April 1 at 5 p.m. ET
       # session_confirm: date attendees will be notified
       session_confirm: April 15
-      
+
       # price_base: set this value to the base ticket price
       price_base: $295
       # price_med: set this value to the medium-sized newsroom ticket price

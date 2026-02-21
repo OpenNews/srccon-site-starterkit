@@ -6,7 +6,7 @@ title: Call for Participation
 
 # Call for participation {#participate}
 
-We can't wait to hear how you'd like to participate at {{ page.event_name }}! If you want to attend, [propose a session](/sessions/proposal-guide/), or [take part in some other way](/attendees), this one form is where to let us know. The deadline to propose a session 
+We can't wait to hear how you'd like to participate at {{ page.event_name }}! If you want to attend, [propose a session](/sessions/proposal-guide/), or [take part in some other way](/attendees), this one form is where to let us know. The deadline to propose a session
 or apply for a scholarship {% if page.session_deadline_passed == true %}has already passed.{% endif %}{% if page.session_deadline_passed == false %}is {{ page.session_deadline }}.{% endif %}
 
 We'll keep this form open for attendees as long as space remains available.

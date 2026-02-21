@@ -12,13 +12,13 @@ We want to help you attend {{ page.event_name }}. OpenNews offers a limited numb
 
 There's no separate application. We offer two scholarship options:
 
-* **Free scholarship tickets** - these will be available directly on our registration page, no application necessary. After you fill out our [call for participation](/participation/form), if we're able to invite you to attend, we'll send a link to register on Eventbrite. On that page, there will be an option to pick up one of a limited number of free scholarship tickets.
-* **{{ page.price_stipend }} travel or caregiving stipends** - these stipends are to compensate for travel or caregiving costs. The funds can be applied toward your own travel costs or to bring your loved ones to Minneapolis, or help care for them back home while you're at the conference. Recipients of this scholarship will also receive a free ticket to SRCCON. The application for this scholarship closes along with the deadline for session proposals on {{ page.session_deadline }}.
+- **Free scholarship tickets** - these will be available directly on our registration page, no application necessary. After you fill out our [call for participation](/participation/form), if we're able to invite you to attend, we'll send a link to register on Eventbrite. On that page, there will be an option to pick up one of a limited number of free scholarship tickets.
+- **{{ page.price_stipend }} travel or caregiving stipends** - these stipends are to compensate for travel or caregiving costs. The funds can be applied toward your own travel costs or to bring your loved ones to Minneapolis, or help care for them back home while you're at the conference. Recipients of this scholarship will also receive a free ticket to SRCCON. The application for this scholarship closes along with the deadline for session proposals on {{ page.session_deadline }}.
 
 ## Who should apply
 
-* Anyone in the journalism-tech community who is unable to purchase a ticket to attend—in particular laid-off, unemployed, and freelance journalists.
-* Tickets are prioritized for members of communities underrepresented in journalism and technology, such as journalists of color, and journalists from smaller and non-coastal newsrooms.
+- Anyone in the journalism-tech community who is unable to purchase a ticket to attend—in particular laid-off, unemployed, and freelance journalists.
+- Tickets are prioritized for members of communities underrepresented in journalism and technology, such as journalists of color, and journalists from smaller and non-coastal newsrooms.
 
 ## How to apply
 

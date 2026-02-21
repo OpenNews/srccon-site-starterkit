@@ -11,7 +11,7 @@ updates:
       - "dependencies"
       - "github-actions"
     open-pull-requests-limit: 5
-  
+
   # Ruby gems (Bundler)
   - package-ecosystem: "bundler"
     directory: "/"

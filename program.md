@@ -16,7 +16,7 @@ We'll publish the complete schedule with session dates and times soon.
 
 ### Sessions {#sessions}
 
-Our conference schedule this year will include the sessions below. Thank you to the [community panel](#community-review) that helped us during our review process! 
+Our conference schedule this year will include the sessions below. Thank you to the [community panel](#community-review) that helped us during our review process!
 
 <div class="session-proposal-list">
 {% for session in site.data.sessions %}
@@ -44,7 +44,8 @@ We'd also like to thank the folks who helped us select this amazing slate of ses
 Thank you, community reviewers!
 
 {% comment %}<!-- remove to add -->
-* Firstname Lastname
-* Firstname Lastname
-* Firstname Lastname
-{% endcomment %}<!-- remove to add -->
+
+- Firstname Lastname
+- Firstname Lastname
+- Firstname Lastname
+  {% endcomment %}<!-- remove to add -->
