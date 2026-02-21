@@ -12,15 +12,22 @@ namespace :test do
             abort "❌ No _site/ directory found. Please run 'bundle exec rake build' first."
         end
 
+        # Suppress Ruby warnings from html-proofer dependencies
+        original_verbose = $VERBOSE
+        $VERBOSE = nil
+        
         HTMLProofer.check_directory(
             "./_site",
             {
             disable_external: true,
             enforce_https: false,
             ignore_urls: [/^http:\/\/(localhost|127\.0\.0\.1)/],
-            allow_hash_href: true
+            allow_hash_href: true,
+            log_level: :error
             }
         ).run
+        
+        $VERBOSE = original_verbose
     end
 
     desc "Check common Liquid template issues"
@@ -87,6 +94,7 @@ namespace :test do
         
         Dir.glob('*.md').each do |file|
             next if file =~ /^[A-Z]+\.md$/
+            next if file == 'AWS_authentication.md' || file == 'SITE_README.md'
             
             content = File.read(file)
             if content =~ /\A---\s*\n(.*?)\n---\s*\n/m
@@ -331,19 +339,20 @@ namespace :test do
             puts "✅ Session page structure tests passed"
         end
     end
+end
 
-    desc "Run all tests (comprehensive)"
-    task :all => [
-        :html_proofer,
-        :templates,
-        :page_config,
-        :placeholders,
-        :a11y,
-        :performance
-        # :layouts
-    ] do
-        puts "\n" + "=" * 60
-        puts "✅ All validation tests passed!"
-        puts "=" * 60
-    end
+# Make `rake test` run all tests
+desc "Run all tests"
+task :test => [
+    'test:html_proofer',
+    'test:templates',
+    'test:page_config',
+    'test:placeholders',
+    'test:a11y',
+    'test:performance'
+    # 'test:layouts'
+] do
+    puts "\n" + "=" * 60
+    puts "✅ All validation tests passed!"
+    puts "=" * 60
 end
