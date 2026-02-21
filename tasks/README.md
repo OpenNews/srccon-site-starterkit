@@ -13,7 +13,6 @@ Format and lint Ruby and non-Ruby files to maintain consistent code style.
 - `rake format:ruby_fix` - Auto-fix Ruby formatting
 - `rake format:prettier` - Check non-Ruby files with Prettier npm via NodeJS
 - `rake format:prettier_fix` - Auto-fix non-Ruby files
-- `rake lint_todo` - Generate todo list of violations
 
 ### `test.rake` - Site Validation Tests
 Comprehensive testing suite for the built site.
