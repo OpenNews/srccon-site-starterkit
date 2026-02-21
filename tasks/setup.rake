@@ -28,17 +28,6 @@ task :setup do
     exit 0
   end
 
-  # Configure git hooks
-  if system("git rev-parse --git-dir > /dev/null 2>&1")
-    if File.exist?(".githooks/pre-commit")
-      if system("git config core.hooksPath .githooks")
-        puts "\n📋 Git hooks configured (core.hooksPath = .githooks)"
-      else
-        puts "\n⚠️  Could not configure git hooks path"
-      end
-    end
-  end
-
   # Create staging branch if it doesn't exist
   puts "\n📋 Setting up branches..."
 

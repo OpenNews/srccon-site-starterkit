@@ -87,7 +87,6 @@ New capabilities:
 - Configuration validation (`bundle exec rake check`)
 - Lotta pre-built and built file testing (`bundle exec rake test`)
 - Performance warnings
-- Pre-commit git hook preventing bad YAML from being committed (`.githooks/pre-commit`)
 - A weekly healthcheck pattern that runs the tests
 - Dependabot keeping an eye on direct dependencies, via GitHub
 
