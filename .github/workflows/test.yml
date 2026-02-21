@@ -50,7 +50,7 @@ jobs:
 
       - name: Configure AWS credentials
         if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         with:
