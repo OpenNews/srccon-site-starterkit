@@ -40,7 +40,7 @@ jobs:
             --allow-hash-href
 
       - name: Extract deployment config from _config.yml
-        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != '' && github.repository != 'OpenNews/srccon-site-starterkit'
         id: config
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
@@ -49,7 +49,7 @@ jobs:
           echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
 
       - name: Configure AWS credentials
-        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != '' && github.repository != 'OpenNews/srccon-site-starterkit'
         uses: aws-actions/configure-aws-credentials@v6
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
@@ -59,7 +59,7 @@ jobs:
           role-session-name: Test-${{ github.event.repository.name }}-${{ github.run_id }}
 
       - name: Test deployment (dry-run)
-        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != '' && github.repository != 'OpenNews/srccon-site-starterkit'
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         run: |
@@ -69,10 +69,10 @@ jobs:
             --delete \
             --cache-control "public, max-age=3600"
 
-      - name: Skip deployment test (no credentials)
-        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN == ''
+      - name: Skip deployment test (no credentials or GitHub Pages repo)
+        if: github.event_name == 'pull_request' && (env.AWS_ROLE_ARN == '' || github.repository == 'OpenNews/srccon-site-starterkit')
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         run: |
-          echo "⏭️  Skipping S3 deployment test (AWS credentials not available)"
+          echo "⏭️  Skipping S3 deployment test (this repo deploys to GitHub Pages, not S3)"
           echo "This is normal for Dependabot PRs and external contributions."
