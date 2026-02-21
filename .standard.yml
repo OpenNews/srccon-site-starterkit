@@ -1,0 +1,19 @@
+# StandardRB configuration for SRCCON site
+# https://github.com/standardrb/standard
+
+# Ruby version
+ruby_version: 3.0
+
+# Files and directories to ignore
+ignore:
+  - "_site/**/*"
+  - "vendor/**/*"
+  - "node_modules/**/*"
+  - ".bundle/**/*"
+  - ".jekyll-cache/**/*"
+  - "_data/**/*"
+
+# StandardRB uses rubocop under the hood
+# You can override specific rules here if needed
+# Example:
+# fix: true  # Auto-fix issues by default

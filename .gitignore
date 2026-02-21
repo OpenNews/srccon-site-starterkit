@@ -1,11 +1,25 @@
-_site
-.jekyll-cache
+# Jekyll build outputs
+_site/
+.jekyll-cache/
+.sass-cache/
 
 # Ruby/Bundler
 .bundle/
 vendor/
-Gemfile.lock
+
+# Node.js
+node_modules/
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# Editor files (but allow .vscode/ and .editorconfig for team shared settings)
+.idea/
+*.swp
+*.swo
+*~
+
+# Local environment
+.env
+.env.local

@@ -1,0 +1,20 @@
+{
+  "name": "srccon-site-starterkit",
+  "version": "1.0.0",
+  "description": "SRCCON conference site starter kit",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write '**/*.{html,css,js,json,yml,yaml,md}'",
+    "format:check": "prettier --check '**/*.{html,css,js,json,yml,yaml,md}'",
+    "format:ruby": "prettier --write '**/*.{rb,rake}'",
+    "lint": "prettier --check '**/*.{html,css,js,json,yml,yaml,md,rb,rake}'"
+  },
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^4.0.4",
+    "prettier": "^3.2.5"
+  },
+  "keywords": [
+    "jekyll",
+    "srccon"
+  ]
+}
