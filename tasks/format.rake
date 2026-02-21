@@ -25,11 +25,11 @@ namespace :format do
 end
 
 desc "Check all code formatting (Ruby + other files)"
-task lint: ["format:ruby", "format:prettier"] do
+task lint: %w[format:ruby format:prettier] do
   puts "✅ All formatting checks passed!"
 end
 
 desc "Auto-fix all code formatting issues (Ruby + other files)"
-task format: ["format:ruby_fix", "format:prettier_fix"] do
+task format: %w[format:ruby_fix format:prettier_fix] do
   puts "✅ All files formatted!"
 end

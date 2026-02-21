@@ -17,10 +17,8 @@ task :setup do
   end
 
   # Remove template-only documentation
-  template_docs = ["AWS_authentication.md", "README.md"]
-  template_docs.each do |doc|
-    File.delete(doc) if File.exist?(doc)
-  end
+  template_docs = %w[AWS_authentication.md README.md]
+  template_docs.each { |doc| File.delete(doc) if File.exist?(doc) }
 
   # rename SITE_README to main README
   if File.exist?("SITE_README.md")
@@ -37,7 +35,8 @@ task :setup do
   if system("git rev-parse --git-dir > /dev/null 2>&1")
     # Check if staging branch exists (locally or remotely)
     staging_exists_local = system("git show-ref --verify --quiet refs/heads/staging")
-    staging_exists_remote = system("git ls-remote --heads origin staging 2>/dev/null | grep -q staging")
+    staging_exists_remote =
+      system("git ls-remote --heads origin staging 2>/dev/null | grep -q staging")
 
     if staging_exists_local || staging_exists_remote
       puts "   ✓ Staging branch already exists"

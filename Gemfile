@@ -18,3 +18,5 @@ end
 group :test do
   gem "html-proofer"
 end
+
+gem "syntax_tree", "~> 6.3"
