@@ -119,7 +119,7 @@ Each session will be led by a facilitator or two or three who will guide partici
 
 ### Where is the conference schedule? {#schedule}
 
-Here's [the SRCCON schedule](https://2025.srccon.org/schedule/)&ndash;you can even mark sessions you want to attend and build your own custom program. We'll also post session names outside each room during the conference.
+Here's [the SRCCON schedule](/program/)&ndash;you can even mark sessions you want to attend and build your own custom program. We'll also post session names outside each room during the conference.
 
 ### How will I find the sessions? {#finding-sessions}
 
@@ -152,7 +152,7 @@ Extra-long breaks mean you don't have to choose between taking care of your need
 
 ### What happens if I feel harassed or unsafe? {#safety}
 
-You are supported by [the SRCCON code of conduct](https://2025.srccon.org/conduct/), which is backed by a detailed action plan. If you feel harassed, unsafe, or concerned about something happening to you or that you see happening to someone else, you can call us or flag down a staff person or volunteer in a color-coded SRCCON shirt.
+You are supported by [the SRCCON code of conduct](/conduct/), which is backed by a detailed action plan. If you feel harassed, unsafe, or concerned about something happening to you or that you see happening to someone else, you can call us or flag down a staff person or volunteer in a color-coded SRCCON shirt.
 
 ### What happens if I have a question or need a band-aid, pain reliever, or safety pin? {#help}
 
