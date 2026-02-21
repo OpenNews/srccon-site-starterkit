@@ -1,190 +1,150 @@
-## SRCCON site starterkit
+## SRCCON [Site Starterkit](https://site-starterkit.srccon.org) (Template Repo)
 
-This repo provides a templated foundation for creating new SRCCON event sites. By default, pages use the "simple" SRCCON template. [Check the demo site](https://site-starterkit.srccon.org) to see what's included and what it looks like.
+**📋 Audience:** This README is for OpenNews maintainers who manage this template and create new SRCCON event sites.
 
-### 🎯 2026 Major Refactoring
+**🎯 Purpose:** Provides a standardized, automated foundation for launching new SRCCON event websites as subdomain sites within the OpenNews organization.
 
-This starterkit has been significantly enhanced in 2026 to automate and template features that previously required manual setup for each annual SRCCON event. Key improvements include:
+**⚠️ Important:** After creating a new event repo from this template, run `bundle exec rake setup` to automatically swap README files and prepare for event customization.
 
-**Now Fully Templated:**
-- **Dynamic event information** - Dates, venues and locations are re-centralized in `_config.yml` and populate throughout the site
-- **Ticket price checks** - The four price options are now centralized in `_config.yml` and populate throughout the site, ready to be set per year
-- **Session program integration** - Program pages and session schedules now use YAML data files instead of hardcoded HTML
-- **Conditional content rendering** - Page content automatically adjusts based on event timeline flags: `schedule_live` and `session_deadline_passed`
-- **Prior events navigation** - Footer automatically generates links to previous SRCCON years based on the current event's URL
-- **Social media metadata** - OpenGraph tags now use absolute URLs from config instead of relative paths
-- **Comprehensive testing** - Automated validation for templates, layouts, configuration, accessibility, security, and performance
+## Quick Start: Creating a New SRCCON Site
 
-**Examples of What's Automated:**
-- Event name, dates and location appear consistently across all Markdown pages
-- Participation Form deadlines update throughout the site from a config values
-- Program page visibility is controlled by one `schedule_live` flag
-- Participation Form open/close language is better controlled by one `session_deadline_passed` flag
-- CTA button variations are pre-seeded to the site's phases
-- Repetitive sponsor data is saved year over year, with some smart defaults in the public list
+1. **Click "Use this template"** in GitHub to create a new repository
+2. **Name it** following the existing pattern: `srccon-<YYYY|name>`
+3. **Clone locally** and run `bundle install`
+4. **Run the setup task:** `bundle exec rake setup`  
+   This automatically cleans up some files that describe the role of the _template_ repo that are now in the way.
+5. **Customize `_config.yml`** with your event details (dates, venue, prices, deployment buckets, etc.)
+6. **Update `CNAME`** with your event's subdomain, e.g., `2026.srccon.org`, with no `https://`
+7. **Validate your configuration changes:** `bundle exec rake check`
+8. **Render and smoke-test locally:** `bundle exec rake serve`
+9. **Commit and push** your changes to trigger deployment to GitHub Pages (the site-starterkit repo is a bit different than our other repos, in that regard).
+   - We recommend starting with by creating a `<year>-<initials>-<task>`-patterned branch name and working in that branch to tweak the template repo logic
+   - Create a PR for your branch compared to `main` (the starterkit has no functional `staging` need at this moment)
+   - Use the `bundle exec rake -T` tasks to check your work for issues
+   - Consider asking @Copilot or colleagues for a Review 
+   - Once you merge your branch into `main`, you should see GitHub Pages automatically kick off a deployment to `https://site-starterkit.srccon.org` and your changes will be live there
 
-This means **less manual find-and-replace work** when setting up a new SRCCON site and **fewer opportunities for inconsistencies** across pages.
+## What's New in 2026
 
-## Repository Structure
-* **Directories:**
-	* `_data/` - YAML data files for sessions, sponsors and other structured content
-	* `_includes/` - Partial templates (footers, navigation, metadata, session tables)
-	* `_layouts/` - Page layouts: `simple_layout.html` (clean design; default choice) and `layout_with_header_image.html` (with photo headers)
-	* `_site/` - this is the result of our `:build` commmand, it should not be commited to GitHub; it's what goes to AWS's bucket to become the static site (is deployed, but also .gitignored)
-	* `.github/workflows/*` - GitHub Actions scripts that drive our site-building process on commits to `main`
-	* `.jekyll-cache/` - local-only elements to `serve` local dev site (gitignored)
-	* `media/` - Static CSS, JS, and image assets
-	* `tasks/` - Rake task definitions for testing and validation
-* **Core Pages:**
-	* `homepage.md` - Event landing page
-	* `welcome.md` - Attendee FAQ guide
-	* `participation_form.md` - Session proposal guide
-	* `program.md` - Session schedule (unlinked, until `schedule_live: true`)
-	* `sponsors.md` - Sponsor list (no longer redirecting to `sponsos_about.md`)
-	* `sponsors_about.md` - Sponsor solicitation
-	* `scholarships.md` - Scholarship info
-	* `volunteer.md` - Volunteer info
-	* `conduct.md` - Code of conduct
-* **Configuration:**
-	* `_config.yml` - **Primary configuration file** - event details, feature flags and defaults
-	* `Rakefile` - `build`, `serve` and `deploy` commands, for local dev and publishing (more on this below)
-	* `tasks/*.rake` files - Beefed up test suite, covering many Jekyll and static-bake templating challenges or inconsistencies
+This template was significantly upgraded in 2026 to reduce repetitive work and migrate deployment continual integration/deployment (CI/CD) patterns to use GitHub Actions rather than Travis. It also upgrades authentication-security connections between AWS S3 and GitHub. Details:
 
-# Working locally with live reload
+### AWS Authentication via OpenID Connect (OIDC)
 
-`bundle exec rake default` - runs `:build`, `:check` and `:serve` commands on most file changes, so you can watch along with your config and file tweaks 
+Previously we used long-lived AWS credentials like
+ `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY` stored as individual repository secrets, requiring rotation and management. Which we did not do frequently.
 
-View at [http://localhost:4000](http://localhost:4000)
+**Now:** We use a single GitHub Organization-level `AWS_ROLE_ARN` secret using [OpenID Connect (OIDC)](https://docs.github.com/en/actions/concepts/security/openid-connect#overview-of-openid-connect-oidc):
+- ✅ Short-lived credentials (auto-expire quickly)
+- ✅ No secrets in cloud storage or on local machines
+- ✅ Granular permission controls that do only what we need, not more
+- ✅ One secret to manage across all OpenNews repos, via [OpenNews Organization-level secrets](https://github.com/organizations/OpenNews/settings/secrets/actions) in GitHub.
 
-## Pre-Launch Checklist
+**Details:** [AWS_authentication.md](AWS_authentication.md)
 
-**Validate your configuration:**
-```bash
-bundle exec rake check
+### Centralized Configuration
+
+Previously, event details were scattered across HTML and Markdown files requiring manual find-and-replace. And many full-event templates were missing from the baseline in this template repo. They needed to be copy-pasted into new event repos from prior years as pre-conference deadlines approached. This brought in inconsistencies in dates, locations and pricing details.
+
+**Now:** Most event metadata si now centralized in `_config.yml`:
+```yaml
+[...snip...]
+event_name: "SRCCON 2052"
+event_date: "April 1-3, 2052"
+event_venue: Nerd Church
+price_base: $450
+price_med: $750
+price_full: $1050
+price_stipend: $500
+[...snip...]
 ```
 
-## Available tests
+Changes to these values propagate automatically throughout the site when it is rebuilt as a static site via `bundle exec rake build`. The built code is then deployed via GitHub PRs & merges into `staging` or `main` protected branches. GitHub Actions auto-deploys successful merges to `staging` and `main` to their respective public-facing buckets & URLs. 
 
-```bash
-# Quick HTML validation
-bundle exec rake test:html_proofer      # Validate built HTML and links
-bundle exec rake test:templates         # Check template syntax
+### Enhanced Templating
 
-# Content quality
-bundle exec rake test:placeholders      # Find unconfigured or TODO content patterns
-bundle exec rake test:page_config       # Validate args at top of Markdown files
+- **Dynamic content** - Dates, venues, prices populate from config
+- **Conditional rendering** - Show/hide content based on timeline flags (`schedule_live`, `session_deadline_passed`)
+- **Session YAML integration** - Program pages render from `_data/sessions.yml`
+- **Auto-generated footer** - Previous SRCCON event links generated automatically
 
-# Best practices
-bundle exec rake test:a11y               # Accessibility checks
-bundle exec rake test:performance        # File-size and performance warnings
+### Automated Validation
 
-# Run 'em all
-bundle exec rake test:all                # Comprehensive validation suite
-```
+New capabilities:
+- Configuration validation (`bundle exec rake check`)
+- Lotta pre-built and built file testing (`bundle exec rake test`)
+- Performance warnings
+- A weekly healthcheck pattern that runs the tests
+- Dependabot keeping an eye on direct dependencies, via GitHub
 
-# Pre-launch checklist
-What to do after copying this repository to set up a new SRCCON site:
+### Smart Deployment Config
 
-**🚀 Quick Start:** See [TEMPLATE_SETUP.md](TEMPLATE_SETUP.md) for a comprehensive setup checklist.
+Previously our S3 buckets and CloudFront caching-setup IDs were somewhat buried in environment-specific files or environment variables.
 
-**Validate your configuration:**
-```bash
-bundle exec rake validate_config
-```
-
-This checklist will guide you though customizing `_config` values and smoke-testing your changes.
-
-* settings
-	- [ ] `CNAME`
-		* delete this file! (It only exists to point to [the demo site for this repo](https://site-starterkit.srccon.org).) If you use GitHub's "Create repository from template" feature to set up your new site repository, you may need to `git rm` this file to get rid of it.
-	- [ ] `_config.yml`
-		- [ ] under `defaults:`, revise the placeholders for:
-			 * `root_url`
-			 * `event_name`
-			 * `event_date`
-			 * `event_place`
-			 * `event_venue`
-			 * `event_venue_link`
-			 * `event_timezone`
-			 * `event_timezone_offset` - daylight savings time
-			 * `event_place_abbr` (only used by `layout_with_header_image`)
-			* `description`: This is written for a midyear SRCCON; if the site is a semi-colon event, change it accordingly	
-		- [ ] `layout`: This is set to "simple_layout" for page designs that look like [SRCCON:2025](https://2025.srccon.org/). You can change the value to "layout_with_header_image" for a site with photo headers like [SRCCON 2019](https://2019.srccon.org). (More work may be necessary for the photo template.)
-		- [ ] `google_analytics_id` - any custom tracking?
-		- [ ] `cta_button_text` & `cta_button_link`: an orange "call to action" button and its text. Some common options are commented out
-		- [ ] `schedule_live` - should users be able to see a link to the program (aka, is it ready to publish)
-		- [ ] `session_deadline_passed` - should we indicate that the participation form is closed
-			- [ ] `session_deadline` - date & time when the form ends
-			- [ ] `session_confirm` - date when applicants should hear a verdict
-		- [ ] To make sure all uses match across our pages, prices are now `_config.yaml` values:
-			* `price_base`
-			* `price_med`
-			* `price_full`
-			* `price_stipend`
-		* Additionally, we have some `scope` args after the `defaults:`; these can be ignored until we get into some challenges with schedule item renderings
-	-[ ] `media/img/`
-		- [ ] `srccon_logo.png` is the primary SRCCON logo (the one that says "SRCCON" set at an angle). If you're creating a site for a topical SRCCON instead, you'll want to create appropriate logo files (generally 800px tall, probably starting from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai).)
-		- [ ] `srccon_logo_share.png` is the version of the logo used by social-media share cards. If you create a new logo for an event, also make a 1200x600 version of it and replace this file.
-		- [ ] if you're using `layout_with_header_image`, there are some helpful images in `/media/img/backgrounds/`
-	- [ ] `_data/sessions.yml` - this is the JSON that will drive the schedule "app", with a basic placeholder/CTA to start
-	- [ ] `_includes/footer_sponsors.html` - any tweaks?
-* VQA/smoke-testing
-	- [ ] `_includes/`
-		* in `simple_footer.html` or `footer.html` (depending on `layout`), double-check the list of linked pages/includes. "Previous events" _should_ add any missing years once you set the `root_url`
-	- [ ] `homepage.md`
-		* in the "When & Where" section, consider un-`{% comment %}`ing the Room-block text once a link is ready
-    - [ ] `price_*` changes in `_config.yaml`
-        * Double-check the use of the prices in `homepage.md`, `attendees.md` and `scholarships.md`  
-	- [ ] `participation/form/` - make sure Airtable renders
-    - [ ] Sponsors:
-		- [ ] `sponsors/` - starts with two default sponsors, but typical sponsor names/logos are ready to be un-`{% comment %}`ed as decisions come in
-		- [ ] `sponsors/about/` - may need a refresh for numbers and contact points; if so, please consider PRing the same change back to `srccon-site-template`, too
-	- [ ] `welcome.md` - do we have stenographers this year? Are they newer people? If so, please update and consider PRing the same change back to `srccon-site-template`, too
-
-## GitHub Actions Setup
-
-This template uses GitHub Actions for automated deployment to S3 and CloudFront. Here's how to set it up:
-
-### Required Secrets
-
-With OIDC authentication and deployment configuration in `_config.yml`, only **one organization-level secret** is required.
-
-**Organization-Level Secret** (Settings → Secrets and variables → Actions at https://github.com/organizations/OpenNews/settings/secrets/actions):
-
-- `AWS_ROLE_ARN` - AWS IAM role ARN for OIDC authentication (e.g., `arn:aws:iam::123456789012:role/GitHubActions-SRCCON-Deploy`). This role must have permissions for `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket`, `cloudfront:CreateInvalidation`
-
-**All other deployment configuration** (bucket names, CloudFront distribution ID) is stored in each repository's `_config.yml` file:
-
+**Now:** All are consolidated and visible in `_config.yml`:
 ```yaml
 deployment:
-  bucket: srccon-2026                    # Production bucket (staging gets -staging suffix)
-  cloudfront_distribution_id: E1234ABCD5678  # Optional
+  bucket: site-starterkit.srccon.org
+  staging_bucket: staging.site-starterkit.srccon.org
+  cloudfront_distribution_id: E1234ABCD5678
 ```
 
-**Benefits of this approach:**
-- ✅ Single organization secret to maintain (the IAM role ARN)
-- ✅ Bucket names visible in code (easier to verify and update)
-- ✅ No repository-level secrets needed
-- ✅ Each event repository is self-contained
-- ✅ Deployment config is version-controlled
+### GitHub Actions Deployment
 
-### Deployment Workflow
+Previously, we used Travis CI with manual configuration per repository and stored (the same broad) secrets in every repo.
 
-The repository includes three GitHub Actions workflows:
+**Now:** Three automated workflows:
+1. **Test** - Validate PRs and any branches not named `main` or `staging`
+2. **Deploy** - Auto-deploys any pushes/merges to `main` (production) or `staging` branches to their respective public S3 buckets
+3. **Health Check** - Weekly automated testing and outdated-dependency reports
+
+## Template Contents
+
+### File Structure
+
+**Configuration & Build:**
+- `_config.yml` - Primary configuration file (event details, feature flags, deployment)
+- `Rakefile` - `:build`, `:serve`, `:test`, and `:deploy` tasks, plus more
+- `tasks/*.rake` - Test suite and Outdated checks as tasks
+- `.ruby-version` - Ruby version specification
+- `Gemfile` / `Gemfile.lock` - Ruby dependencies
+
+**Content Pages:**
+- `homepage.md` - Event landing page
+- `welcome.md` - Attendee FAQ
+- `participation_form.md` - Session proposal guide
+- `program.md` - Session schedule
+- `sponsors.md` / `sponsors_about.md` - Sponsor information
+- `scholarships.md` / `volunteer.md` / `conduct.md` - Supporting pages
+
+**Templates & Data:**
+- `_layouts/` - Page layouts, defaults to `simple_layout.html`
+- `_includes/` - Reusable components (navigation, footers, session tables)
+- `_data/sessions.yml` - Session data for program schedule
+
+**Assets:**
+- `media/css/` - Styles
+- `media/js/` - Client-side JavaScript
+- `media/img/` - Images and sponsor logos (this repo is the library of more sponsors than a given event may need)
+
+**Continuous Integration & Deployment (CI/CD):**
+- `.github/workflows/deploy.yml` - Production/staging deployment
+- `.github/workflows/test.yml` - PR validation
+- `.github/workflows/health-check.yml` - Weekly monitoring of responsiveness and outdated dependencies
+ 
+### GitHub Actions Workflows
 
 **1. Deploy Workflow** (`.github/workflows/deploy.yml`)
 - Triggers on push to `main` or `staging` branches
-- Builds Jekyll site with Ruby 3.2
+- Builds Jekyll site with Ruby (see `.ruby-version`)
 - Deploys to S3 using AWS CLI
 - Invalidates CloudFront cache (production only)
-- Sends Slack notifications on completion
 
 **2. Test Workflow** (`.github/workflows/test.yml`)
 - Runs on all PRs and non-deployment branches
 - Validates Jekyll build succeeds
-- Checks internal links with html-proofer
+- Chec_ks i_nternal links with html-proofer
 - Tests deployment commands with `--dryrun` flag
-- No artifacts saved (test locally if needed)
+- **No** artifacts copied to S3
 
 **3. Health Check Workflow** (`.github/workflows/health-check.yml`)
 - Runs weekly (Mondays at noon UTC)
@@ -192,157 +152,87 @@ The repository includes three GitHub Actions workflows:
 - Reports outdated dependencies
 - Creates GitHub issue on failure
 
-### Branch Strategy
+## Maintaining This Template
 
-- `main` → Production deployment (S3 + CloudFront invalidation)
-- `staging` → Staging deployment (S3 only)
-- Other branches → Test builds only (no deployment)
+### When to Update
 
-### Local Development
+Update this template when you discover:
+- Out of date Gems and versions (so long as they aren't breaking changes)
+- Bugs or issues affecting multiple SRCCON sites that you want to patch now before we generate the next event
+- Improved CI/CD workflows or automation
+- Security updates or best practices
+- New features, logos and styles useful for all events
+- Documentation improvements
 
-**Prerequisites:**
+### Propagating Fixes to Event Sites
 
-This project requires Ruby and Bundler. Check if you have them installed:
+When you fix something in the template that affects live event sites:
 
-```bash
-ruby --version   # Should be 3.2 or higher (see .ruby-version)
-bundle --version # Should be 2.0 or higher
-```
+1. **Document the fix** in the PR description
+2. **Create issues** in affected event repositories
+3. **Consider backporting** critical security/bug fixes to every repo that need the fix (this can be painful)
 
-If you need to install Ruby:
-- **macOS/Linux**: Use [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/)
-- **macOS with Homebrew**: `brew install ruby`
-- **Linux**: Check your package manager (e.g., `sudo apt install ruby-full`)
-- **Windows**: Use [RubyInstaller](https://rubyinstaller.org/)
+## Key Maintenance Tasks
 
-If you need to install Bundler:
-```bash
-gem install bundler
-```
+**Regular (when starting a new event):**
+- Update sponsor logos in `media/img/partners/`
+- Review and update prices if changed
+- Check for outdated Ruby/gem versions (`bundle update`)
+- Consider merging in Dependabot recommendations on GitHub Action workflows version upgrades
+- Update Code of Conduct if OpenNews policy changes
+- Improve accessibility based on audits
+- Add new validation tests based on issues discovered
 
-# Core Commands
-```bash
-bundle exec rake clean              # Clean the build directory
-bundle exec rake build              # 'Bake' the site to `_site/`
-bundle exec rake serve              # Render locally with live reload
-bundle exec rake default			# runs :clean, :build, :serve in a loop
-```
-
-# Ruby/Rails updates
-```bash
-bundle exec rake outdated           # Check for outdated dependencies
-bundle exec rake outdated:all       # Chained outdated dependencies (we can't address these, but they may be informative)
-```
-
-# Checks & tests
-```bash
-bundle exec rake check              # Validate _config.yml configuration
-bundle exec rake test:all           # Run all tests
-bundle exec rake test:html_proofer  # Test built HTML and links
-bundle exec rake test:templates     # Validate Liquid syntax
-bundle exec rake test:layouts       # Check layout configuration
-bundle exec rake test:page_config   # Validate page front matter
-bundle exec rake test:placeholders  # Find TODO/FIXME content
-bundle exec rake test:a11y          # Accessibility checks
-bundle exec rake test:performance   # Performance warnings
-```
-
-# Deployment (requires AWS credentials)
-```bash
-bundle exec rake deploy:precheck                   # Run all pre-deployment checks
-bundle exec rake deploy:staging DRY_RUN=false      # Deploy to staging S3
-bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
-```
+**Periodic (annually):**
+- Consider upgrading Ruby version in `.ruby-version` 
+- Validate CloudFront distribution IDs
+- Audit AWS IAM permissions
+- Review and update documentation
 
 ### Dependency Management
 
-- **`bundler`** manages Ruby gems (Jekyll and plugins)
-- **`dependabot`** automatically creates PRs for dependency updates
-- Weekly automated health checks catch breaking changes
+**Automated:**
+- **Dependabot** - Creates PRs for gem updates (configured in `.github/dependabot.yml`)
+- **Weekly health checks** - Health check workflow reports outdated dependencies, too
 
-### Migration from Travis CI-backed sites to 2026 latest
+**Manual checks:**
+```bash
+bundle exec rake outdated           # Check for outdated gems
+bundle exec rake outdated:all       # Include child dependencies of our main dependencies (stuff we can't fix but should generally understand is falling behind)
+```
 
-[See these AI-driven instructions](MIGRATION.md)
+**Updating dependencies:**
+```bash
+bundle update                       # Update all gems
+bundle update jekyll                # Update specific gem
+bundle install                      # Install after Gemfile changes
+```
 
-### AWS OIDC Setup (Required)
+## Additional Resources
 
-This project uses **OpenID Connect (OIDC)** for secure, keyless AWS authentication. This eliminates the need for long-lived credentials.
+- **[SRCCON Event Site](https://srccon.org)** - Main SRCCON landing page
+- **[Jekyll Documentation](https://jekyllrb.com/docs/)** - Static site generator
+- **[GitHub Actions Docs](https://docs.github.com/en/actions)** - CI/CD documentation
+- **[AWS S3 Documentation](https://docs.aws.amazon.com/s3/)** - Static hosting
+- **[AWS CloudFront Documentation](https://docs.aws.amazon.com/cloudfront/)** - CDN configuration
 
-**It is already working!** However, if you need to re-do it, here are the steps:
 
-**Setup Steps:**
+## Troubleshooting
 
-1. **Create an OIDC Identity Provider in AWS IAM:**
-   - Provider URL: `https://token.actions.githubusercontent.com`
-   - Audience: `sts.amazonaws.com`
-   - [AWS Documentation](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+**Template changes not appearing in new sites:**
+- Ensure you're using GitHub's "Use this template" button, not forking
+- After creating from template, pull latest changes if updates were recent
 
-2. **Create an IAM Role for GitHub Actions:**
-   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "Federated": "arn:aws:iam::YOUR_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
-         },
-         "Action": "sts:AssumeRoleWithWebIdentity",
-         "Condition": {
-           "StringLike": {
-             "token.actions.githubusercontent.com:sub": "repo:OpenNews/*:*"
-           },
-           "StringEquals": {
-             "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
-           }
-         }
-       }
-     ]
-   }
-   ```
+**Deployment workflow fails:**
+- Verify `AWS_ROLE_ARN` secret exists at organization level (no need to see its value)
+- Check S3 bucket names in `_config.yml` match actual buckets
+- Ensure CloudFront distribution ID is correct
 
-3. **Attach permissions policy to the role:**
-   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Action": [
-           "s3:PutObject",
-           "s3:DeleteObject",
-           "s3:ListBucket"
-         ],
-         "Resource": [
-           "arn:aws:s3:::srccon-*",
-           "arn:aws:s3:::srccon-*/*"
-         ]
-       },
-       {
-         "Effect": "Allow",
-         "Action": "cloudfront:CreateInvalidation",
-         "Resource": "*"
-       }
-     ]
-   }
-   ```
+**Tests failing locally but passing in CI:**
+- Ensure Ruby version matches `.ruby-version`
+- Delete and rebuild: `bundle exec rake clean && bundle exec rake build`
 
-4. **Set the role ARN as an organization secret:**
-   - Secret name: `AWS_ROLE_ARN`
-   - Value: `arn:aws:iam::YOUR_ACCOUNT_ID:role/GitHubActions-SRCCON-Deploy`
+## License
 
-**Note:** This template only supports OIDC authentication. Long-lived credentials (AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY) are not configured in the workflows for security reasons.
+The SRCCON site template is available as open source under the terms of the [MIT License](LICENSE).
 
-### Troubleshooting
-
-**Build fails with gem errors:**
-- Delete `Gemfile.lock` and run `bundle install` locally
-- Commit the new `Gemfile.lock`
-
-**Deployment dry-run fails in PRs:**
-- Check that AWS credentials are configured as repository secrets
-- Ensure secrets are available to PR builds (may need to adjust workflow permissions)
-
-**HTML validation reports false positives:**
-- Adjust html-proofer flags in `.github/workflows/test.yml`
-- Add `--ignore-urls` patterns for known false positives
