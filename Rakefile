@@ -79,7 +79,7 @@ task check: :validate_yaml do
   end
 
   begin
-    config = YAML.load_file("_config.yml")
+    config = YAML.safe_load_file("_config.yml")
   rescue => e
     abort "\n❌ Error parsing _config.yml: #{e.message}"
   end

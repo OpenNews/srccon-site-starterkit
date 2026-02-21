@@ -19,6 +19,8 @@ jobs:
         with:
           ruby-version: "3.2.2"
           bundler-cache: true
+      - name: Validate YAML files
+        run: bundle exec rake validate_yaml
       - run: bundle exec jekyll build
       - uses: actions/upload-pages-artifact@v3
 

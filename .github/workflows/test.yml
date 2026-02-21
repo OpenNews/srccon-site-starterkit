@@ -28,6 +28,9 @@ jobs:
           ruby-version: ".ruby-version"
           bundler-cache: true
 
+      - name: Validate YAML files
+        run: bundle exec rake validate_yaml
+
       - name: Build Jekyll site
         run: bundle exec jekyll build --verbose
 
@@ -74,5 +77,5 @@ jobs:
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         run: |
-          echo "⏭️  Skipping S3 deployment test (this repo deploys to GitHub Pages, not S3)"
+          echo "⏭️  Skipping S3 deployment test in this build context"
           echo "This is normal for Dependabot PRs and external contributions."
