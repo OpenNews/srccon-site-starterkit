@@ -5,6 +5,7 @@ This directory contains Rake tasks that are automatically loaded by the main `Ra
 ## Available Task Files
 
 ### `format.rake` - Code Formatting & Linting
+
 Format and lint Ruby and non-Ruby files to maintain consistent code style.
 
 - `rake lint` - Check all code formatting (Ruby with StandardRB + HTML/CSS/JS/YAML/Markdown with Prettier)
@@ -15,6 +16,7 @@ Format and lint Ruby and non-Ruby files to maintain consistent code style.
 - `rake format:prettier_fix` - Auto-fix non-Ruby files
 
 ### `test.rake` - Site Validation Tests
+
 Comprehensive testing suite for the built site.
 
 - `rake test` - Run all tests
@@ -27,6 +29,7 @@ Comprehensive testing suite for the built site.
 - `rake test:sessions` - Validate session page structure
 
 ### `outdated.rake` - Dependency Updates
+
 Check for outdated Ruby gems.
 
 - `rake outdated` - Check directly used outdated dependencies
@@ -34,6 +37,7 @@ Check for outdated Ruby gems.
 - `rake outdated:all` - Check all outdated dependencies (including transitive)
 
 ### `setup.rake` - Initial Site Setup
+
 One-time setup task for new SRCCON sites created from the template.
 
 - `rake setup` - Initialize a new SRCCON site from template (cleans up template-specific docs)

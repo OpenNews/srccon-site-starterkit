@@ -9,6 +9,7 @@ exclude:
   - "Rakefile"
   - "README.md"
   - "SITE_README.md"
+  - "TROUBLESHOOTING.md"
   - "AWS_authentication.md"
   - "LICENSE"
   - "tasks/"
