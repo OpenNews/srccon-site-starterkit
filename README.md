@@ -83,6 +83,7 @@ Changes to these values propagate automatically throughout the site when it is r
 
 New capabilities:
 
+- YAML duplicate key detection (`bundle exec rake validate_yaml`)
 - Configuration validation (`bundle exec rake check`)
 - Lotta pre-built and built file testing (`bundle exec rake test`)
 - Performance warnings

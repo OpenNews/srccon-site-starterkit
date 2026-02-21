@@ -135,6 +135,7 @@ bundle exec rake                    # Run clean, build, check, and serve in a lo
 ### Testing & Validation
 
 ```bash
+bundle exec rake validate_yaml          # Validate YAML syntax and duplicate keys
 bundle exec rake check              # Validate _config.yml configuration
 bundle exec rake test               # Run all tests (recommended)
 bundle exec rake test:html_proofer  # Test built HTML and links
@@ -200,6 +201,9 @@ Once configured, your editor will automatically:
    code --install-extension testdouble.vscode-standard-ruby
    # OR use Ruby LSP (includes StandardRB plus autocomplete, go-to-definition)
    code --install-extension shopify.ruby-lsp
+
+   # Red Hat YAML - validates YAML syntax and flags duplicate keys as you type
+   code --install-extension redhat.vscode-yaml
    ```
 
    _Note: The `code` command works with VSCode and most VSCode-based editors. Alternatively, install extensions through your editor's Extensions panel._

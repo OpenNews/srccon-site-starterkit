@@ -1,9 +1,53 @@
 require "jekyll"
 require "yaml"
+require "psych"
 require "fileutils"
 
 # Load test:* tasks from separate file
 Dir.glob("tasks/*.rake").each { |r| load r }
+
+# Recursively walk a Psych AST node and collect duplicate mapping keys
+def collect_yaml_duplicate_keys(node, file, errors = [])
+  return errors unless node.respond_to?(:children) && node.children
+
+  if node.is_a?(Psych::Nodes::Mapping)
+    keys = node.children.each_slice(2).map { |k, _| k.value if k.respond_to?(:value) }.compact
+    keys.group_by(&:itself).each do |key, hits|
+      errors << "#{file}: duplicate key '#{key}'" if hits.size > 1
+    end
+  end
+
+  node.children.each { |child| collect_yaml_duplicate_keys(child, file, errors) }
+  errors
+end
+
+desc "Validate YAML files for syntax errors and duplicate keys"
+task :validate_yaml do
+  puts "Validating YAML files..."
+  errors = []
+
+  Dir.glob("{_config.yml,_data/**/*.{yml,yaml}}").sort.each do |file|
+    begin
+      node = Psych.parse_file(file)
+      collect_yaml_duplicate_keys(node, file, errors)
+      YAML.safe_load_file(file)
+    rescue Psych::SyntaxError => e
+      errors << "#{file}: syntax error — #{e.message}"
+    rescue Psych::DisallowedClass => e
+      errors << "#{file}: unsafe YAML — #{e.message}"
+    rescue => e
+      errors << "#{file}: #{e.message}"
+    end
+  end
+
+  if errors.any?
+    puts "❌ YAML validation errors:"
+    errors.each { |e| puts "  - #{e}" }
+    abort
+  else
+    puts "✅ YAML files are valid"
+  end
+end
 
 # Load deployment vars from _config.yml
 def deployment_config
@@ -25,7 +69,7 @@ end
 task default: [:build, :check, :serve]
 
 desc "Validate configuration has been updated from template defaults"
-task :check do
+task check: :validate_yaml do
   puts "\n" + "=" * 60
   puts "🔍 Validating SRCCON site configuration"
   puts "=" * 60
@@ -35,7 +79,7 @@ task :check do
   end
 
   begin
-    config = YAML.load_file("_config.yml")
+    config = YAML.safe_load_file("_config.yml")
   rescue => e
     abort "\n❌ Error parsing _config.yml: #{e.message}"
   end
@@ -111,7 +155,7 @@ task :check do
 end
 
 desc "Build the Jekyll site"
-task :build do
+task build: :validate_yaml do
   puts "Building Jekyll site..."
   options = {
     "source" => ".",

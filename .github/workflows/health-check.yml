@@ -28,6 +28,9 @@ jobs:
           echo "=== Checking for outdated gems ==="
           bundle outdated || true
 
+      - name: Validate YAML files
+        run: bundle exec rake validate_yaml
+
       - name: Build Jekyll site
         run: bundle exec jekyll build --verbose
 
