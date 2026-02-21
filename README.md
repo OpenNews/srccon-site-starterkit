@@ -9,22 +9,22 @@
 ## Quick Start: Creating a New SRCCON Site
 
 1. **Click "Use this template"** in GitHub to create a new repository
-2. **Name it** following the existing pattern: `srccon-<YYYY|name>`
-3. **Clone locally** and run `bundle install`
-4. **Run the setup task:** `bundle exec rake setup`  
+1. **Name it** following the existing pattern: `srccon-<YYYY|name>`
+1. **Clone locally** and run `bundle install`
+1. **Run the setup task:** `bundle exec rake setup`  
    This automatically cleans up some files that describe the role of the _template_ repo that are now in the way.
-5. **Customize `_config.yml`** with your event details (dates, venue, prices, deployment buckets, etc.)
-6. **Update `CNAME`** with your event's subdomain, e.g., `2026.srccon.org`, with no `https://`
-7. **Validate your configuration changes:** `bundle exec rake check`
-8. **Render and smoke-test locally:** `bundle exec rake serve`
-9. **Commit and push** your changes to trigger deployment to GitHub Pages (the site-starterkit repo is a bit different than our other repos, in that regard).
+1. **Customize `_config.yml`** with your event details (dates, venue, prices, deployment buckets, etc.)
+1. **Update `CNAME`** with your event's subdomain, e.g., `2026.srccon.org`, with no `https://`
+1. **Validate your configuration changes:** `bundle exec rake check`
+1. **Render and smoke-test locally:** `bundle exec rake serve`
+1. **Commit and push** your changes to trigger deployment to GitHub Pages (the site-starterkit repo is a bit different than our other repos, in that regard).
    - We recommend starting with by creating a `<year>-<initials>-<task>`-patterned branch name and working in that branch to tweak the template repo logic
    - Create a PR for your branch compared to `main` (the starterkit has no functional `staging` need at this moment)
    - Use the `bundle exec rake -T` tasks to check your work for issues
    - Consider asking @Copilot or colleagues for a Review
    - Once you merge your branch into `main`, you should see GitHub Pages automatically kick off a deployment to `https://site-starterkit.srccon.org` and your changes will be live there
 
-## What's New in 2026
+## Recent Updates (2026)
 
 This template was significantly upgraded in 2026 to reduce repetitive work and migrate deployment continual integration/deployment (CI/CD) patterns to use GitHub Actions rather than Travis. It also upgrades authentication-security connections between AWS S3 and GitHub. Details:
 
@@ -46,7 +46,7 @@ Previously we used long-lived AWS credentials like
 
 Previously, event details were scattered across HTML and Markdown files requiring manual find-and-replace. And many full-event templates were missing from the baseline in this template repo. They needed to be copy-pasted into new event repos from prior years as pre-conference deadlines approached. This brought in inconsistencies in dates, locations and pricing details.
 
-**Now:** Most event metadata si now centralized in `_config.yml`:
+**Now:** Most event metadata is now centralized in `_config.yml`:
 
 ```yaml
 [...snip...]
@@ -78,6 +78,16 @@ New capabilities:
 - Performance warnings
 - A weekly healthcheck pattern that runs the tests
 - Dependabot keeping an eye on direct dependencies, via GitHub
+
+### Code Quality & Formatting
+
+New automated formatting system maintains consistent code style:
+
+- **StandardRB** - Zero-config Ruby linter and formatter
+- **Prettier** - Opinionated formatter for HTML, CSS, JavaScript, YAML, and Markdown
+- **Unified commands** - `bundle exec rake lint` checks all files, `bundle exec rake format` fixes all issues
+- **Editor integration** - `.editorconfig` works with most editors automatically
+- **Dual toolchain** - Ruby formatting via StandardRB, everything else via Prettier with Node.js
 
 ### Smart Deployment Config
 
@@ -113,6 +123,8 @@ Previously, we used Travis CI with manual configuration per repository and store
 - `tasks/*.rake` - Test suite and Outdated checks as tasks
 - `.ruby-version` - Ruby version specification
 - `Gemfile` / `Gemfile.lock` - Ruby dependencies
+- `package.json` / `package-lock.json` - Node.js dependencies (Prettier)
+- `.editorconfig` / `.prettierrc` / `.prettierignore` / `.standard.yml` - Code formatting configuration
 
 **Content Pages:**
 
@@ -154,7 +166,7 @@ Previously, we used Travis CI with manual configuration per repository and store
 
 - Runs on all PRs and non-deployment branches
 - Validates Jekyll build succeeds
-- Chec_ks i_nternal links with html-proofer
+- Checks internal links with html-proofer
 - Tests deployment commands with `--dryrun` flag
 - **No** artifacts copied to S3
 
@@ -193,7 +205,9 @@ When you fix something in the template that affects live event sites:
 - Update sponsor logos in `media/img/partners/`
 - Review and update prices if changed
 - Check for outdated Ruby/gem versions (`bundle update`)
+- Run `npm update` to update Prettier and formatting dependencies
 - Consider merging in Dependabot recommendations on GitHub Action workflows version upgrades
+- Run `bundle exec rake format` to maintain consistent code style
 - Update Code of Conduct if OpenNews policy changes
 - Improve accessibility based on audits
 - Add new validation tests based on issues discovered
@@ -209,23 +223,89 @@ When you fix something in the template that affects live event sites:
 
 **Automated:**
 
-- **Dependabot** - Creates PRs for gem updates (configured in `.github/dependabot.yml`)
+- **Dependabot** - Creates PRs for Ruby gem and npm package updates (configured in `.github/dependabot.yml`)
 - **Weekly health checks** - Health check workflow reports outdated dependencies, too
 
 **Manual checks:**
 
 ```bash
+# Ruby dependencies
 bundle exec rake outdated           # Check for outdated gems
 bundle exec rake outdated:all       # Include child dependencies of our main dependencies (stuff we can't fix but should generally understand is falling behind)
+
+# Node.js dependencies (Prettier)
+npm outdated                        # Check for outdated npm packages
 ```
 
 **Updating dependencies:**
 
 ```bash
+# Ruby gems
 bundle update                       # Update all gems
 bundle update jekyll                # Update specific gem
 bundle install                      # Install after Gemfile changes
+
+# Node.js packages
+npm update                          # Update all npm packages
+npm update prettier                 # Update specific package
+npm install                         # Install after package.json changes
 ```
+
+### Code Quality & Formatting
+
+This template includes automated code formatting and linting for maintaining consistent code style across Ruby and non-Ruby files.
+
+**Formatting Tools:**
+
+- **StandardRB** - Ruby code style linter and formatter (zero-config)
+- **Prettier** - Opinionated formatter for HTML, CSS, JavaScript, YAML, and Markdown
+- **@prettier/plugin-ruby** - Prettier plugin for Ruby syntax support
+
+**Prerequisites:**
+
+```bash
+# Ruby dependencies (already installed with bundle install)
+bundle install
+
+# Node.js dependencies for Prettier
+npm install
+```
+
+**Available Commands:**
+
+```bash
+# Check all code formatting (Ruby + HTML/CSS/JS/YAML/Markdown)
+bundle exec rake lint
+
+# Auto-fix all formatting issues
+bundle exec rake format
+
+# Ruby-only tasks
+bundle exec rake format:ruby        # Check Ruby code style
+bundle exec rake format:ruby_fix    # Auto-fix Ruby formatting
+
+# Prettier-only tasks
+bundle exec rake format:prettier      # Check non-Ruby files
+bundle exec rake format:prettier_fix  # Auto-fix non-Ruby files
+```
+
+**When to Format:**
+
+- Before committing changes to maintain consistency
+- After making template modifications
+- When reviewing PRs from contributors
+- Periodically to catch drift from standards
+
+**CI Integration:**
+
+The Test workflow (`.github/workflows/test.yml`) can be extended to include formatting checks on PRs. Currently, it focuses on build and deployment validation.
+
+**Configuration Files:**
+
+- `.standard.yml` - StandardRB configuration (currently uses defaults)
+- `.prettierrc` - Prettier configuration
+- `.prettierignore` - Files to exclude from Prettier
+- `.editorconfig` - Editor settings for consistent formatting
 
 ## Additional Resources
 

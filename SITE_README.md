@@ -86,11 +86,13 @@ This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via G
 
 ### Prerequisites
 
-This project requires Ruby and Bundler. Check if you have them installed:
+This project requires Ruby, Bundler, and Node.js. Check if you have them installed:
 
 ```bash
-ruby --version   # Should be 3.* or higher (see .ruby-version)
+ruby --version   # Should match .ruby-version
 bundle --version # Should be 2.0 or higher
+node --version   # Should be 14.0 or higher (for Prettier)
+npm --version    # Should be 6.0 or higher
 ```
 
 If you need to install Ruby:
@@ -100,7 +102,19 @@ If you need to install Ruby:
 - **Linux**: Check your package manager (e.g., `sudo apt install ruby-full`)
 - **Windows**: Use [RubyInstaller](https://rubyinstaller.org/)
 
-If you need to install Bundler: `gem install bundler` then `bundle install`
+If you need to install Bundler: `gem install bundler`.
+
+If you need to install Node.js:
+- **macOS with Homebrew**: `brew install node`
+- **Linux**: Check your package manager (e.g., `sudo apt install nodejs npm`)
+- **Windows**: Use [Node.js installer](https://nodejs.org/)
+
+After installing Ruby and Node.js:
+
+```bash
+bundle install  # Install Ruby dependencies
+npm install     # Install Node.js dependencies (Prettier)
+```
 
 ### Core Commands
 
@@ -124,6 +138,33 @@ bundle exec rake test:a11y          # Very basic accessibility checks
 bundle exec rake test:performance   # Performance warnings
 bundle exec rake outdated           # Check for outdated _direct_ dependencies
 ```
+
+### Code Formatting & Linting
+
+It is very helpful to maintain consistent code style across Ruby and non-Ruby files and keep change- and diff-histories easier to read in git/GitHub. 
+`bundle install` and `npm install` will enable our code-formatting support, available 
+in your IDE (depending on its features) and also via these `bundle exec rake *` commands: 
+
+```bash
+bundle exec rake lint               # Check all code formatting (Ruby + web/YAML/Markdown)
+bundle exec rake format             # Auto-fix all formatting issues
+
+# Check only (no changes)
+bundle exec rake format:ruby        # Ruby files with StandardRB
+bundle exec rake format:prettier    # HTML/CSS/JS/YAML/Markdown with Prettier
+
+# Auto-fix specific file types
+bundle exec rake format:ruby_fix      # Fix Ruby formatting
+bundle exec rake format:prettier_fix  # Fix non-Ruby formatting
+```
+
+**Configuration Files:**
+
+The formatting behavior is controlled by:
+- `.editorconfig` - Editor settings (most editors support this automatically)
+- `.prettierrc` - Prettier formatting rules  
+- `.prettierignore` - Files excluded from Prettier
+- `.standard.yml` - StandardRB configuration for Ruby files
 
 ### Deployment
 
