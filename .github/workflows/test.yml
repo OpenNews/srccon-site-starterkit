@@ -40,25 +40,39 @@ jobs:
             --allow-hash-href
 
       - name: Extract deployment config from _config.yml
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
         id: config
+        env:
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         run: |
           STAGING_BUCKET=$(ruby -ryaml -e "config = YAML.load_file('_config.yml'); puts config['deployment']['staging_bucket']")
           echo "staging_bucket=$STAGING_BUCKET" >> $GITHUB_OUTPUT
 
       - name: Configure AWS credentials
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
         uses: aws-actions/configure-aws-credentials@v4
+        env:
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
           role-session-name: Test-${{ github.event.repository.name }}-${{ github.run_id }}
 
       - name: Test deployment (dry-run)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN != ''
+        env:
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
         run: |
           echo "Testing S3 sync command (dry-run)..."
           aws s3 sync _site/ s3://${{ steps.config.outputs.staging_bucket }} \
             --dryrun \
             --delete \
             --cache-control "public, max-age=3600"
+
+      - name: Skip deployment test (no credentials)
+        if: github.event_name == 'pull_request' && env.AWS_ROLE_ARN == ''
+        env:
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+        run: |
+          echo "⏭️  Skipping S3 deployment test (AWS credentials not available)"
+          echo "This is normal for Dependabot PRs and external contributions."
