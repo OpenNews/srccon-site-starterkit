@@ -12,8 +12,9 @@ ignore:
   - ".bundle/**/*"
   - ".jekyll-cache/**/*"
   - "_data/**/*"
+  - "tasks/**/*" # Prettier handles formatting for these files
+  - "Rakefile" # Prettier handles formatting for this file
 
-# StandardRB uses rubocop under the hood
-# You can override specific rules here if needed
-# Example:
-# fix: true  # Auto-fix issues by default
+
+# Note: Rake files are formatted by Prettier with trailing commas (ES5 style)
+# StandardRB is excluded from these files to avoid conflicts
