@@ -4,7 +4,7 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
 plugins:
   - jekyll-redirect-from
-exclude: ['*.yml', 'Rakefile', 'README.md', 'TEMPLATE_SETUP.md', 'LICENSE']
+exclude: ['*.yml', 'Rakefile', 'README.md', 'SITE_README.md', 'AWS_authentication.md', 'LICENSE']
 collections:
   transcripts:
     output: true
@@ -18,10 +18,11 @@ collections:
 # Deployment vars - used by `rake deploy:*` tasks and GitHub Actions
 deployment:
   # AWS S3 bucket for production deployments
-  bucket: 2026.srccon.org
+  bucket: site-starterkit.srccon.org
   # AWS S3 bucket for staging deployments
-  staging_bucket: staging.2026.srccon.org
-  # CloudFront distribution ID for cache invalidation (optional)
+  staging_bucket: staging.site-starterkit.srccon.org
+  # CloudFront distribution ID for cache invalidation 
+  # (for production, you MUST change this to your site's ID)
   cloudfront_distribution_id: E1234ABCD5678
 
 defaults:
@@ -31,7 +32,7 @@ defaults:
       # layout: set this value to layout_with_header_image for pages with images at top
       layout: simple_layout
       # root_url: set this value to the root_url of the event
-      root_url: https://2025.srccon.org #no trailing slash
+      root_url: https://site-starterkit.srccon.org #no trailing slash
       # event_name: set this value to something like SRCCON 2020 or SRCCON:LEAD
       event_name: SRCCON YYYY
       # event_date: set this value to something like July 11 & 12
