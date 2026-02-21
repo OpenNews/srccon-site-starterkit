@@ -2,6 +2,21 @@
 
 This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via GitHub Actions to AWS S3.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Setup Checklist](#setup-checklist)
+- [Local Development](#local-development)
+  - [Prerequisites](#prerequisites)
+  - [Core Commands](#core-commands)
+  - [Testing & Validation](#testing--validation)
+  - [Code Formatting & Linting](#code-formatting--linting)
+  - [Editor Setup (VSCode, Cursor, Antigravity, etc.)](#editor-setup-vscode-cursor-antigravity-etc)
+  - [Deployment](#deployment)
+- [Repository Structure / Essential Files](#repository-structure--essential-files)
+- [Troubleshooting](#troubleshooting)
+- [Additional Resources](#additional-resources)
+
 ## Quick Start
 
 1. **Start Here:** Run `bundle exec rake setup` (one-time initialization - creates staging branch and swaps README files)
@@ -33,27 +48,27 @@ This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via G
 ### Settings
 
 - [ ] `CNAME` - Set to your event's public URL (no `https://`)
-- [ ] `_config.yml` - Update these values under `deployment:`:
+- [ ] `_config.yml` - Update these values under `deployment:`
   - [ ] `s3_bucket_staging` - name of the staging bucket, often `staging.<event>.srccon.org`
   - [ ] `s3_bucket_production` - name of the user-facing public bucket, `<event>.srccon.org`
-- [ ] `_config.yml` - Update these values under `defaults:`:
-  - `root_url` - The full URL of your site (e.g., `https://2050.srccon.org`)
-  - `event_name` - Full event name (e.g., "SRCCON 2050")
-  - `event_date` - Human-readable date (e.g., "August 12-13, 2050")
-  - `event_place` - Full location (e.g., "Minneapolis, MN")
+- [ ] `_config.yml` - Update these values under `defaults:`
+  - `root_url` - The full URL of your site
+  - `event_name` - Full event name
+  - `event_date` - Human-readable date
+  - `event_place` - Full location
   - `event_venue` - Venue name
   - `event_venue_link` - Maps or the Venue's own public site
-  - `event_timezone` - Timezone abbreviation (e.g., "CT")
-  - `event_timezone_offset` - UTC offset (e.g., "-05:00"), helps drive the live-session logic
-  - `event_place_abbr` - Short location (only for `layout_with_header_image`)
+  - `event_timezone` - Timezone abbreviation
+  - `event_timezone_offset` - UTC offset
+  - `event_place_abbr` - Short location
   - `description` - Meta description for SEO and various pages
-- [ ] `layout` - Choose between "simple_layout" (default) or "layout_with_header_image" (requires a bit more work)
+- [ ] `layout` - Which layout to use
 - [ ] `google_analytics_id` - Set if using custom tracking
 - [ ] `cta_button_text` & `cta_button_link` - Configure the main call-to-action button, from the default or commented out options, or something new
 - [ ] `schedule_live` - Set to `true` when ready to show the program page
 - [ ] `session_deadline_passed` - Set to `true` when participation form closes
-  - `session_deadline` - Form deadline (e.g., "11:59pm ET on May 15, 2026")
-  - `session_confirm` - When applicants hear back (e.g., "June 1")
+  - `session_deadline` - Participation form deadline
+  - `session_confirm` - When applicants hear back
 - [ ] Ticket prices in `_config.yml`:
   - `price_base` - Base ticket price
   - `price_med` - Mid-tier price
@@ -62,14 +77,14 @@ This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via G
 
 ### Media Assets
 
-- [ ] `media/img/srccon_logo.png` - Main SRCCON logo (800px tall, angled "SRCCON" text)
+- [ ] `media/img/srccon_logo.png` - Main SRCCON logo
   - For topical SRCCONs, create custom logo from [this Illustrator template](https://github.com/OpenNews/media-assets/blob/master/srccon/srccon_thematic_logo_template.ai)
-- [ ] `media/img/srccon_logo_share.png` - Social media share card (1200x600px)
+- [ ] `media/img/srccon_logo_share.png` - Social media share card
 - [ ] `media/img/backgrounds/` - Background images (if using `layout_with_header_image`)
 
 ### Data Files
 
-- [ ] `_data/sessions.yml` - Session data (starts with placeholder/CTA)
+- [ ] `_data/sessions.yml` - Session data (seeded with placeholder/CTA)
 - [ ] `_includes/footer_sponsors.html` - Customize sponsor footer if needed
 
 ### Content Verification & Page Reviews
@@ -95,19 +110,11 @@ node --version   # Should be 14.0 or higher (for Prettier)
 npm --version    # Should be 6.0 or higher
 ```
 
-If you need to install Ruby:
-
-- **macOS/Linux**: Use [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/)
-- **macOS with Homebrew**: `brew install ruby`
-- **Linux**: Check your package manager (e.g., `sudo apt install ruby-full`)
-- **Windows**: Use [RubyInstaller](https://rubyinstaller.org/)
-
-If you need to install Bundler: `gem install bundler`.
-
-If you need to install Node.js:
-- **macOS with Homebrew**: `brew install node`
-- **Linux**: Check your package manager (e.g., `sudo apt install nodejs npm`)
-- **Windows**: Use [Node.js installer](https://nodejs.org/)
+| Tool        | macOS/Linux                                                       | macOS (Homebrew)      | Linux                                           | Windows                                     |
+| ----------- | ----------------------------------------------------------------- | --------------------- | ----------------------------------------------- | ------------------------------------------- |
+| **Ruby**    | [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/) | `brew install ruby`   | Package manager (`sudo apt install ruby-full`)  | [RubyInstaller](https://rubyinstaller.org/) |
+| **Bundler** | `gem install bundler`                                             | `gem install bundler` | `gem install bundler`                           | `gem install bundler`                       |
+| **Node.js** | [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/) | `brew install node`   | Package manager (`sudo apt install nodejs npm`) | [Node.js installer](https://nodejs.org/)    |
 
 After installing Ruby and Node.js:
 
@@ -141,9 +148,9 @@ bundle exec rake outdated           # Check for outdated _direct_ dependencies
 
 ### Code Formatting & Linting
 
-It is very helpful to maintain consistent code style across Ruby and non-Ruby files and keep change- and diff-histories easier to read in git/GitHub. 
-`bundle install` and `npm install` will enable our code-formatting support, available 
-in your IDE (depending on its features) and also via these `bundle exec rake *` commands: 
+It is very helpful to maintain consistent code style across Ruby and non-Ruby files and keep change- and diff-histories easier to read in git/GitHub.
+`bundle install` and `npm install` will enable our code-formatting support, available
+in your IDE (depending on its features) and also via these `bundle exec rake *` commands:
 
 ```bash
 bundle exec rake lint               # Check all code formatting (Ruby + web/YAML/Markdown)
@@ -161,10 +168,63 @@ bundle exec rake format:prettier_fix  # Fix non-Ruby formatting
 **Configuration Files:**
 
 The formatting behavior is controlled by:
+
 - `.editorconfig` - Editor settings (most editors support this automatically)
-- `.prettierrc` - Prettier formatting rules  
+- `.prettierrc` - Prettier formatting rules
 - `.prettierignore` - Files excluded from Prettier
 - `.standard.yml` - StandardRB configuration for Ruby files
+- `.vscode/settings.json` - Editor workspace settings (see below)
+
+### Editor Setup (VSCode, Cursor, Antigravity, etc.)
+
+If you're using VSCode or a VSCode-based editor (like Cursor or Antigravity), the repository includes pre-configured settings for automatic code formatting and problem detection. These editors share the same open-source foundation and all read `.vscode/settings.json` files.
+
+**Expected Behaviors:**
+
+Once configured, your editor will automatically:
+
+- **Format files on save** - No need to run `bundle exec rake format` manually
+- **Format pasted content** - Pasted code auto-adjusts to project style
+- **Show problems in real-time** - Linting issues appear in the Problems tab (Cmd/Ctrl+Shift+M)
+- **Highlight syntax errors** - Ruby, HTML, CSS, JS, YAML, and Markdown errors surface immediately
+
+**Setup Steps:**
+
+1. **Install Required Extensions:**
+
+   ```bash
+   # Prettier - formats HTML, CSS, JS, JSON, YAML, Markdown
+   code --install-extension esbenp.prettier-vscode
+
+   # StandardRB - Ruby linting and formatting
+   code --install-extension testdouble.vscode-standard-ruby
+   # OR use Ruby LSP (includes StandardRB plus autocomplete, go-to-definition)
+   code --install-extension shopify.ruby-lsp
+   ```
+
+   _Note: The `code` command works with VSCode and most VSCode-based editors. Alternatively, install extensions through your editor's Extensions panel._
+
+1. **Reload Your Editor:**
+   - Run "Developer: Reload Window" from Command Palette (Cmd/Ctrl+Shift+P)
+   - Or restart your editor
+
+1. **Verify It's Working:**
+   - Open any file and save it - it should auto-format
+   - Check status bar (bottom-right) - should show "Prettier" or "StandardRB"
+   - Make a formatting mistake and save - it should auto-correct
+
+**Editor Compatibility:**
+
+These settings work with VSCode and any editor built on the same open-source codebase (like Cursor, Antigravity, VSCodium, etc.), as they all read `.vscode/` configuration files.
+
+**Manual Formatting (Alternative):**
+
+If you prefer not to use a VSCode-based editor or want to format all files at once:
+
+```bash
+bundle exec rake format    # Format all files
+bundle exec rake lint      # Check formatting without changing files
+```
 
 ### Deployment
 
@@ -200,16 +260,6 @@ aws configure
 aws s3 ls
 ```
 
-#### Deploy
-
-```bash
-bundle exec rake deploy:precheck                   # Run pre-deployment checks
-bundle exec rake deploy:staging DRY_RUN=false      # Deploy to staging S3
-bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
-```
-
-**Note:** Pushing to GitHub is usually faster than local deployment.
-
 ## Repository Structure / Essential Files
 
 - `welcome.md` - Attendee FAQ guide
@@ -226,6 +276,22 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 - `_data/` - YAML data for sessions and structured content
 - `_includes/` - Partial templates (footers, navigation, metadata, session tables)
 - `media/` - Static CSS, JS, and image assets
+
+### Configuration Files:
+
+- **Jekyll & Dependencies:**
+  - `_config.yml` - Primary site configuration (event details, feature flags, deployment settings)
+  - `Gemfile` / `Gemfile.lock` - Ruby dependencies (Jekyll, plugins, testing tools)
+  - `package.json` / `package-lock.json` - Node.js dependencies (Prettier)
+  - `.ruby-version` - Ruby version specification
+- **Editor & Code Quality:**
+  - `.vscode/settings.json` - VSCode/Cursor/Antigravity workspace settings (format-on-save, linting)
+  - `.editorconfig` - Cross-editor formatting rules (indentation, line endings, etc.)
+  - `.prettierrc` / `.prettierignore` - Prettier formatter configuration
+  - `.standard.yml` - StandardRB Ruby linter configuration
+- **Version Control:**
+  - `.gitignore` - Git ignore patterns
+  - `CNAME` - GitHub Pages custom domain configuration
 
 ### Infrastructure (Rarely Modified)
 
@@ -247,64 +313,16 @@ bundle exec rake deploy:production DRY_RUN=false   # Deploy to production S3
 
 ## Troubleshooting
 
-**Setup task fails (`bundle exec rake setup`):**
+For common issues and solutions, see **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**, which covers:
 
-- Ensure you're in the root directory of the repository
-- Check that `CNAME` and `_config.yml` exist
-- If running on the template repository itself, setup will exit with a warning (this is expected)
-- Try running with `--trace` flag: `bundle exec rake setup --trace`
-
-**Staging branch not created:**
-
-- The setup task creates the staging branch automatically if you're in a git repository
-- If not in a git repo yet: initialize with `git init`, commit files, add remote, push to GitHub, then run `bundle exec rake setup` again
-- To create manually: `git checkout -b staging && git push -u origin staging`
-
-**CNAME conflicts with another site:**
-
-- Each SRCCON site needs a unique subdomain (e.g., `2026.srccon.org`, `power.srccon.org`)
-- Coordinate with OpenNews team to ensure no conflicts
-- Update both `CNAME` file and `root_url` in `_config.yml`
-
-**Build fails with gem errors:**
-
-- Delete `Gemfile.lock` and run `bundle install`
-- Commit the new `Gemfile.lock`
-- Check that Ruby version matches `.ruby-version`
-
-**Deployment succeeds but site shows old content:**
-
-- CloudFront cache invalidation takes 5-10 minutes to propagate globally
-- Check GitHub Actions logs to confirm invalidation was triggered
-- For immediate testing, append `?cache-bust=timestamp` to URLs
-- Staging environment bypasses CloudFront so updates appear immediately
-
-**Deployment fails:**
-
-- Check that `_config.yml` has correct S3 bucket configuration (`s3_bucket_staging` and `s3_bucket_production`)
-- Verify AWS OIDC role has necessary permissions (CloudFront invalidation requires additional permissions beyond S3 write)
-- Confirm repository has access to organization-level `AWS_ROLE_ARN` secret
-- Review GitHub Actions logs for specific errors
-
-**HTML validation reports false positives:**
-
-- Adjust html-proofer flags in `tasks/test.rake`
-- Add `--ignore-urls` patterns for known false positives
-
-**Local server won't start:**
-
-- Ensure Ruby version matches `.ruby-version`
-- Run `bundle install` to update dependencies
-- Check port 4000 isn't already in use: `lsof -i :4000`
-- Try `bundle exec rake clean` then `bundle exec rake serve`
-
-**rake check reports placeholder values:**
-
-- This is expected for a new site - work through the [Setup Checklist](#setup-checklist)
-- Update all placeholder values in `_config.yml`
-- Run `bundle exec rake check` again to verify
-
----
+- **First-time setup** - Steps for getting started after cloning
+- **Quick triage** - Identify your issue quickly (won't build, looks wrong, changes not showing)
+- **Environment issues** - Ruby version, gems, Node.js
+- **Build problems** - Cache issues, server won't start
+- **Jekyll errors** - Liquid syntax, includes, layouts, variables
+- **YAML issues** - Config and data file syntax
+- **Deployment** - CloudFront cache, AWS configuration
+- **Manual testing** - Pre-commit smoke testing checklist
 
 ## Additional Resources
 

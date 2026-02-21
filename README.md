@@ -6,23 +6,33 @@
 
 **⚠️ Important:** After creating a new event repo from this template, run `bundle exec rake setup` to automatically swap README files and prepare for event customization.
 
+## Table of Contents
+
+- [Quick Start: Creating a New SRCCON Site](#quick-start-creating-a-new-srccon-site)
+- [Recent Updates (2026)](#recent-updates-2026)
+- [Template Contents](#template-contents)
+- [Maintaining This Template](#maintaining-this-template)
+  - [When to Update](#when-to-update)
+  - [How to Update the Template](#how-to-update-the-template)
+  - [Propagating Fixes to Event Sites](#propagating-fixes-to-event-sites)
+  - [Testing Template Changes](#testing-template-changes)
+  - [Version & Release Management](#version--release-management)
+- [Key Maintenance Tasks](#key-maintenance-tasks)
+  - [Dependency Management](#dependency-management)
+  - [Code Quality & Formatting](#code-quality--formatting)
+  - [Editor Integration](#editor-integration-vscode-cursor-antigravity-etc)
+- [Supporting Documentation](#supporting-documentation)
+- [Additional Resources](#additional-resources)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
 ## Quick Start: Creating a New SRCCON Site
 
 1. **Click "Use this template"** in GitHub to create a new repository
-1. **Name it** following the existing pattern: `srccon-<YYYY|name>`
-1. **Clone locally** and run `bundle install`
-1. **Run the setup task:** `bundle exec rake setup`  
-   This automatically cleans up some files that describe the role of the _template_ repo that are now in the way.
-1. **Customize `_config.yml`** with your event details (dates, venue, prices, deployment buckets, etc.)
-1. **Update `CNAME`** with your event's subdomain, e.g., `2026.srccon.org`, with no `https://`
-1. **Validate your configuration changes:** `bundle exec rake check`
-1. **Render and smoke-test locally:** `bundle exec rake serve`
-1. **Commit and push** your changes to trigger deployment to GitHub Pages (the site-starterkit repo is a bit different than our other repos, in that regard).
-   - We recommend starting with by creating a `<year>-<initials>-<task>`-patterned branch name and working in that branch to tweak the template repo logic
-   - Create a PR for your branch compared to `main` (the starterkit has no functional `staging` need at this moment)
-   - Use the `bundle exec rake -T` tasks to check your work for issues
-   - Consider asking @Copilot or colleagues for a Review
-   - Once you merge your branch into `main`, you should see GitHub Pages automatically kick off a deployment to `https://site-starterkit.srccon.org` and your changes will be live there
+1. **Name it** following the pattern: `srccon-<YYYY|name>`
+1. **Clone locally:** `bundle install` then `bundle exec rake setup`
+
+After setup completes, follow the workflow in the new repo's README.md for configuration, development, and deployment. See [SITE_README.md](SITE_README.md) for a preview of the event site documentation.
 
 ## Recent Updates (2026)
 
@@ -147,6 +157,13 @@ Previously, we used Travis CI with manual configuration per repository and store
 - `media/js/` - Client-side JavaScript
 - `media/img/` - Images and sponsor logos (this repo is the library of more sponsors than a given event may need)
 
+**Documentation:**
+
+- `README.md` - Template maintainer documentation (this file, deleted by `rake setup`)
+- `SITE_README.md` - Event organizer documentation (becomes `README.md` after `rake setup`)
+- `TROUBLESHOOTING.md` - Common issues and solutions (included in event repos)
+- `AWS_authentication.md` - OIDC setup details (template-only, deleted by `rake setup`)
+
 **Continuous Integration & Deployment (CI/CD):**
 
 - `.github/workflows/deploy.yml` - Production/staging deployment
@@ -190,13 +207,170 @@ Update this template when you discover:
 - New features, logos and styles useful for all events
 - Documentation improvements
 
+### How to Update the Template
+
+When making changes to the template repository itself:
+
+**Workflow:**
+
+1. **Create a feature branch** following the pattern: `<year>-<initials>-<task>`
+
+   ```bash
+   git checkout -b 2026-tk-update-ruby
+   ```
+
+2. **Make your changes** and test thoroughly (see [Testing Template Changes](#testing-template-changes))
+
+3. **Update documentation:**
+   - Update this README.md if maintenance procedures change
+   - Update SITE_README.md if event organizer workflow changes
+   - Add entry to "Recent Updates" section if it's a significant change
+   - Update TROUBLESHOOTING.md if addressing common issues
+
+4. **Run validation:**
+
+   ```bash
+   bundle exec rake check
+   bundle exec rake test
+   bundle exec rake format
+   ```
+
+5. **Create PR to `main`:**
+   - The template repo uses `main` branch only (no `staging` needed)
+   - Document what changed and why in PR description
+   - Note if changes affect existing event sites
+   - Consider asking @Copilot or colleagues for review
+
+6. **Merge and deploy:**
+   - Once merged to `main`, GitHub Pages auto-deploys to `https://site-starterkit.srccon.org`
+   - New event repos created after this point will include your changes
+
+**Important Notes:**
+
+- Template changes only affect NEW event sites created after the change
+- Existing event sites don't automatically receive updates (see [Propagating Fixes](#propagating-fixes-to-event-sites))
+- Breaking changes should be documented clearly and coordinated with event organizers
+
 ### Propagating Fixes to Event Sites
 
 When you fix something in the template that affects live event sites:
 
-1. **Document the fix** in the PR description
-2. **Create issues** in affected event repositories
-3. **Consider backporting** critical security/bug fixes to every repo that need the fix (this can be painful)
+**For Critical Fixes (security, broken functionality):**
+
+1. **Document the fix** in the PR description with clear before/after behavior
+2. **Create issues** in affected event repositories:
+   - Link to the template PR/commit
+   - Provide specific files that need updating
+   - Include reproduction steps if it's a bug
+3. **Consider direct PRs** to affected repos if time-critical
+4. **Notify event organizers** via issue comments or direct communication
+
+**For Non-Critical Improvements (features, cleanup):**
+
+1. **Document in template PR** what changed and benefits
+2. **Create tracking issue** in template repo listing affected sites
+3. **Let event organizers decide** whether to adopt changes
+4. **Provide migration guide** if the update requires configuration changes
+
+**Helping Event Organizers Pull Updates:**
+
+Event sites can selectively adopt template improvements:
+
+```bash
+# In the event repo, add template as a remote
+git remote add template https://github.com/OpenNews/srccon-site-starterkit.git
+git fetch template
+
+# View specific file changes
+git diff main template/main -- path/to/file.rb
+
+# Cherry-pick specific commits
+git cherry-pick <commit-hash>
+
+# Or manually copy files/changes as needed
+```
+
+**What to Backport:**
+
+- ✅ Security updates (Ruby/gem versions, GitHub Actions)
+- ✅ Bug fixes that break functionality
+- ✅ Deployment config improvements
+- ⚠️ New features (event organizer decides)
+- ❌ Documentation changes (each repo has its own)
+- ❌ Event-specific content/configuration
+
+### Testing Template Changes
+
+Before pushing template changes that will affect future event sites:
+
+**Option 1: Local Testing (Quick)**
+
+```bash
+bundle exec rake serve    # Preview at localhost:4000
+bundle exec rake test     # Run validation tests
+bundle exec rake check    # Verify configuration
+```
+
+**Option 2: Test Event Repo (Thorough)**
+
+1. Create a test repository from the template ("Use this template" button)
+2. Clone locally and run `bundle exec rake setup`
+3. Test the complete event organizer workflow
+4. Verify `SITE_README.md` becomes `README.md` correctly
+5. Delete test repo when done
+
+**What to Test:**
+
+- Jekyll builds without errors (`bundle exec rake build`)
+- All rake tasks work (`bundle exec rake -T` and try each)
+- Documentation is clear and accurate
+- `.vscode/settings.json` works with required extensions
+- GitHub Actions workflows validate (check `.github/workflows/test.yml`)
+
+### Version & Release Management
+
+The template uses a **rolling release** model without formal version numbers:
+
+**Why No Versions:**
+
+- Event sites are typically one-time use (for a specific conference)
+- Template changes are incremental improvements, not breaking releases
+- Event organizers rarely need to "upgrade" an in-progress site
+- Git history provides sufficient tracking of changes
+
+**Tracking Template History:**
+
+- Use Git commit SHAs to reference specific template states
+- Significant updates documented in "Recent Updates" section
+- GitHub's commit history shows all changes: `https://github.com/OpenNews/srccon-site-starterkit/commits/main`
+
+**Maintaining "Recent Updates" Section:**
+
+Add entries to the "Recent Updates (2026)" section when:
+
+- ✅ Major feature additions (new rake tasks, workflows, automation)
+- ✅ Significant architecture changes (auth, deployment, config structure)
+- ✅ Tool changes that affect contributor workflow (new linters, formatters)
+- ❌ Minor bug fixes (document in commit messages instead)
+- ❌ Content updates (logo additions, sponsor changes)
+- ❌ Documentation improvements (unless workflow changes)
+
+**When to Archive Updates:**
+
+- When the section becomes too long (>10 subsections), consider:
+  - Moving older updates (2+ years) to a CHANGELOG.md file
+  - Keeping only current year's major updates in README
+  - Linking to CHANGELOG.md for historical context
+
+**Communicating Breaking Changes:**
+
+If a template change would break existing event sites:
+
+1. Document clearly in PR description
+2. Add to "Recent Updates" with ⚠️ warning
+3. Create issues in all active event repositories
+4. Provide migration path or rollback instructions
+5. Consider delaying merge until after active events conclude
 
 ## Key Maintenance Tasks
 
@@ -253,59 +427,66 @@ npm install                         # Install after package.json changes
 
 ### Code Quality & Formatting
 
-This template includes automated code formatting and linting for maintaining consistent code style across Ruby and non-Ruby files.
+The template includes automated code formatting using **StandardRB** (Ruby) and **Prettier** (HTML, CSS, JS, YAML, Markdown). This ensures consistent code style across all SRCCON event sites.
 
-**Formatting Tools:**
+**Why These Tools:**
 
-- **StandardRB** - Ruby code style linter and formatter (zero-config)
-- **Prettier** - Opinionated formatter for HTML, CSS, JavaScript, YAML, and Markdown
-- **@prettier/plugin-ruby** - Prettier plugin for Ruby syntax support
+- **Zero configuration** - StandardRB and Prettier work out-of-the-box with sensible defaults
+- **Automatic fixing** - Most issues auto-correct on save (with editor integration) or via `bundle exec rake format`
+- **Dual toolchain** - Ruby via StandardRB, everything else via Prettier with Node.js
+- **Git-friendly** - Consistent formatting reduces noisy diffs and merge conflicts
 
-**Prerequisites:**
-
-```bash
-# Ruby dependencies (already installed with bundle install)
-bundle install
-
-# Node.js dependencies for Prettier
-npm install
-```
-
-**Available Commands:**
+**Quick Reference:**
 
 ```bash
-# Check all code formatting (Ruby + HTML/CSS/JS/YAML/Markdown)
-bundle exec rake lint
-
-# Auto-fix all formatting issues
-bundle exec rake format
-
-# Ruby-only tasks
-bundle exec rake format:ruby        # Check Ruby code style
-bundle exec rake format:ruby_fix    # Auto-fix Ruby formatting
-
-# Prettier-only tasks
-bundle exec rake format:prettier      # Check non-Ruby files
-bundle exec rake format:prettier_fix  # Auto-fix non-Ruby files
+bundle exec rake lint      # Check all formatting
+bundle exec rake format    # Auto-fix all issues
 ```
 
-**When to Format:**
+**For Maintainers:**
 
-- Before committing changes to maintain consistency
-- After making template modifications
-- When reviewing PRs from contributors
-- Periodically to catch drift from standards
+- Configuration lives in `.standard.yml`, `.prettierrc`, and `.prettierignore`
+- Formatting rules are intentionally minimal to reduce bikeshedding
+- To modify rules, update config files and run `bundle exec rake format` across the template
+- Consider CI integration in `.github/workflows/test.yml` if format drift becomes an issue
 
-**CI Integration:**
+**For Event Organizers:**
 
-The Test workflow (`.github/workflows/test.yml`) can be extended to include formatting checks on PRs. Currently, it focuses on build and deployment validation.
+See [SITE_README.md - Code Formatting & Linting](SITE_README.md#code-formatting--linting) for detailed usage instructions and commands.
 
-**Configuration Files:**
+### Editor Integration (VSCode, Cursor, Antigravity, etc.)
 
-- `.standard.yml` - StandardRB configuration (currently uses defaults)
-- `.prettierrc` - Prettier configuration
-- `.prettierignore` - Files to exclude from Prettier
-- `.editorconfig` - Editor settings for consistent formatting
+The template includes `.vscode/settings.json` that configures automatic formatting for VSCode and VSCode-based editors (Cursor, Antigravity, VSCodium, etc.).
+
+**What It Does:**
+
+- **Format on save** - All files auto-format when saved
+- **Format on paste** - Pasted content auto-formats to match project style
+- **Real-time linting** - Issues appear in Problems tab as you type
+- **Consistent tooling** - Same behavior across all contributors' editors
+
+**For Maintainers:**
+
+- Settings are in `.vscode/settings.json` and committed to the repository
+- Works with Prettier and StandardRB extensions
+- Applies to template and all event repos created from it
+- To modify: Edit `.vscode/settings.json` and test with the required extensions installed
+
+**For Event Organizers:**
+
+See [SITE_README.md - Editor Setup](SITE_README.md#editor-setup-vscode-cursor-antigravity-etc) for complete setup instructions, required extensions, and troubleshooting.
+
+## Supporting Documentation
+
+Event organizers working from this template will have access to:
+
+- **[SITE_README.md](SITE_README.md)** - Complete setup and development guide (becomes `README.md` in event repos)
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions for setup, build, deployment, and editor problems
+- **[tasks/README.md](tasks/README.md)** - Rake task development documentation
+
+Template maintainers should also reference:
+
+- **[AWS_authentication.md](AWS_authentication.md)** - OIDC setup and configuration details
 
 ## Additional Resources
 
@@ -317,21 +498,47 @@ The Test workflow (`.github/workflows/test.yml`) can be extended to include form
 
 ## Troubleshooting
 
+### Template Maintenance Issues
+
+These issues are specific to maintaining the template repository itself. For event site development issues, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
+
 **Template changes not appearing in new sites:**
 
 - Ensure you're using GitHub's "Use this template" button, not forking
 - After creating from template, pull latest changes if updates were recent
+- Template changes only affect NEW sites created after the change
 
-**Deployment workflow fails:**
+**`rake setup` fails or behaves unexpectedly:**
 
-- Verify `AWS_ROLE_ARN` secret exists at organization level (no need to see its value)
-- Check S3 bucket names in `_config.yml` match actual buckets
-- Ensure CloudFront distribution ID is correct
+- Check that you're running it on a NEW repo created from template, not the template itself
+- Ensure `SITE_README.md` exists before running
+- The task is idempotent but warns if files are already processed
+- Test setup task on a disposable test repo, not the template repo
 
-**Tests failing locally but passing in CI:**
+**Testing template changes:**
 
-- Ensure Ruby version matches `.ruby-version`
-- Delete and rebuild: `bundle exec rake clean && bundle exec rake build`
+- Create a disposable test repo from template to verify changes
+- Test with `bundle exec rake setup` to ensure event organizer experience works
+- Don't run destructive setup tasks on the template repo itself
+- Verify build works: `bundle exec rake clean && bundle exec rake build`
+
+**Deployment workflow configuration (in template):**
+
+- Verify `AWS_ROLE_ARN` secret exists at organization level
+- Ensure workflow files in `.github/workflows/` have correct triggers
+- Test workflow changes in a test repo before merging to template
+
+### Event Site Development
+
+For issues that event organizers encounter when building and deploying their sites, see **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**, which covers:
+
+- First-time setup and quick triage
+- Environment and dependency issues
+- Build and cache problems
+- Jekyll and template errors
+- YAML and data file issues
+- Deployment problems
+- Manual smoke testing
 
 ## License
 
