@@ -36,6 +36,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
+  // YAML validation: flags syntax errors and duplicate keys inline as you edit
+  // Requires the Red Hat YAML extension (redhat.vscode-yaml)
+  "yaml.validate": true,
+
   // StandardRB configuration
   "rubyLsp.formatter": "standard",
   "rubyLsp.linters": ["standard"],

@@ -201,6 +201,9 @@ Once configured, your editor will automatically:
    code --install-extension testdouble.vscode-standard-ruby
    # OR use Ruby LSP (includes StandardRB plus autocomplete, go-to-definition)
    code --install-extension shopify.ruby-lsp
+
+   # Red Hat YAML - validates YAML syntax and flags duplicate keys as you type
+   code --install-extension redhat.vscode-yaml
    ```
 
    _Note: The `code` command works with VSCode and most VSCode-based editors. Alternatively, install extensions through your editor's Extensions panel._
