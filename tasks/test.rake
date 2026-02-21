@@ -2,6 +2,11 @@ require "html-proofer"
 require "yaml"
 
 namespace :test do
+  desc "Validate YAML files for syntax errors and duplicate keys"
+  task :yaml do
+    Rake::Task[:validate_yaml].invoke
+  end
+
   desc "Check the built site with html-proofer"
   task :html_proofer do
     puts "Testing site with html-proofer..."
@@ -369,6 +374,7 @@ end
 # Make `rake test` run all tests
 desc "Run all tests"
 task test: [
+       "test:yaml",
        "test:html_proofer",
        "test:templates",
        "test:page_config",

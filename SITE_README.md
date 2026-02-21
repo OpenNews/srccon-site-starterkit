@@ -135,6 +135,7 @@ bundle exec rake                    # Run clean, build, check, and serve in a lo
 ### Testing & Validation
 
 ```bash
+bundle exec rake validate_yaml          # Validate YAML syntax and duplicate keys
 bundle exec rake check              # Validate _config.yml configuration
 bundle exec rake test               # Run all tests (recommended)
 bundle exec rake test:html_proofer  # Test built HTML and links
