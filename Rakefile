@@ -26,46 +26,51 @@ task default: [:build, :check, :serve]
 
 desc "Validate configuration has been updated from template defaults"
 task :check do
-  puts "Validating _config.yml configuration..."
+  puts "\n" + "=" * 60
+  puts "🔍 Validating SRCCON site configuration"
+  puts "=" * 60
   
   unless File.exist?('_config.yml')
-    abort "❌ _config.yml not found. Are you in the project root directory?"
+    abort "\n❌ _config.yml not found. Are you in the project root directory?"
   end
   
   begin
     config = YAML.load_file('_config.yml')
   rescue => e
-    abort "❌ Error parsing _config.yml: #{e.message}"
+    abort "\n❌ Error parsing _config.yml: #{e.message}"
   end
   
   unless config['defaults'].is_a?(Array)
-    abort "❌ _config.yml is missing 'defaults' array"
+    abort "\n❌ _config.yml is missing 'defaults' array"
   end
   
   default_scope = config['defaults'].find { |d| d['scope'] && d['scope']['path'] == '' }
   unless default_scope && default_scope['values']
-    abort "❌ _config.yml is missing default scope with empty path"
+    abort "\n❌ _config.yml is missing default scope with empty path"
   end
   
   defaults = default_scope['values']
+  deployments = config['deployment']
   
   errors = []
   warnings = []
-  
+
+  # Check for required deployment configuration
+  errors << "AWS buckets are still set to demo site in deployment config" if deployments['bucket'].to_s.include?('site-starterkit') || deployments['staging_bucket'].to_s.include?('site-starterkit')
+  if deployments['cloudfront_distribution_id'].to_s.include?('E1234ABCD5678')
+    errors << "AWS cloudfront_distribution_id is still set to demo site in deployment config, set to site's prd distribution ID (see README)" 
+  end
+
   # Check for placeholder values that need updating
-  errors << "root_url is still set to 'https://2025.srccon.org'" if defaults['root_url'] == 'https://2025.srccon.org'
+  errors << "root_url is still set to 'https://site-starterkit.srccon.org'" if defaults['root_url'] == 'https://site-starterkit.srccon.org'
   errors << "event_name is still set to 'SRCCON YYYY'" if defaults['event_name'] == 'SRCCON YYYY'
   errors << "event_date is still 'DATES' placeholder" if defaults['event_date'] == 'DATES'
   errors << "event_place is still 'PLACE' placeholder" if defaults['event_place'] == 'PLACE'
   errors << "form_link is still set to the demo Airtable URL" if defaults['form_link'].to_s.include?('pagJcROoTohbsBLFw')
   errors << "session_deadline is still set to April Fools placeholder" if defaults['session_deadline'].to_s.include?('April 1')
-  errors << "session_confirm is still set to Tax Day placeholder" if defaults['session_confirm'].to_s.include?('April 15')
-  
-  # Check for CNAME file (should be deleted or customized)
-  if File.exist?('CNAME')
-    cname_content = File.read('CNAME').strip
-    errors << "CNAME file exists with demo site URL (#{cname_content}). Delete or update for your event." if cname_content.include?('srccon.org')
-  end
+  errors << "session_confirm is still set to Tax Day placeholder" if defaults['session_confirm'].to_s.include?('April 15')  
+  cname_content = File.read('CNAME').strip
+  errors << "CNAME file still set to demo site URL" if cname_content.include?('site-starterkit')
   
   warnings << "event_timezone_offset is empty (needed for live sessions feature)" if defaults['event_timezone_offset'].nil? || defaults['event_timezone_offset'].empty?
   warnings << "google_analytics_id is empty (no tracking will be enabled)" if defaults['google_analytics_id'].nil? || defaults['google_analytics_id'].empty?
@@ -120,6 +125,7 @@ task :serve do
 end
 
 namespace :deploy do
+  
   desc "Run all pre-deployment checks"
   task :precheck => [:check, :build, 'test:all'] do
     puts "\n✅ All pre-deployment checks passed!"
