@@ -5,11 +5,13 @@
     // Event timezone configuration from _config.yml
     var eventTimezone = '{{ page.event_timezone }}';
     var eventTimezoneOffset = '{{ page.event_timezone_offset }}';
+    var year = new Date().getFullYear();
     
-    // Helper to create Date in event timezone
+    // Helper to create Date object from event time string, 'YYYY-MM-DD HH:MM'
+    // Constructs an ISO8601 with explicit timezone offset to create
+    // an absolute timestamp representing local time for the event
     function eventTime(dateTimeStr) {
-        // Format: 'YYYY-MM-DD HH:MM'
-        // Parses as local time in the event's timezone using the configured offset
+        // e.g., '2019-07-11 08:00' + ':00.000-05:00' == 8:00 AM CDT
         return new Date(dateTimeStr + ':00.000' + eventTimezoneOffset);
     }
 
@@ -19,27 +21,27 @@
     }
 
     var now = new Date(),
-        thursdayMorning = eventTime('2019-07-11 08:00'),
-        thursdayAM1 = eventTime('2019-07-11 09:30'),
-        thursdayAMbreak = eventTime('2019-07-11 10:45'),
-        thursdayAM2 = eventTime('2019-07-11 11:15'),
-        thursdayLunch = eventTime('2019-07-11 12:30'),
-        thursdayScienceFair = eventTime('2019-07-11 13:45'),
-        thursdayPM1 = eventTime('2019-07-11 15:00'),
-        thursdayPMbreak = eventTime('2019-07-11 16:15'),
-        thursdayPM2 = eventTime('2019-07-11 16:45'),
-        thursdayEvening = eventTime('2019-07-11 18:00'),
-        thursdayEveningEnd = eventTime('2019-07-11 21:30'),
-        fridayMorning = eventTime('2019-07-12 09:00'),
-        fridayAM1 = eventTime('2019-07-12 10:00'),
-        fridayAMbreak = eventTime('2019-07-12 11:15'),
-        fridayAM2 = eventTime('2019-07-12 11:45'),
-        fridayLunch = eventTime('2019-07-12 13:00'),
-        fridayPM1 = eventTime('2019-07-12 14:30'),
-        fridayPMbreak = eventTime('2019-07-12 15:45'),
-        fridayPM2 = eventTime('2019-07-12 16:15'),
-        fridayEvening = eventTime('2019-07-12 17:30'),
-        fridayEveningEnd = eventTime('2019-07-12 18:30');
+        thursdayMorning = eventTime(year + '-07-11 08:00'),
+        thursdayAM1 = eventTime(year + '-07-11 09:30'),
+        thursdayAMbreak = eventTime(year + '-07-11 10:45'),
+        thursdayAM2 = eventTime(year + '-07-11 11:15'),
+        thursdayLunch = eventTime(year + '-07-11 12:30'),
+        thursdayScienceFair = eventTime(year + '-07-11 13:45'),
+        thursdayPM1 = eventTime(year + '-07-11 15:00'),
+        thursdayPMbreak = eventTime(year + '-07-11 16:15'),
+        thursdayPM2 = eventTime(year + '-07-11 16:45'),
+        thursdayEvening = eventTime(year + '-07-11 18:00'),
+        thursdayEveningEnd = eventTime(year + '-07-11 21:30'),
+        fridayMorning = eventTime(year + '-07-12 09:00'),
+        fridayAM1 = eventTime(year + '-07-12 10:00'),
+        fridayAMbreak = eventTime(year + '-07-12 11:15'),
+        fridayAM2 = eventTime(year + '-07-12 11:45'),
+        fridayLunch = eventTime(year + '-07-12 13:00'),
+        fridayPM1 = eventTime(year + '-07-12 14:30'),
+        fridayPMbreak = eventTime(year + '-07-12 15:45'),
+        fridayPM2 = eventTime(year + '-07-12 16:15'),
+        fridayEvening = eventTime(year + '-07-12 17:30'),
+        fridayEveningEnd = eventTime(year + '-07-12 18:30');
 
     var showLive = function() {
         var timeblockToShow = '',
