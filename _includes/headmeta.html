@@ -1,5 +1,5 @@
 <meta charset="utf-8" />
-<meta name="theme-color" content="#5c1818">
+<meta name="theme-color" content="#5c1818" />
 <meta name="author" content="OpenNews" />
 <title>{{ page.event_name }} — {% if page.title %}{{ page.title }}{% else %}{{ page.event_date }}, {{ page.event_place }}{% endif %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:description" content="{{ page.description | markdownify | strip_html | strip_newlines }}" />
 <meta property="og:image" content="{{ page.root_url }}/media/img/srccon_share_logo.png" />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="330" />
+<meta property="og:image:alt" content="{{ page.event_name }} logo" />
 
+<!-- Performance: TypeKit optimization -->
+<link rel="dns-prefetch" href="//use.typekit.net" />
+<link rel="preconnect" href="https://use.typekit.net" crossorigin />
 <link rel="stylesheet" href="https://use.typekit.net/npu3izb.css">
 <link rel="stylesheet" href="/media/css/style.css">
 <link rel="shortcut icon" href="/media/img/favicon.ico" />
