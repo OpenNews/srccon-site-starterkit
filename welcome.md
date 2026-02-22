@@ -34,7 +34,7 @@ If you're looking for lodging and other logistics info, [you'll find it right he
   {% comment %}<!-- remove to add -->\* [Who are the people with the futuristic keyboards?](#stenographer){% endcomment %}<!-- remove to add -->
 - [What are the meals like?](#meals)
 - [What are the non-caffeinated, non-alcoholic drink options like?](#drinks)
-- [What is this Thursday evening thing all about?](#evening)
+- [What is this SRCCON Evening thing all about?](#evening)
 - [What am I supposed to do for 30 minutes in between every session?](#breaks)
 - [What happens if I feel harassed or unsafe?](#safety)
 - [What happens if I have a question or need a band-aid, pain reliever, or safety pin?](#help)
@@ -58,15 +58,15 @@ This year we're in {{ page.event_place}} on {{ page.event_date }} at {{ page.eve
 
 ### How much time should I allow for traveling to SRCCON? {#travel}
 
-Most people arrive Wednesday evening in order to get to SRCCON bright and early on Thursday morning. The venue is about 40 minutes from the airport on transit or by cab (depending on traffic).
+Most people arrive the evening before SRCCON starts in order to get to {{ page.event_venue }} bright and early by 9am the first morning. The venue is about 40 minutes from the airport on transit or by cab (depending on traffic).
 
-When people head home varies depending on flight times to their home city and other responsibilities. Some folks leave Friday night after SRCCON closes, while others may stay to enjoy {{ page.event_place }} through the weekend.
+When people head home varies depending on flight times to their home city and other responsibilities. Some folks leave the evening that SRCCON closes, while others may stay to enjoy {{ page.event_place }} for another day or two.
 
 ### What do I need to pack? {#packing}
 
 In addition to your usual trip prep, feel free to bring things you'd love to share with other people at SRCCON! People often pack books to swap, stickers to hand out, or favorite ways to share a taste of home with other attendees.
 
-People also often bring favorite games to play together Thursday after dinner&ndash;we'll have a big space for evening activities, so if there's a game you enjoy or want to teach other people, bring it!
+People also often bring favorite games to play together after dinner&ndash;we'll have a big space for evening activities, so if there's a game you enjoy or want to teach other people, bring it!
 
 ### What is the dress code? {#dress-code}
 
@@ -134,15 +134,15 @@ That's our stenographer! Amanda Lundberg from the White Coat Captioning crew wil
 
 ### What are the meals like? {#meals}
 
-Meals are usually buffet style, with a variety of tasty options to meet all dietary needs (just be sure to let us know when you register or email us if anything changed). Meals are a communal experience at SRCCON. With folks gathering around tables to chat, sometimes to host entire sessions, and enjoy some camaraderie. Yes, sometimes folks catch up on work email as well, but there's a lot of chatting happening too. We provide lunch both days of SRCCON as well as dinner on Thursday night, and snack breaks on both days so you never have to worry about finding sufficient energy to keep your brain moving.
+Meals are usually buffet style, with a variety of tasty options to meet all dietary needs (just be sure to let us know when you register or email us if anything changed). Meals are a communal experience at SRCCON. With folks gathering around tables to chat, sometimes to host entire sessions, and enjoy some camaraderie. Yes, sometimes folks catch up on work email as well, but there's a lot of chatting happening too. We provide lunch both days of SRCCON as well as dinner on the first night, and snack breaks on both days so you never have to worry about finding sufficient energy to keep your brain moving.
 
 ### What are the non-caffeinated, non-alcoholic drink options like? {#drinks}
 
 Not every SRCCON participant is into coffee or beer culture, so we make sure there's plenty of tea and uncaffeinated drinks at the coffee station and during meals. In the evening, we provide a range of non-alcoholic drink options.
 
-### What is this Thursday evening thing all about? {#evening}
+### What is this SRCCON Evening thing all about? {#evening}
 
-We also want to make sure you get a chance to connect with everyone at SRCCON about the things you love to do in your free time, not just what you work on during the day. Our Thursday night program is all about the “life” side of the work-life balance, and we'll spread throughout the conference venue for board games and lightning talks, get outside for field trips, and pull together hobby workshops and interesting conversations.
+We also want to make sure you get a chance to connect with everyone at SRCCON about the things you love to do in your free time, not just what you work on during the day. Our Evening Program is all about the “life” side of the work-life balance, and we'll spread throughout the conference venue for board games and lightning talks, get outside for field trips, and pull together hobby workshops and interesting conversations.
 
 ### What am I supposed to do for 30 minutes in between every session? {#breaks}
 
