@@ -182,7 +182,7 @@ S3_ARGS = "--delete --cache-control 'public, max-age=3600'"
 desc "MOSTLY used by GitHub Actions on push/merges to `main` and `staging` branches"
 namespace :deploy do
   desc "Run all pre-deployment checks"
-  task precheck: [:check, :build, "test:all"] do
+  task precheck: [:check, :build, :test] do
     puts "\n✅ All pre-deployment checks passed!"
     puts "\nDeploy with:"
     puts "  rake deploy:staging          # Dry-run to staging"
