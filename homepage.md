@@ -18,8 +18,10 @@ Our deadline for proposing sessions has already passed, but we'll keep our [call
 
 ### Key dates {#dates}
 
-{% if page.session_deadline_passed == false %}\* **[NOW](/participation/form)**: Call for participation is open!{% endif %}
+{% if page.session_deadline_passed == false %}
 
+- **[NOW](/participation/form)**: Call for participation is open!
+  {% endif %}
 - **{{ page.session_deadline }}**: Deadline to submit session proposals and stipend applications
 - **Through {{ page.session_confirm }}**: We'll send out notifications about session proposals and stipend applications
 - **After {{ page.session_confirm }}**: We'll review more participation forms for attendees only, on a rolling basis until the conference
