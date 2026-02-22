@@ -4,8 +4,8 @@
   "description": "SRCCON conference site starter kit",
   "private": true,
   "scripts": {
-    "format": "prettier --write '**/*.{html,css,js,json,yml,yaml,md}'",
-    "format:check": "prettier --check '**/*.{html,css,js,json,yml,yaml,md}'",
+    "format": "prettier --write '**/*.{html,css,js,json,yml,yaml,md,rb,rake}'",
+    "format:check": "prettier --check '**/*.{html,css,js,json,yml,yaml,md,rb,rake}'",
     "format:ruby": "prettier --write '**/*.{rb,rake}'",
     "lint": "prettier --check '**/*.{html,css,js,json,yml,yaml,md,rb,rake}'"
   },
