@@ -16,17 +16,19 @@ task :setup do
     exit 0
   end
 
+  # Check if setup has already been run (idempotency check)
+  unless File.exist?("SITE_README.md")
+    puts "\n⚠️  SITE_README.md not found - setup appears to have already been run."
+    puts "💡 If you need to re-initialize, restore SITE_README.md from the template first."
+    exit 0
+  end
+
   # Remove template-only documentation
   template_docs = %w[AWS_authentication.md README.md]
   template_docs.each { |doc| File.delete(doc) if File.exist?(doc) }
 
-  # rename SITE_README to main README
-  if File.exist?("SITE_README.md")
-    File.rename("SITE_README.md", "README.md")
-  else
-    puts "\n⚠️  SITE_README.md not found (may have already been renamed)"
-    exit 0
-  end
+  # Rename SITE_README to main README
+  File.rename("SITE_README.md", "README.md")
 
   # Create staging branch if it doesn't exist
   puts "\n📋 Setting up branches..."
