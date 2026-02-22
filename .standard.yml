@@ -2,7 +2,7 @@
 # https://github.com/standardrb/standard
 
 # Ruby version
-ruby_version: 3.0
+ruby_version: 3.2.6
 
 # Files and directories to ignore
 ignore:
