@@ -64,7 +64,7 @@ Most common issues can be resolved using built-in Rake tasks. See [tasks/README.
 
 ### New site setup fails
 
-- Ensure you're in the repository root with `CNAME` and `_config.yml` present
+- Ensure you're in the repository root with `_config.yml` present
 - Run with trace for details: `bundle exec rake setup --trace`
 - If not in a git repo: `git init`, commit files, add remote, push to GitHub, then retry
 
@@ -72,7 +72,7 @@ Most common issues can be resolved using built-in Rake tasks. See [tasks/README.
 
 **Run `bundle exec rake check` to identify issues**, then:
 
-- Update placeholder values in `_config.yml` and `CNAME`
+- Update placeholder values in `_config.yml`
 - Coordinate subdomain with OpenNews team (e.g., `2026.srccon.org`)
 - Follow the [Setup Checklist](SITE_README.md#setup-checklist)
 

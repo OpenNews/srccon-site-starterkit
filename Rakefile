@@ -121,9 +121,6 @@ task check: :validate_yaml do
     errors << message if check_value.send(method, value)
   end
 
-  cname_content = File.read("CNAME").strip
-  errors << "CNAME file still set to demo site URL" if cname_content.include?("site-starterkit")
-
   warnings << "event_timezone_offset is empty (needed for live sessions feature)" if defaults["event_timezone_offset"].nil? || defaults["event_timezone_offset"].empty?
   warnings << "google_analytics_id is empty (no tracking will be enabled)" if defaults["google_analytics_id"].nil? || defaults["google_analytics_id"].empty?
 

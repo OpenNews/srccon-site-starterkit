@@ -248,6 +248,7 @@ When making changes to the template repository itself:
 
 **Important Notes:**
 
+- Make sure CNAME file is present and set to `site-starterkit.srccon.org`, since GitHub Pages hosting depends on it
 - Template changes only affect NEW event sites created after the change
 - Existing event sites don't automatically receive updates (see [Propagating Fixes](#propagating-fixes-to-event-sites))
 - Breaking changes should be documented clearly and coordinated with event organizers
