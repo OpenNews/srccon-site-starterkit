@@ -21,7 +21,7 @@ This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via G
 
 1. **Start Here:** Run `bundle exec rake setup` (one-time initialization - creates staging branch and swaps README files)
    - No `bundle?` Try the [Prerequisite steps](#local-development) below
-1. **Configure:** Update `_config.yml` with your event details (see the [Setup Checklist](#setup-checklist) below) and customize the URL in the `CNAME` file
+1. **Configure:** Update `_config.yml` with your event details (see the [Setup Checklist](#setup-checklist) below)
 1. **Create AWS Buckets:** If you haven't already, create the `staging.<event>.srccon.org` and `<event>.srccon.org` buckets [AWS S3](https://us-east-1.console.aws.amazon.com/s3/buckets?region=us-east-1). Use the "_Copy settings from existing bucket - optional_" feature and the prior year's config to speed things up.
 1. **Develop:** Run `bundle exec rake serve` to preview locally at [http://localhost:4000](http://localhost:4000)
 1. **Workflow:**
@@ -47,7 +47,6 @@ This is the website for SRCCON [YEAR|name], built with Jekyll and deployed via G
 
 ### Settings
 
-- [ ] `CNAME` - Set to your event's public URL (no `https://`)
 - [ ] `_config.yml` - Update these values under `deployment:`
   - [ ] `s3_bucket_staging` - name of the staging bucket, often `staging.<event>.srccon.org`
   - [ ] `s3_bucket_production` - name of the user-facing public bucket, `<event>.srccon.org`
@@ -295,7 +294,6 @@ aws s3 ls
   - `.standard.yml` - StandardRB Ruby linter configuration
 - **Version Control:**
   - `.gitignore` - Git ignore patterns
-  - `CNAME` - GitHub Pages custom domain configuration
 
 ### Infrastructure (Rarely Modified)
 

@@ -24,7 +24,7 @@ task :setup do
   end
 
   # Remove template-only documentation
-  template_docs = %w[AWS_authentication.md README.md]
+  template_docs = %w[AWS_authentication.md README.md CNAME]
   template_docs.each { |doc| File.delete(doc) if File.exist?(doc) }
 
   # Rename SITE_README to main README

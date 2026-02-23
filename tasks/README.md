@@ -40,4 +40,8 @@ Check for outdated Ruby gems.
 
 One-time setup task for new SRCCON sites created from the template.
 
-- `rake setup` - Initialize a new SRCCON site from template (cleans up template-specific docs)
+- Checks if setup has already been run
+- Removes some `site-starterkit`-only files
+- Renames `SITE_README.md` to `README.md`
+- Creates and pushes `staging` branch (if it doesn't exist)
+- Switches to `staging` branch by default
