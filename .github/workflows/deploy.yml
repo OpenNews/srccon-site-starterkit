@@ -18,6 +18,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Prevent deployment on starter kit
+        run: |
+          echo "This workflow is disabled in the starter kit repository, which is deployed and hosted on GitHub Pages, not AWS S3."
+          exit 1
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
