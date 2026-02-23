@@ -6,6 +6,13 @@
 
 **⚠️ Important:** After creating a new event repo from this template, run `bundle exec rake setup` to automatically swap README files and prepare for event customization.
 
+[![GitHub Pages deployment](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/pages.yml)
+[![Test Build](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/test.yml/badge.svg)](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/test.yml)
+[![Weekly Healthcheck](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/health-check.yml/badge.svg?branch=main)](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/health-check.yml)
+[![Dependabot Updates](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/dependabot/dependabot-updates/badge.svg?branch=main)](https://github.com/OpenNews/srccon-site-starterkit/actions/workflows/dependabot/dependabot-updates)
+
+
+
 ## Table of Contents
 
 - [Quick Start: Creating a New SRCCON Site](#quick-start-creating-a-new-srccon-site)
