@@ -22,7 +22,7 @@ jobs:
       - name: Validate YAML files
         run: bundle exec rake validate_yaml
       - run: bundle exec jekyll build
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
 
   deploy:
     environment:
