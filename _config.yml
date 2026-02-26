@@ -20,13 +20,7 @@ exclude:
   - "yarn.lock"
   - "node_modules/"
   - "vendor/"
-  - ".bundle/"
-  - ".editorconfig"
-  - ".prettierrc"
-  - ".prettierignore"
-  - ".standard.yml"
-  - ".ruby-version"
-  - ".gitignore"
+  - "tasks/*"
 collections:
   transcripts:
     output: true
