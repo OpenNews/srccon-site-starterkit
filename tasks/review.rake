@@ -1,5 +1,4 @@
 require "html-proofer"
-require "yaml"
 
 namespace :review do
   desc "Check external/public URLs in the built site (slower, requires network access)"
