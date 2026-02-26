@@ -1,0 +1,4 @@
+SRCCON is the site for the annual SRCCON conference series, run by OpenNews (https://github.com/OpenNews).
+
+This OpenNews and this site were originally built by Dan Sinker, Ryan Pitts, Erika Owens, and Erin Kissane. 
+It is now maintained by the folks listed in our GitHub contributors page: https://github.com/OpenNews/srccon/graphs/contributors

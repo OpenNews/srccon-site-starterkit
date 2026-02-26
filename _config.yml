@@ -12,7 +12,7 @@ exclude:
   - "TROUBLESHOOTING.md"
   - "AWS_authentication.md"
   - "LICENSE"
-  - "tasks/"
+  - "tasks/*"
   - "Gemfile"
   - "Gemfile.lock"
   - "package.json"
@@ -20,13 +20,6 @@ exclude:
   - "yarn.lock"
   - "node_modules/"
   - "vendor/"
-  - ".bundle/"
-  - ".editorconfig"
-  - ".prettierrc"
-  - ".prettierignore"
-  - ".standard.yml"
-  - ".ruby-version"
-  - ".gitignore"
 collections:
   transcripts:
     output: true
