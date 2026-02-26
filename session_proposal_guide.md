@@ -46,10 +46,10 @@ Sessions are 75 minutes long—plenty of time to dig into even deep topics, but 
 
 Effective SRCCON facilitation is about effort and preparation more than expertise. You don't have to have all the answers, just a plan to help people search for them together. Other things that make a proposal really stand out:
 
-- **A topic you don't often see at traditional conferences.** SRCCON welcomes [hard conversations](https://work.srccon.org/schedule/#_session-mental-health-support), and session topics you [might have never seen](https://2017.srccon.org/schedule/#_session-overcoming-personality-traits) on a journalism conference schedule before.
-- **A clear and thoughtful format.** Simple is great! A straightforward plan helps people participate, and simple discussions or activities [draw people in](https://2016.srccon.org/schedule/#_session-illustrating-investigations).
-- **An inclusive perspective.** Journalism needs to hear from [underrepresented communities](https://2016.srccon.org/schedule/#_session-underrepresented-managers) and [organizations outside](https://2017.srccon.org/schedule/#_session-local-data-journalism) the New York-DC corridor. We look for these voices in our session topics and facilitators.
-- **A plan that helps attendees build relationships.** SRCCON connects people with a [community of peers](https://2017.srccon.org/schedule/#_session-people-of-color-newsrooms) they can reach out to for [collaboration and support](https://work.srccon.org/schedule/#_session-like-a-boss) down the road.
+- **A topic you don't often see at traditional conferences.** SRCCON welcomes [hard conversations](https://work.srccon.org/schedule#_session-mental-health-support), and session topics you [might have never seen](https://2017.srccon.org/schedule#_session-overcoming-personality-traits) on a journalism conference schedule before.
+- **A clear and thoughtful format.** Simple is great! A straightforward plan helps people participate, and simple discussions or activities [draw people in](https://2016.srccon.org/schedule#_session-illustrating-investigations).
+- **An inclusive perspective.** Journalism needs to hear from [underrepresented communities](https://2016.srccon.org/schedule#_session-underrepresented-managers) and [organizations outside](https://2017.srccon.org/schedule#_session-local-data-journalism) the New York-DC corridor. We look for these voices in our session topics and facilitators.
+- **A plan that helps attendees build relationships.** SRCCON connects people with a [community of peers](https://2017.srccon.org/schedule#_session-people-of-color-newsrooms) they can reach out to for [collaboration and support](https://work.srccon.org/schedule#_session-like-a-boss) down the road.
 
 #### Pitching with a co-facilitator {#co-facilitators}
 
@@ -101,18 +101,18 @@ Because SRCCON is a collaborative, peer-to-peer event, we do ask that all partic
 #### Facilitation tips & ideas {#tips}
 
 - [Behind the decisions that help make SRCCON, and your sessions, more humane](https://opennews.org/blog/srccon-human-stuff/)
-- [Our favorite facilitation guide from AORTA Coop](https://aorta.coop/portfolio_page/facilitation-in-motion/)
+- [Our favorite facilitation guide from AORTA Coop](https://web.archive.org/web/20190814120436/https://aorta.coop/portfolio_page/facilitation-in-motion/)
 - [Tips from our friends at Aspiration Tech about running a breakout session](https://facilitation.aspirationtech.org/index.php?title=Facilitation:Break-Outs)
 - [General facilitation tips from Aspiration Tech](https://facilitation.aspirationtech.org/index.php?title=Facilitation:Facilitator_Guidelines)
 
 #### Example sessions that have worked well in the past {#sessions}
 
-- [Every day I’m juggling: Managing managers, peer expectations, and your own project ideas](https://2016.srccon.org/schedule/#_session-juggling-expectations). Talking to management, helping them to see things from your perspective, coaxing change out of newsrooms—it's tough to go it alone. This session used the "experts in the room" to help level each other up.
-- [Let's All Be Terrible at Things Together](https://2016.srccon.org/schedule/#_session-lets-be-terrible). This session forced people out of their comfort zones and into collaborating around weaknesses and fears.
-- [Mentorship at Scale: How The NYT Women in Tech group build a mentorship program for 250+ people in our free time](https://2017.srccon.org/schedule/#_session-mentorship-at-scale). This session shared practical tips from leaders who helped create a program in their own newsroom, and ran condensed versions of goal-planning and peer-coaching workshops.
-- [Threat Modeling, But For Your Own Well-Being](https://2017.srccon.org/schedule/#_session-threat-modeling-well-being). This session used a guided series of questions to help participants identify their sources of anxiety, and then shared strategies for taking care of yourself emotionally.
-- [Lights, Camera, Algorithms: Acting out (and then discussing) Machine Learning](https://2018.srccon.org/schedule/#_session-lights-camera-algorithms). This session got participants up and moving around, with active learning exercises (and dice-rolling!) that helped make sense of abstract concepts.
-- [Managing the blind spots in community news coverage](https://2018.srccon.org/schedule/#_session-blind-spots-coverage). Participants worked together on strategies to identify the blind spots in their own newsroom's coverage, talk about them with decision-makers, and build relationships with underserved communities.
+- [Every day I’m juggling: Managing managers, peer expectations, and your own project ideas](https://2016.srccon.org/schedule#_session-juggling-expectations). Talking to management, helping them to see things from your perspective, coaxing change out of newsrooms—it's tough to go it alone. This session used the "experts in the room" to help level each other up.
+- [Let's All Be Terrible at Things Together](https://2016.srccon.org/schedule#_session-lets-be-terrible). This session forced people out of their comfort zones and into collaborating around weaknesses and fears.
+- [Mentorship at Scale: How The NYT Women in Tech group build a mentorship program for 250+ people in our free time](https://2017.srccon.org/schedule#_session-mentorship-at-scale). This session shared practical tips from leaders who helped create a program in their own newsroom, and ran condensed versions of goal-planning and peer-coaching workshops.
+- [Threat Modeling, But For Your Own Well-Being](https://2017.srccon.org/schedule#_session-threat-modeling-well-being). This session used a guided series of questions to help participants identify their sources of anxiety, and then shared strategies for taking care of yourself emotionally.
+- [Lights, Camera, Algorithms: Acting out (and then discussing) Machine Learning](https://2018.srccon.org/schedule#_session-lights-camera-algorithms). This session got participants up and moving around, with active learning exercises (and dice-rolling!) that helped make sense of abstract concepts.
+- [Managing the blind spots in community news coverage](https://2018.srccon.org/schedule#_session-blind-spots-coverage). Participants worked together on strategies to identify the blind spots in their own newsroom's coverage, talk about them with decision-makers, and build relationships with underserved communities.
 
 #### Programs from prior SRCCONs {#past}
 
