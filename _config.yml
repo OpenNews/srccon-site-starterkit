@@ -96,9 +96,9 @@ defaults:
       # price_stipend: set this value to the stipend ticket price
       price_stipend: $500
 
-      # google_analytics_id: set this value to your GA4 measurement ID (format: G-XXXXXXXXXX)
+      # google_analytics_id: set this value to the shared GA4 measurement ID or a unique one for your event
       # Leave empty to disable Google Analytics tracking
-      google_analytics_id: ""
+      google_analytics_id: "G-0NQFDG30JQ" # <== the **shared** SRCCON-event GA4 ID, a default option
   # these 'scope' props drive pages generated from the schedule
   - scope:
       path: ""
