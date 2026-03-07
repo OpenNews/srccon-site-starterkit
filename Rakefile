@@ -23,7 +23,6 @@ end
 
 desc "Validate YAML files for syntax errors and duplicate keys"
 task :validate_yaml do
-  puts "Validating YAML files..."
   errors = []
 
   Dir.glob("{_config.yml,_data/**/*.{yml,yaml}}").sort.each do |file|
@@ -70,9 +69,6 @@ task default: [:build, :check, :serve]
 
 desc "Validate configuration has been updated from template defaults"
 task check: :validate_yaml do
-  puts "\n" + "=" * 60
-  puts "🔍 Validating SRCCON site configuration"
-  puts "=" * 60
 
   unless File.exist?("_config.yml")
     abort "\n❌ _config.yml not found. Are you in the project root directory?"
@@ -153,24 +149,40 @@ end
 
 desc "Build the Jekyll site"
 task build: :validate_yaml do
-  puts "Building Jekyll site..."
   options = {
     "source" => ".",
-    "destination" => "./_site"
+    "destination" => "./_site",
+    "config" => "_config.yml",
+    "quiet" => true,
   }
-  Jekyll::Site.new(Jekyll.configuration(options)).process
+  begin 
+    Jekyll::Site.new(Jekyll.configuration(options)).process
+  rescue => e
+    abort "\n❌ Jekyll build failed: #{e.message}"
+  end
+  
+  puts "✅ Built successfully!"
 end
 
 desc "Clean the build directory"
 task :clean do
-  puts "Cleaning _site directory..."
-  FileUtils.rm_rf(["_site", ".jekyll-cache", ".jekyll-metadata"])
+  begin
+    FileUtils.rm_rf(["_site", ".jekyll-cache", ".jekyll-metadata"])
+  rescue => e
+    abort "\n❌ Failed to clean build directory: #{e.message}"
+  end
+
+  puts "✅ Cleanup complete"
 end
 
 desc "Build and serve the site locally"
 task :serve do
   puts "Starting Jekyll server..."
-  sh "bundle exec jekyll serve"
+  begin
+    sh "bundle exec jekyll serve"
+  rescue => e
+    abort "\n❌ Failed to start Jekyll server: #{e.message}"
+  end
 end
 
 # Common S3 sync arguments in :deploy steps
