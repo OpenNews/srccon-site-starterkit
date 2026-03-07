@@ -143,6 +143,7 @@ bundle exec rake test:page_config   # Validate page setup
 bundle exec rake test:placeholders  # Find untouched defaults
 bundle exec rake test:a11y          # Very basic accessibility checks
 bundle exec rake test:performance   # Performance warnings
+bundle exec rake review:external_links  # Check external/public URLs (slower, requires network)
 bundle exec rake outdated           # Check for outdated _direct_ dependencies
 ```
 

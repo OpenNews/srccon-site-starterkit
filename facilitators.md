@@ -132,7 +132,7 @@ In your sessions and outside them, the SRCCON staff will fully support you in ma
 #### Facilitation tips & ideas {#tips}
 
 - [Behind the decisions that help make SRCCON, and your sessions, more humane](https://opennews.org/blog/srccon-human-stuff/)
-- [Our favorite facilitation guide from AORTA Coop](https://aorta.coop/portfolio_page/facilitation-in-motion/)
+- [Our favorite facilitation guide from AORTA Coop](https://web.archive.org/web/20190814120436/https://aorta.coop/portfolio_page/facilitation-in-motion/)
 - [Tips from our friends at Aspiration Tech about running a breakout session](https://facilitation.aspirationtech.org/index.php?title=Facilitation:Break-Outs)
 - [General facilitation tips from Aspiration Tech](https://facilitation.aspirationtech.org/index.php?title=Facilitation:Facilitator_Guidelines)
 

@@ -15,7 +15,7 @@ namespace :test do
     original_verbose = $VERBOSE
     $VERBOSE = nil
 
-    begin 
+    begin
       HTMLProofer.check_directory(
         "./_site",
         {
