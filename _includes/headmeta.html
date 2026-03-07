@@ -30,10 +30,20 @@
 <meta property="og:image:height" content="330" />
 <meta property="og:image:alt" content="{{ page.event_name }} logo" />
 
-<!-- Performance: TypeKit optimization -->
+<!-- TypeKit optimization -->
 <link rel="dns-prefetch" href="https://use.typekit.net" />
 <link rel="preconnect" href="https://use.typekit.net" crossorigin />
-<link rel="stylesheet" href="https://use.typekit.net/npu3izb.css" />
+<link
+  rel="preload"
+  href="https://use.typekit.net/npu3izb.css"
+  as="style"
+  onload="
+    this.onload = null;
+    this.rel = 'stylesheet';
+  "
+/>
+
+<link rel="preload" href="media/img/srccon_logo.png" as="image" fetchpriority="high" />
 <link rel="stylesheet" href="/media/css/style.css" />
 <link rel="shortcut icon" href="/media/img/favicon.ico" />
 <link
