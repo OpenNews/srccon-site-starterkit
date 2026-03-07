@@ -145,6 +145,7 @@ strong {
 
 .hub #main-logo img {
   width: 600px;
+  height: auto;
 }
 
 .hub #main-logo.mini img {
