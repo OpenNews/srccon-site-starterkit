@@ -11,6 +11,9 @@ updates:
       - "dependencies"
       - "github-actions"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "OpenNews/opennews-actions"
+        # Keep floating @v1 tag instead of pinning to specific versions
 
   # Ruby gems (Bundler)
   - package-ecosystem: "bundler"
